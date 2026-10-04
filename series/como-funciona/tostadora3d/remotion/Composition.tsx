@@ -13,7 +13,7 @@ import { ramp, springy, noise1, keyed, lerp } from "./kit3d/anim";
 import { Captions, MainLabel, Timeline, Callout, Gauge, Intro, Outro, Timing, K, FONT } from "./kit2d/Kit";
 import { Toaster, TOASTER, ToasterState, Bread } from "./Model";
 
-export type Props = { timing: Timing; quality?: "draft" | "final"; debug?: boolean };
+export type Props = { timing: Timing; quality?: "draft" | "final"; debug?: boolean; dpr?: number; aa?: boolean };
 
 const norm = (w: string) => w.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9ñ]/g, "");
 
@@ -21,7 +21,7 @@ const GUIDE_POS = [-2.55, 0, 0.75];
 const GUIDE_ROT = 0.85;
 const GUIDE_SCALE = 0.62;
 
-export const Tostadora3D: React.FC<Props> = ({ timing, quality = "final", debug = false }) => {
+export const Tostadora3D: React.FC<Props> = ({ timing, quality = "final", debug = false, dpr = 1, aa = true }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
@@ -183,7 +183,7 @@ export const Tostadora3D: React.FC<Props> = ({ timing, quality = "final", debug 
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.bgEdge }}>
-      <Scene3D frame={frame} camKeys={cam} quality={quality}>
+      <Scene3D frame={frame} camKeys={cam} quality={quality} dpr={dpr} aa={aa}>
         <Toaster s={s} clip={clip} frame={frame} />
         <Guide pose={pose} frame={frame} position={GUIDE_POS} rotationY={GUIDE_ROT} scale={GUIDE_SCALE} coreBoost={s.magnet * 0.15} />
         {/* beat 2: fuego con tenedor largo y rebanada */}

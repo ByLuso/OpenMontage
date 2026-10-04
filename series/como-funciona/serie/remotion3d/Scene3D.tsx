@@ -38,25 +38,23 @@ const Cam: React.FC<{ keys: CameraKey[]; frame: number }> = ({ keys, frame }) =>
 
 export const Scene3D: React.FC<{
   frame: number; camKeys: CameraKey[]; quality?: "draft" | "final"; children: React.ReactNode;
-  floorY?: number; keyLight?: number;
-}> = ({ frame, camKeys, quality = "final", children, floorY = 0, keyLight = 1 }) => {
-  const sm = quality === "final" ? 2048 : 1024;
+  floorY?: number; keyLight?: number; dpr?: number; aa?: boolean;
+}> = ({ frame, camKeys, quality = "final", children, floorY = 0, keyLight = 1, dpr = 1, aa = true }) => {
+  const sm = quality === "final" ? 1024 : 512;
   return (
     <AbsoluteFill style={{ background: `radial-gradient(ellipse 75% 55% at 50% 45%, ${C.bgCenter} 0%, #0B1B33 55%, ${C.bgEdge} 100%)` }}>
-      <ThreeCanvas width={1080} height={1920} shadows gl={{ alpha: true, antialias: true }}
+      <ThreeCanvas width={1080} height={1920} shadows gl={{ alpha: true, antialias: aa }} dpr={dpr}
         camera={{ position: [0, 3, 12], fov: 30 }} style={{ position: "absolute", inset: 0 }}>
         <Env />
         <Cam keys={camKeys} frame={frame} />
-        <hemisphereLight args={["#9fc4ff", "#0b1424", 0.35]} />
+        <hemisphereLight args={["#9fc4ff", "#0b1424", 0.5]} />
         {/* luz principal cálida arriba-izquierda */}
         <directionalLight position={[-6, 10, 7]} intensity={2.6 * keyLight} color="#FFE2C2" castShadow
           shadow-mapSize={[sm, sm]} shadow-camera-left={-8} shadow-camera-right={8} shadow-camera-top={9}
           shadow-camera-bottom={-3} shadow-camera-near={1} shadow-camera-far={40} shadow-bias={-0.0004} shadow-radius={6} />
         {/* luz de borde cian desde atrás */}
         <directionalLight position={[5, 6, -9]} intensity={2.4} color={C.cold} />
-        <directionalLight position={[-7, 3, -6]} intensity={0.9} color={C.coldCore} />
-        {/* relleno tenue */}
-        <directionalLight position={[6, 2, 8]} intensity={0.45} color="#BFD4FF" />
+        {/* relleno tenue (la hemisférica y el entorno hacen el resto) */}
         {/* suelo con reflejo tenue */}
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, floorY, 0]} receiveShadow>
           <circleGeometry args={[30, 64]} />

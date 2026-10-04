@@ -71,7 +71,8 @@ export const Bread: React.FC<{ toast: number; opacity?: number; clip?: THREE.Pla
     crumb.color.copy(crumbColor(toast));
     crust.color.copy(crumbColor(Math.min(2, toast + 0.55))).multiplyScalar(0.85);
     for (const m of [crumb, crust]) {
-      m.transparent = opacity < 0.999; m.opacity = opacity; m.depthWrite = opacity > 0.6;
+      // siempre transparente: cambiar `transparent` en caliente exige recompilar el material
+      m.transparent = true; m.opacity = opacity; m.depthWrite = opacity > 0.6;
       m.clippingPlanes = clip ?? [];
     }
     return <mesh geometry={geo} material={[crumb, crust]} position={position as any} scale={scale} rotation={rotation as any} castShadow={opacity > 0.6} />;
@@ -166,7 +167,6 @@ export const Toaster: React.FC<{ s: ToasterState; clip: THREE.Plane; frame: numb
         <Glow key={i} position={p.map((v, k) => (k === 2 && clip.constant < p[2] ? 99 : v))} color={C.hot} size={1.1} scaleY={1.4} opacity={s.heat * 0.28 * flick} />
       ))}
       <pointLight position={[-0.15, 1.0, 0.29]} color={C.hot} intensity={s.heat * 1.4 * flick} distance={2.5} decay={2} />
-      <pointLight position={[-0.15, 1.0, -0.29]} color={C.hot} intensity={s.heat * 0.9 * flick} distance={2.5} decay={2} />
       {/* corriente (amarillo) recorriendo la resistencia central */}
       <Flow points={wires[1].pts} frame={frame} color={C.flow} count={16} speed={0.004} size={0.09} trail={6} opacity={s.flow} seed="wire" />
       {/* rejillas guía a ambos lados de cada rebanada */}
