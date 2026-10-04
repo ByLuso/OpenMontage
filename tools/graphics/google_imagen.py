@@ -120,11 +120,20 @@ class GoogleImagen(BaseTool):
                     "imagen-4.0-fast-generate-001",
                     "imagen-4.0-ultra-generate-001",
                     "gemini-2.5-flash-image",
+                    "gemini-3.1-flash-image",
+                    "gemini-3-pro-image",
                 ],
                 "default": "imagen-4.0-generate-001",
                 "description": "Imagen model variant, or a Gemini image model "
                 "(gemini-*) routed through generate_content. Use "
                 "gemini-2.5-flash-image when the project has no Imagen access.",
+            },
+            "reference_image_paths": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Local reference images (e.g. a character sheet) sent "
+                "with the prompt to keep a subject consistent. Gemini image models "
+                "only; Imagen models ignore them.",
             },
             "number_of_images": {
                 "type": "integer",
@@ -180,6 +189,11 @@ class GoogleImagen(BaseTool):
     def estimate_cost(self, inputs: dict[str, Any]) -> float:
         model = inputs.get("model", "imagen-4.0-generate-001")
         n = inputs.get("number_of_images", 1)
+        if model.startswith("gemini-3-pro"):
+            # ~1120 output tokens per 1K/2K image at $120/1M tokens
+            return 0.134 * n
+        if model.startswith("gemini-3.1-flash"):
+            return 0.067 * n
         if model.startswith("gemini-"):
             # ~1290 output tokens per image at $30/1M tokens
             return 0.039 * n
@@ -232,11 +246,24 @@ class GoogleImagen(BaseTool):
             image_config=types.ImageConfig(aspect_ratio=aspect_ratio),
         )
 
+        contents: list[Any] = []
+        for ref in inputs.get("reference_image_paths") or []:
+            ref_path = Path(ref)
+            if not ref_path.is_file():
+                return ToolResult(
+                    success=False, error=f"Reference image not found: {ref_path}"
+                )
+            mime = "image/jpeg" if ref_path.suffix.lower() in {".jpg", ".jpeg"} else "image/png"
+            contents.append(
+                types.Part.from_bytes(data=ref_path.read_bytes(), mime_type=mime)
+            )
+        contents.append(prompt)
+
         image_bytes: list[bytes] = []
         try:
             for _ in range(number_of_images):
                 response = client.models.generate_content(
-                    model=model, contents=prompt, config=config
+                    model=model, contents=contents, config=config
                 )
                 for part in response.candidates[0].content.parts or []:
                     inline = getattr(part, "inline_data", None)
