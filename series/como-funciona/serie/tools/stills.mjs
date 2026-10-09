@@ -7,9 +7,9 @@ import fs from "node:fs";
 
 const [slug, compId, scale, debug, outDir, ...times] = process.argv.slice(2);
 const root = path.resolve("projects", `cf-${slug}`);
-const pub = path.resolve("..", "projects", "como-funciona", slug, "remotion", "public");
+const pub = process.env.PUB ? path.resolve(process.env.PUB) : path.resolve("..", "projects", "como-funciona", slug, "remotion", "public");
 const timing = JSON.parse(fs.readFileSync(path.join(root, "timing.json"), "utf8"));
-const inputProps = { timing, quality: "draft", debug: debug === "1" };
+const inputProps = { timing, quality: "draft", debug: debug === "1", dpr: 0.7 };
 const t0 = Date.now();
 const serveUrl = await bundle({ entryPoint: path.join(root, "index.tsx"), publicDir: pub });
 console.log(`bundle ${((Date.now() - t0) / 1000).toFixed(1)}s`);

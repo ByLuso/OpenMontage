@@ -11,7 +11,8 @@ ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT))
 MODELS = ["gemini-3.8-flash-tts", "gemini-3.1-flash-tts-preview",
           "gemini-2.5-flash-preview-tts", "gemini-3.8-flash-lite-tts"]
-TARGET_WPS = 2.85
+import os
+TARGET_WPS = float(os.environ.get("TARGET_WPS", "2.85"))
 
 
 def norm(w):

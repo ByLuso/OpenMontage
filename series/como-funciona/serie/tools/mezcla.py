@@ -8,7 +8,7 @@ from pathlib import Path
 
 CF = Path(__file__).resolve().parents[2]
 slug, sfx_json, out = sys.argv[1], sys.argv[2], sys.argv[3]
-ep = CF / slug
+ep = Path(slug) if Path(slug).is_absolute() else CF / slug
 pub = ep / "remotion" / "public"
 tm = json.loads((ep / "artifacts" / "timing.json").read_text())
 dur, vend = tm["duration"], tm["voiceEnd"]
