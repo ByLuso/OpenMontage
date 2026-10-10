@@ -70,7 +70,7 @@ def main(ep):
     # pausas largas -> 0,4 s
     trimmed = art / "voz_trim.wav"
     ff("-i", str(raw), "-af",
-       "silenceremove=stop_periods=-1:stop_duration=0.4:stop_threshold=-40dB:stop_silence=0.4", str(trimmed))
+       "silenceremove=stop_periods=-1:stop_duration=0.25:stop_threshold=-40dB:stop_silence=0.25", str(trimmed))
     nwords = sum(len(b.split()) for b in beats)
     tempo = max(0.85, min(1.25, TARGET_WPS / (nwords / duration(trimmed))))
     out = pub / "voz.wav"

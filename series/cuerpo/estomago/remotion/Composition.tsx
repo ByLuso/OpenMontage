@@ -22,13 +22,23 @@ const T = [0.25, 0.95, 0]; // centro del estómago
 const T2 = [0.3, 1.25, 0]; // centro con el esófago (planos medios)
 
 export const Estomago: React.FC<Props> = ({ timing, dpr = 1, debug = false, cover = false }) => {
-  const frame = useCurrentFrame();
+  const realFrame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
-  const t = frame / fps;
+  const realT = realFrame / fps;
+  // Reloj visual: la puesta en escena se diseñó sobre la v1 del guion; se re-mapea por tramos
+  // (inicio de cada bloque) a los tiempos de la voz actual para que los planos sigan a la narración.
+  const OLD = [0, 2.58, 8.0, 16.89, 25.81, 33.8, 39.8, 40];
+  const NEW = [...timing.beats.map((b) => b.s), Math.min(39.6, timing.voiceEnd + 0.25), 40];
+  const toOld = (x: number) => {
+    for (let i = 0; i < NEW.length - 1; i++) if (x <= NEW[i + 1]) return OLD[i] + (x - NEW[i]) / (NEW[i + 1] - NEW[i]) * (OLD[i + 1] - OLD[i]);
+    return x;
+  };
+  const t = toOld(realT);
+  const frame = t * fps;
   const F = (s: number) => Math.round(s * fps);
   const Wd = (i: number, w: string) => {
     const x = timing.words.find((k) => k.beat === i - 1 && norm(k.w).startsWith(norm(w)));
-    return x ? x.s : timing.beats[i - 1].s;
+    return toOld(x ? x.s : timing.beats[i - 1].s);
   };
   const wall = (t >= CUTS.toWall1 && t < CUTS.toOrgan1) || (t >= CUTS.toWall2 && t < CUTS.toOrgan2);
 
@@ -122,18 +132,18 @@ export const Estomago: React.FC<Props> = ({ timing, dpr = 1, debug = false, cove
       {cover && <CoverTitle />}
       {!cover && <>
       {/* ---------- capa 2D ---------- */}
-      <MainLabel text="1 · Ácido" color={K.flow} t={t} t0={8.0} t1={15.0} />
-      <Callout text="ácido clorhídrico" anchor={pr([PITS[5][0], 0.4, PITS[5][1]])} offset={[-60, -230]} color={K.flow} t={t} t0={Wd(3, "acido")} t1={12.9} size={40} />
+      <MainLabel text="Ácido + pepsina" color={K.flow} t={t} t0={8.0} t1={15.0} />
+      <Callout text="ácido clorhídrico" anchor={pr([PITS[5][0], 0.4, PITS[5][1]])} offset={[-60, 260]} color={K.flow} t={t} t0={Wd(3, "acido")} t1={12.9} size={40} />
       <Callout text="pepsina" anchor={pr([0.75, 1.15, 0.0])} offset={[120, -160]} color={K.white} t={t} t0={Wd(3, "pepsina")} t1={14.1} size={40} />
-      <MainLabel text="2 · Moco" color={K.cold} t={t} t0={16.9} t1={24.0} />
+      <MainLabel text="Moco protector" color={K.cold} t={t} t0={16.9} t1={24.0} />
       <Callout text="moco + bicarbonato" anchor={pr([-0.8, 0.3, 0.6])} offset={[-40, 200]} color={K.cold} t={t} t0={Wd(4, "moco")} t1={21.4} size={40} />
       <MainLabel text="Un chubasquero" color={K.white} t={t} t0={Wd(4, "chubasquero")} t1={24.0} />
       <Callout text="se neutraliza" anchor={pr([0.5, 0.35, 0.4])} offset={[-140, 190]} color={K.cold} t={t} t0={Wd(4, "neutraliza")} t1={24.0} size={40} />
-      <MainLabel text="3 · Músculo" color={K.hot} t={t} t0={25.8} t1={32.4} />
+      <MainLabel text="Músculos" color={K.hot} t={t} t0={25.8} t1={32.4} />
       <BigNumber t={t} t0={Wd(5, "tres") - 0.15} t1={32.3} waves={waves} />
       <Callout text="papilla" anchor={pr(centerPoint(0.74).toArray())} offset={[-160, -180]} color={K.flow} t={t} t0={Wd(5, "papilla")} t1={32.35} size={40} />
       <MainLabel text="Células nuevas" color="#FF7AB0" t={t} t0={Wd(6, "celulas")} t1={36.5} />
-      <Captions words={timing.words} t={t} />
+      <Captions words={timing.words} t={realT} />
       </>}
 
       {flash > 0 && <AbsoluteFill style={{ background: `radial-gradient(circle at 50% 42%, rgba(255,235,240,${flash * 0.95}) 0%, rgba(255,90,140,${flash * 0.6}) 45%, rgba(0,0,0,0) 80%)` }} />}
