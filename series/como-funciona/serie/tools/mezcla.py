@@ -28,6 +28,12 @@ voiced = "+".join(f"between(t,{a - 0.1:.2f},{b + 0.15:.2f})" for a, b in spans)
 inputs = ["-i", str(pub / "voz.wav"), "-i", str(pub / "music.mp3")]
 filt = [f"[1:a]atrim=0:{dur},volume='if(gt({voiced},0),{duck},{full})':eval=frame,afade=t=in:d=1,afade=t=out:st={dur - 2}:d=2[m]"]
 mix = ["[0:a]", "[m]"]
+import wave as _wave
+def _len(n):
+    with _wave.open(str(pub / "sfx" / f"{n}.wav")) as w:
+        return w.getnframes() / w.getframerate()
+# un efecto que no cabe entero antes del final sonaría cortado: se descarta
+sfx = [c for c in sfx if c[0] + _len(c[1]) <= dur - 0.05]
 for k, (at, name, vol) in enumerate(sfx):
     inputs += ["-i", str(pub / "sfx" / f"{name}.wav")]
     ms = int(max(0, at) * 1000)

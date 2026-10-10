@@ -73,6 +73,8 @@ def main(ep):
        "silenceremove=stop_periods=-1:stop_duration=0.25:stop_threshold=-40dB:stop_silence=0.25", str(trimmed))
     nwords = sum(len(b.split()) for b in beats)
     tempo = max(0.85, min(1.25, TARGET_WPS / (nwords / duration(trimmed))))
+    if os.environ.get("TEMPO"):
+        tempo = float(os.environ["TEMPO"])  # p. ej. 1.0 = velocidad natural de la voz
     out = pub / "voz.wav"
     ff("-i", str(trimmed), "-af", f"atempo={tempo:.4f},loudnorm=I=-15:TP=-1.5:LRA=11",
        "-ar", "48000", str(out))
