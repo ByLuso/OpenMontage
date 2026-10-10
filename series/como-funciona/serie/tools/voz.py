@@ -106,6 +106,11 @@ def main(ep):
               "beats": [{"s": min(x["s"] for x in words if x["beat"] == i),
                          "e": max(x["e"] for x in words if x["beat"] == i)} for i in range(len(beats))]}
     (art / "timing.json").write_text(json.dumps(timing, ensure_ascii=False, indent=1))
+    # Gemini TTS a veces termina con un chasquido (pico de continua): se corta tras la última palabra con fundido.
+    cut = voice_end + 0.2
+    tmp = art / "voz_cut.wav"
+    ff("-i", str(out), "-af", f"atrim=0:{cut:.3f},afade=t=out:st={cut - 0.12:.3f}:d=0.12", str(tmp))
+    tmp.replace(out)
     print(f"alineadas {matched:.0%}  duración vídeo {timing['duration']}s")
     for i, b in enumerate(timing["beats"]):
         print(i + 1, round(b["s"], 2), round(b["e"], 2), round(b["e"] - b["s"], 2))
