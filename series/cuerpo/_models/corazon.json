@@ -1,0 +1,145 @@
+{
+ "scale": 0.02,
+ "ao_gamma": 1.5,
+ "ao_dist": 12.0,
+ "center_groups": [
+  "vent",
+  "atria"
+ ],
+ "groups": {
+  "vent": {
+   "ids": [
+    "FMA7088"
+   ],
+   "match": "cavity of (left|right) ventricle",
+   "subdiv": 1,
+   "smooth": 1,
+   "ao": true
+  },
+  "atria": {
+   "ids": [
+    "FMA7088"
+   ],
+   "match": "atrium",
+   "subdiv": 1,
+   "smooth": 1,
+   "ao": true
+  },
+  "valves": {
+   "ids": [
+    "FMA7088"
+   ],
+   "match": "cusp|leaflet|papillary",
+   "subdiv": 1
+  },
+  "corA": {
+   "ids": [
+    "FMA7088"
+   ],
+   "match": "artery|branch|conus"
+  },
+  "corV": {
+   "ids": [
+    "FMA7088"
+   ],
+   "match": "vein|sinus"
+  },
+  "aorta": {
+   "ids": [
+    "FMA3736",
+    "FMA3768",
+    "FMA3734"
+   ],
+   "box": [
+    [
+     -60,
+     -220,
+     1170
+    ],
+    [
+     110,
+     0,
+     1330
+    ]
+   ],
+   "subdiv": 1,
+   "ao": true
+  },
+  "svc": {
+   "ids": [
+    "FMA4720"
+   ],
+   "box": [
+    [
+     -90,
+     -220,
+     1150
+    ],
+    [
+     130,
+     0,
+     1345
+    ]
+   ],
+   "subdiv": 1
+  },
+  "ivc": {
+   "ids": [
+    "FMA10951"
+   ],
+   "box": [
+    [
+     -90,
+     -220,
+     1150
+    ],
+    [
+     130,
+     0,
+     1345
+    ]
+   ],
+   "subdiv": 1
+  },
+  "pulm": {
+   "ids": [
+    "FMA8612",
+    "FMA50872",
+    "FMA50873"
+   ],
+   "box": [
+    [
+     -45,
+     -220,
+     1205
+    ],
+    [
+     85,
+     0,
+     1300
+    ]
+   ],
+   "subdiv": 1,
+   "ao": true
+  },
+  "pveins": {
+   "ids": [
+    "FMA49914",
+    "FMA49916"
+   ],
+   "box": [
+    [
+     -45,
+     -220,
+     1190
+    ],
+    [
+     90,
+     0,
+     1300
+    ]
+   ],
+   "subdiv": 1
+  }
+ }
+}

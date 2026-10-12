@@ -5,6 +5,7 @@ import React, { useMemo } from "react";
 import * as THREE from "three";
 import { random } from "remotion";
 import { Glow } from "./kit3d/Glow";
+import { useModel } from "./Model";
 import { mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 
 const TILT = 0.5; // inclinación de la punta (rad, alrededor de z)
@@ -52,23 +53,20 @@ const tube = (pts: number[][], r: number, seg = 60) =>
   new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map((p) => new THREE.Vector3(...p)), false, "centripetal"), seg, r, 16, false);
 
 // Sistema eléctrico (coordenadas del mundo, dentro del plano de corte)
-export const SA_NODE = [-0.66, 1.18, 0.06];
-export const AV_NODE = [-0.12, 0.42, 0.06];
-const PATH_ATRIA = [SA_NODE, [-0.45, 0.95, 0.06], [-0.25, 0.65, 0.06], AV_NODE];
-const PATH_LEFT = [AV_NODE, [0.02, 0.05, 0.07], [0.25, -0.5, 0.06], [0.45, -0.85, 0.05], [0.68, -0.45, 0.04], [0.72, 0.0, 0.03]];
-const PATH_RIGHT = [[0.02, 0.05, 0.07], [-0.15, -0.4, 0.07], [-0.45, -0.3, 0.06], [-0.62, 0.05, 0.05]];
-const PATH_LA = [SA_NODE, [-0.1, 1.15, 0.05], [0.35, 1.05, 0.04]];
+// Puntos del modelo real (BodyParts3D, escala 0.02; Y arriba, Z anterior)
+export const SA_NODE = [-0.62, 0.85, 0.16];
+export const AV_NODE = [-0.15, 0.05, 0.16];
+const APEX = [0.5, -0.92, 0.16];
+const PATH_ATRIA = [SA_NODE, [-0.58, 0.55, 0.16], [-0.4, 0.25, 0.16], AV_NODE];
+const PATH_LEFT = [AV_NODE, [0.1, -0.3, 0.16], [0.3, -0.65, 0.16], APEX, [0.85, -0.35, 0.16]];
+const PATH_RIGHT = [[0.1, -0.3, 0.16], [-0.2, -0.6, 0.16], [-0.5, -0.4, 0.16], [-0.62, 0.0, 0.16]];
+const PATH_LA = [SA_NODE, [-0.2, 0.8, 0.16], [0.3, 0.72, 0.16]];
 const curveOf = (p: number[][]) => new THREE.CatmullRomCurve3(p.map((q) => new THREE.Vector3(...q)), false, "centripetal");
 const C_ATRIA = curveOf(PATH_ATRIA), C_LEFT = curveOf(PATH_LEFT), C_RIGHT = curveOf(PATH_RIGHT), C_LA = curveOf(PATH_LA);
-
-// grandes vasos
-const AORTA = [[0.08, 0.7, -0.05], [0.02, 1.55, 0.05], [0.18, 2.15, -0.1], [0.62, 2.12, -0.42], [0.82, 1.55, -0.62], [0.82, 0.4, -0.72]];
-const PULM = [[0.36, 0.78, 0.32], [0.42, 1.45, 0.3], [0.5, 1.75, 0.1]];
-const PULM_L = [[0.5, 1.75, 0.1], [0.95, 1.85, -0.05], [1.45, 1.8, -0.15]];
-const PULM_R = [[0.5, 1.75, 0.1], [0.05, 1.9, -0.15], [-0.6, 1.95, -0.3]];
-const SVC = [[-0.72, 2.25, -0.12], [-0.7, 1.7, -0.1], [-0.68, 1.2, -0.1]];
-const IVC = [[-0.55, -1.15, -0.25], [-0.58, -0.6, -0.22], [-0.6, -0.15, -0.2]];
-export const VESSELS = { AORTA, PULM, PULM_L, SVC };
+const AORTA = [[0.15, 0.4, 0.2], [0.2, 0.9, 0.05], [0.4, 1.5, -0.2], [0.75, 1.65, -0.55], [0.9, 1.2, -0.75]];
+const PULM_L = [[0.26, 1.27, -0.33], [0.7, 1.35, -0.6], [1.2, 1.3, -0.8]];
+export const VESSELS = { AORTA, PULM_L };
+const VENT_C = [0.21, -0.11, 0.22], ATR_C = [-0.42, 0.1, -0.11];
 
 export type HeartState = {
   beatPhase: number; // 0..1 dentro del ciclo cardiaco
@@ -88,78 +86,35 @@ export function contraction(ph: number) {
 }
 
 export const Heart: React.FC<{ s: HeartState; clip: THREE.Plane; frame: number }> = ({ s, clip, frame }) => {
+  const G = useModel("corazon.glb");
   const cl = [clip];
   const m = useMemo(() => {
-    const tex = muscleTexture();
-    const tissue = (color: string, em: string) => new THREE.MeshPhysicalMaterial({
-      color, roughness: 0.38, clearcoat: 0.75, clearcoatRoughness: 0.25, sheen: 1, sheenColor: new THREE.Color("#FF8FA8"),
-      sheenRoughness: 0.45, emissive: new THREE.Color(em), emissiveIntensity: 0.55, bumpMap: tex, bumpScale: 0.7, clippingPlanes: cl,
+    const tissue = (color: string, em: string, clip = true) => new THREE.MeshPhysicalMaterial({
+      color, roughness: 0.34, clearcoat: 0.8, clearcoatRoughness: 0.2, sheen: 0.9, sheenColor: new THREE.Color("#FF8FA8"),
+      sheenRoughness: 0.45, emissive: new THREE.Color(em), emissiveIntensity: 0.5, vertexColors: true, clippingPlanes: clip ? cl : [],
     });
+    const plain = (color: string, em: string, e = 0.5, clip = true) => new THREE.MeshPhysicalMaterial({ color, roughness: 0.32, clearcoat: 0.7, emissive: new THREE.Color(em), emissiveIntensity: e, clippingPlanes: clip ? cl : [] });
     return {
-      myo: tissue("#A8233D", "#3A0612"),
-      atrium: tissue("#B9364F", "#3A0612"),
-      cut: new THREE.MeshStandardMaterial({ color: "#8A1A2E", roughness: 0.65, side: THREE.BackSide, clippingPlanes: cl, emissive: new THREE.Color("#2A040C"), emissiveIntensity: 0.5 }),
-      cavity: new THREE.MeshStandardMaterial({ color: "#3E0712", roughness: 0.5, side: THREE.BackSide, clippingPlanes: cl }),
-      aorta: (() => { const x = tissue("#C8364A", "#4A0812"); x.clippingPlanes = []; return x; })(),
-      venous: (() => { const x = tissue("#4B4FB8", "#10144A"); x.clippingPlanes = []; return x; })(),
-      coronaryA: new THREE.MeshStandardMaterial({ color: "#E8505F", roughness: 0.3, emissive: new THREE.Color("#5A0A14"), emissiveIntensity: 0.6, clippingPlanes: cl }),
-      coronaryV: new THREE.MeshStandardMaterial({ color: "#4A3A8A", roughness: 0.35, emissive: new THREE.Color("#1A0A3A"), emissiveIntensity: 0.5, clippingPlanes: cl }),
-      valve: new THREE.MeshPhysicalMaterial({ color: "#F0C8D0", roughness: 0.3, clearcoat: 1, clippingPlanes: cl }),
+      myo: tissue("#A8283C", "#3A0612"), atrium: tissue("#B83A50", "#3A0612"),
+      inner: new THREE.MeshStandardMaterial({ color: "#5A0E1C", roughness: 0.55, side: THREE.BackSide, clippingPlanes: cl, emissive: new THREE.Color("#2A040C"), emissiveIntensity: 0.6 }),
+      valve: plain("#F0D2D6", "#3A1A1E", 0.4),
+      corA: plain("#E8505F", "#5A0A14", 0.6), corV: plain("#5A4AA0", "#1A0A3A", 0.5),
+      aorta: (() => { const x = tissue("#C8384C", "#4A0812", false); return x; })(),
+      pulm: (() => { const x = tissue("#5560C8", "#14184A", false); x.vertexColors = true; return x; })(),
+      vein: (() => { const x = plain("#4B4FB8", "#10144A", 0.5, false); x.clippingPlanes = [new THREE.Plane(new THREE.Vector3(0, 1, 0), 1.25)]; return x; })(),
+      pvein: plain("#D8404E", "#4A0812", 0.5, false),
       wire: new THREE.MeshStandardMaterial({ color: "#35C4F0", emissive: new THREE.Color("#35C4F0"), emissiveIntensity: 1.2, transparent: true }),
-      shell: new THREE.MeshBasicMaterial({ color: "#5FE6FF", transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.BackSide }),
       nerve: new THREE.MeshStandardMaterial({ color: "#FFD23F", emissive: new THREE.Color("#FFB020"), emissiveIntensity: 1.2, transparent: true }),
     };
   }, [clip]);
-
-  const ventGeo = useMemo(() => {
-    const g = mergeVertices(new THREE.IcosahedronGeometry(1, 6).deleteAttribute("normal").deleteAttribute("uv"));
-    const p = g.getAttribute("position") as THREE.BufferAttribute;
-    const uv = new Float32Array(p.count * 2);
-    const v = new THREE.Vector3();
-    for (let i = 0; i < p.count; i++) {
-      v.fromBufferAttribute(p, i);
-      uv[i * 2] = (Math.atan2(v.x, v.z) / Math.PI + 1) * 2; uv[i * 2 + 1] = v.y * 2;
-      p.setXYZ(i, ...(ventricleShape(v.normalize()).toArray() as [number, number, number]));
-    }
-    g.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
-    g.computeVertexNormals();
-    return g;
-  }, []);
-  const vessels = useMemo(() => ({
-    aorta: tube(AORTA, 0.21), pulm: tube(PULM, 0.18), pulmL: tube(PULM_L, 0.13), pulmR: tube(PULM_R, 0.13),
-    svc: tube(SVC, 0.16), ivc: tube(IVC, 0.17),
-    branches: [[[0.15, 2.2, -0.12], [0.12, 2.6, -0.1]], [[0.35, 2.24, -0.25], [0.38, 2.62, -0.25]], [[0.55, 2.18, -0.38], [0.62, 2.55, -0.4]]].map((p) => tube(p, 0.07, 12)),
-    pveins: [[[0.95, 1.05, -0.75], [0.6, 1.0, -0.6]], [[1.0, 0.75, -0.7], [0.65, 0.8, -0.55]], [[-0.1, 1.05, -0.85], [0.2, 1.0, -0.65]]].map((p) => tube(p, 0.08, 12)),
-  }), []);
-  const coronaries = useMemo(() => {
-    const paths: { pts: number[][]; art: boolean }[] = [];
-    const along = (a0: number, a1: number, y0: number, y1: number, n = 10) =>
-      Array.from({ length: n }).map((_, k) => {
-        const t = k / (n - 1), a = a0 + (a1 - a0) * t, y = y0 + (y1 - y0) * t;
-        const c = Math.sqrt(Math.max(0, 1 - y * y));
-        return ventriclePoint([Math.sin(a) * c, y, Math.cos(a) * c], 1.015).toArray();
-      });
-    paths.push({ pts: along(0.18, 0.45, 0.75, -0.9), art: true });   // descendente anterior
-    paths.push({ pts: along(-0.9, -1.6, 0.6, 0.1), art: true });    // coronaria derecha
-    paths.push({ pts: along(0.6, 1.4, 0.55, -0.4), art: true });     // circunfleja/marginal
-    paths.push({ pts: along(0.05, 0.3, 0.7, -0.7), art: false });    // vena cardiaca
-    paths.push({ pts: along(-0.4, -0.75, 0.4, -0.6), art: false });
-    for (let i = 0; i < 6; i++) { // ramitas
-      const a = -0.6 + random(`cb${i}`) * 1.5, y = 0.5 - random(`cy${i}`) * 0.9;
-      paths.push({ pts: along(a, a + (random(`cd${i}`) - 0.5) * 0.5, y, y - 0.35, 6), art: i % 2 === 0 });
-    }
-    return paths.map((p) => ({ g: tube(p.pts, p.art ? 0.022 : 0.016, 30), art: p.art }));
-  }, []);
-  const wires = useMemo(() => [PATH_ATRIA, PATH_LEFT, PATH_RIGHT, PATH_LA].map((p) => tube(p, 0.009, 60)), []);
-
+  const wires = useMemo(() => [PATH_ATRIA, PATH_LEFT, PATH_RIGHT, PATH_LA].map((p) => tube(p, 0.011, 60)), []);
   const { a, v } = contraction(s.beatPhase);
-  const vScale = 1 - 0.07 * v + 0.012 * a;
-  const aScale = 1 - 0.12 * a;
+  const vScale = 1 - 0.06 * v + 0.01 * a;
+  const aScale = 1 - 0.09 * a;
   m.wire.opacity = s.electric;
   m.wire.emissiveIntensity = 1 + 2.5 * (a + v) * 0.5;
-  m.shell.opacity = s.flash * 0.35;
+  [m.myo, m.atrium].forEach((x) => { x.emissiveIntensity = 0.5 + 0.5 * s.flash; x.emissive.set(s.flash > 0.05 ? "#5A1030" : "#3A0612"); });
 
-  // pulsos eléctricos: recorren cada ruta según la fase del ciclo
   const pulses: { p: number[]; k: number }[] = [];
   const along = (c: THREE.CatmullRomCurve3, t0: number, t1: number) => {
     const u = (s.beatPhase - t0) / (t1 - t0);
@@ -170,7 +125,6 @@ export const Heart: React.FC<{ s: HeartState; clip: THREE.Plane; frame: number }
   };
   if (s.electric > 0.01) { along(C_ATRIA, 0.0, 0.14); along(C_LA, 0.0, 0.12); along(C_LEFT, 0.16, 0.32); along(C_RIGHT, 0.2, 0.32); }
 
-  // sangre: azul (derecha → pulmones) y roja (pulmones → cuerpo)
   const blood: { p: number[]; c: string }[] = [];
   if (s.blood > 0.01) {
     const ch = (pts: number[][], n: number, color: string, seed: string, speed: number) => {
@@ -178,65 +132,48 @@ export const Heart: React.FC<{ s: HeartState; clip: THREE.Plane; frame: number }
       for (let i = 0; i < n; i++) {
         const u = (frame / speed + random(`${seed}${i}`)) % 1;
         const p = c.getPointAt(u);
-        blood.push({ p: [p.x + (random(`${seed}x${i}`) - 0.5) * 0.12, p.y, p.z + (random(`${seed}z${i}`) - 0.5) * 0.12], c: color });
+        blood.push({ p: [p.x + (random(`${seed}x${i}`) - 0.5) * 0.1, p.y, p.z + (random(`${seed}z${i}`) - 0.5) * 0.1], c: color });
       }
     };
-    ch([[-0.7, 2.2, -0.12], [-0.66, 1.0, 0.0], [-0.4, 0.3, 0.05], [-0.35, -0.35, 0.05], [-0.05, 0.3, 0.1], [0.36, 0.9, 0.3], [0.45, 1.6, 0.25], [1.3, 1.8, -0.12]], 26, "#5A7BFF", "bb", 70);
-    ch([[1.0, 1.0, -0.7], [0.5, 0.95, -0.45], [0.35, 0.4, -0.1], [0.4, -0.5, 0.0], [0.15, 0.1, 0.0], [0.05, 0.9, -0.02], [0.05, 1.6, 0.05], [0.4, 2.2, -0.25], [0.82, 1.4, -0.62], [0.82, 0.4, -0.72]], 30, "#FF3A4A", "br", 70);
+    // venosa: cava superior → aurícula derecha → ventrículo derecho → tronco pulmonar → pulmones
+    ch([[-0.54, 1.6, 0.0], [-0.62, 0.9, 0.25], [-0.5, 0.3, 0.75], [-0.2, -0.4, 0.95], [0.15, 0.3, 0.9], [0.28, 0.85, 0.2], [0.27, 1.27, -0.2], [1.2, 1.3, -0.8]], 26, "#5A7BFF", "bb", 70);
+    // arterial: venas pulmonares → aurícula izq. → ventrículo izq. → aorta → arco
+    ch([[1.1, 0.95, -0.6], [0.4, 0.75, -0.3], [0.55, 0.1, 0.5], [0.5, -0.6, 0.75], [0.35, 0.0, 0.7], [0.18, 0.6, 0.35], [0.2, 1.2, 0.1], [0.45, 1.55, -0.25], [0.85, 1.4, -0.7], [0.9, 0.6, -0.8]], 30, "#FF3A4A", "br", 70);
   }
-
-  // nervios (vago/simpáticos simplificados): bajan hacia el nódulo sinusal; al cortarse se separan y se apagan
-  const nervePaths = [[[-1.4, 3.2, 0.1], [-1.0, 2.4, 0.1], [-0.75, 1.6, 0.08], SA_NODE], [[0.2, 3.3, 0.2], [-0.2, 2.5, 0.15], [-0.5, 1.7, 0.1], SA_NODE], [[1.4, 3.1, 0.0], [0.9, 2.3, 0.05], [0.3, 1.5, 0.08], [0.1, 1.0, 0.1]]];
+  const nervePaths = [[[-1.4, 3.0, 0.3], [-1.0, 2.2, 0.3], [-0.75, 1.4, 0.3], SA_NODE], [[0.2, 3.1, 0.4], [-0.2, 2.3, 0.4], [-0.5, 1.5, 0.35], SA_NODE], [[1.4, 2.9, 0.3], [0.9, 2.1, 0.4], [0.3, 1.2, 0.6], [0.0, 0.6, 0.85]]];
   const nerveGeo = useMemo(() => nervePaths.map((p) => {
     const c = curveOf(p);
     const pts = c.getSpacedPoints(30).map((q) => q.toArray());
     return { up: tube(pts.slice(0, 16), 0.022, 20), down: tube(pts.slice(15), 0.022, 20), mid: pts[15] };
   }), []);
   m.nerve.opacity = s.nerves * (1 - 0.85 * s.nerveCut);
-
+  if (!G) return null;
+  const around = (c: number[], k: number, children: React.ReactNode) => (
+    <group position={c as any} scale={k}><group position={[-c[0], -c[1], -c[2]]}>{children}</group></group>
+  );
   return (
     <group>
-      <group scale={vScale}>
-        <mesh geometry={ventGeo} material={m.myo} rotation={[0, 0, TILT]} castShadow receiveShadow />
-        <mesh geometry={ventGeo} material={m.cut} rotation={[0, 0, TILT]} />
-        <mesh geometry={ventGeo} material={m.shell} rotation={[0, 0, TILT]} scale={1.06} />
-        {/* cavidades ventriculares (se ven al abrir) */}
-        <mesh material={m.cavity} position={[-0.38, -0.12, 0.05]} scale={[0.36, 0.62, 0.34]}><sphereGeometry args={[1, 32, 24]} /></mesh>
-        <mesh material={m.cavity} position={[0.32, -0.28, -0.02]} scale={[0.3, 0.66, 0.3]} rotation={[0, 0, TILT * 0.8]}><sphereGeometry args={[1, 32, 24]} /></mesh>
-        {coronaries.map((c, i) => <mesh key={i} geometry={c.g} material={c.art ? m.coronaryA : m.coronaryV} />)}
-      </group>
-      {/* aurículas */}
-      <group position={[-0.68, 0.92, -0.08]} scale={aScale}>
-        <mesh material={m.atrium} scale={[0.55, 0.5, 0.5]} castShadow><sphereGeometry args={[1, 40, 30]} /></mesh>
-        <mesh material={m.cut} scale={[0.55, 0.5, 0.5]}><sphereGeometry args={[1, 40, 30]} /></mesh>
-        <mesh material={m.cavity} scale={[0.42, 0.38, 0.38]}><sphereGeometry args={[1, 32, 24]} /></mesh>
-        <mesh material={m.atrium} position={[0.25, 0.25, 0.32]} scale={[0.3, 0.18, 0.14]} rotation={[0.3, 0, -0.6]}><sphereGeometry args={[1, 24, 16]} /></mesh>
-      </group>
-      <group position={[0.42, 0.98, -0.48]} scale={aScale}>
-        <mesh material={m.atrium} scale={[0.5, 0.42, 0.45]} castShadow><sphereGeometry args={[1, 40, 30]} /></mesh>
-        <mesh material={m.cut} scale={[0.5, 0.42, 0.45]}><sphereGeometry args={[1, 40, 30]} /></mesh>
-        <mesh material={m.cavity} scale={[0.38, 0.32, 0.34]}><sphereGeometry args={[1, 32, 24]} /></mesh>
-        <mesh material={m.atrium} position={[0.15, 0.1, 0.42]} scale={[0.26, 0.15, 0.12]} rotation={[0.2, 0, 0.5]}><sphereGeometry args={[1, 24, 16]} /></mesh>
-      </group>
-      {/* válvulas auriculoventriculares (anillos visibles en el corte) */}
-      <mesh material={m.valve} position={[-0.42, 0.45, 0.0]} rotation={[Math.PI / 2 - 0.3, 0, 0.2]}><torusGeometry args={[0.2, 0.03, 10, 30]} /></mesh>
-      <mesh material={m.valve} position={[0.3, 0.52, -0.18]} rotation={[Math.PI / 2 - 0.3, 0, -0.2]}><torusGeometry args={[0.18, 0.03, 10, 30]} /></mesh>
-      {/* grandes vasos */}
-      <mesh geometry={vessels.aorta} material={m.aorta} castShadow />
-      {vessels.branches.map((g, i) => <mesh key={i} geometry={g} material={m.aorta} />)}
-      <mesh geometry={vessels.pulm} material={m.venous} castShadow />
-      <mesh geometry={vessels.pulmL} material={m.venous} />
-      <mesh geometry={vessels.pulmR} material={m.venous} />
-      <mesh geometry={vessels.svc} material={m.venous} />
-      <mesh geometry={vessels.ivc} material={m.venous} />
-      {vessels.pveins.map((g, i) => <mesh key={i} geometry={g} material={m.aorta} />)}
-      {/* sistema eléctrico */}
+      {around(VENT_C, vScale, <>
+        <mesh geometry={G.vent} material={m.myo} castShadow receiveShadow />
+        <mesh geometry={G.vent} material={m.inner} />
+        <mesh geometry={G.corA} material={m.corA} />
+        <mesh geometry={G.corV} material={m.corV} />
+        {s.open > 0.01 && <mesh geometry={G.valves} material={m.valve} />}
+      </>)}
+      {around(ATR_C, aScale, <>
+        <mesh geometry={G.atria} material={m.atrium} castShadow />
+        <mesh geometry={G.atria} material={m.inner} />
+      </>)}
+      <mesh geometry={G.aorta} material={m.aorta} castShadow />
+      <mesh geometry={G.pulm} material={m.pulm} castShadow />
+      <mesh geometry={G.pveins} material={m.pvein} />
+      <mesh geometry={G.svc} material={m.vein} />
+      <mesh geometry={G.ivc} material={m.vein} />
       {s.electric > 0.01 && wires.map((g, i) => <mesh key={i} geometry={g} material={m.wire} />)}
       {s.electric > 0.01 && <Glow position={SA_NODE} color="#5FE6FF" size={0.55 + 0.35 * a} opacity={s.electric} />}
       {s.electric > 0.01 && <Glow position={AV_NODE} color="#5FE6FF" size={0.35 + 0.25 * v} opacity={s.electric * 0.8} />}
       {pulses.map((q, i) => <Glow key={`p${i}`} position={q.p} color="#BFF6FF" size={0.32 * q.k} opacity={s.electric * q.k} />)}
       {blood.map((q, i) => <Glow key={`b${i}`} position={q.p} color={q.c} size={0.14} opacity={s.blood * 0.9} />)}
-      {/* nervios */}
       {s.nerves > 0.01 && nerveGeo.map((n, i) => (
         <group key={`n${i}`}>
           <mesh geometry={n.up} material={m.nerve} position={[0, s.nerveCut * 0.5, 0]} />

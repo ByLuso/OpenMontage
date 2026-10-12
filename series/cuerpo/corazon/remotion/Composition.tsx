@@ -9,6 +9,7 @@ import { ramp } from "./kit3d/anim";
 import { Captions, MainLabel, Callout, Timing, K, FONT } from "./kit2d/Kit";
 import { Heart, HeartState, SA_NODE, AV_NODE, VESSELS } from "./Heart";
 import { Valve } from "./Valve";
+import { usePreloadModel } from "./Model";
 
 export type Props = { timing: Timing; dpr?: number; debug?: boolean; cover?: boolean };
 
@@ -30,6 +31,7 @@ export function beatPhaseAt(t: number, slowA: number, slowB: number) {
 }
 
 export const Corazon: React.FC<Props> = ({ timing, dpr = 1, debug = false, cover = false }) => {
+  const loaded = usePreloadModel("corazon.glb");
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const t = frame / fps;
@@ -51,31 +53,31 @@ export const Corazon: React.FC<Props> = ({ timing, dpr = 1, debug = false, cover
     const SA = SA_NODE;
     return [
       first,
-      k(0.9, HC, 10.5, -10, 6),
-      k(2.3, HC, 9.0, 12, 6),
-      k(bs(2), HC, 9.4, -24, 12),
-      k(4.7, HC, 9.4, 24, 6),
-      k(bs(3) + 0.1, SA, 6.6, -16, 10),
-      k(9.6, SA, 4.4, 6, 8),
-      k(11.3, SA, 3.8, -10, 6),
-      k(Wd(3, "chispa") - 0.3, [-0.25, 0.6, 0], 4.8, 0, 6),
-      k(bs(4), [0.0, 0.35, 0], 6.8, 0, 5),
-      k(Wd(4, "auriculas") + 0.2, [-0.15, 0.95, 0], 3.8, -12, 10),
-      k(Wd(4, "ventriculos") + 0.2, [0.1, -0.3, 0], 4.2, 12, 2),
-      k(Wd(4, "pulmones") - 0.2, [0.35, 1.45, 0], 6.2, 18, 8),
-      k(tValve - 0.05, [0.35, 1.45, 0], 5.6, 26, 8),
+      k(0.9, HC, 11.8, -10, 6),
+      k(2.3, HC, 10.1, 12, 6),
+      k(bs(2), HC, 10.5, -24, 12),
+      k(4.7, HC, 10.5, 24, 6),
+      k(bs(3) + 0.1, SA, 9.6, -16, 10),
+      k(9.6, SA, 6.4, 6, 8),
+      k(11.3, SA, 5.5, -10, 6),
+      k(Wd(3, "chispa") - 0.3, [-0.25, 0.6, 0], 6.9, 0, 6),
+      k(bs(4), [0.0, 0.35, 0], 9.9, 0, 5),
+      k(Wd(4, "auriculas") + 0.2, [-0.15, 0.95, 0], 5.6, -12, 10),
+      k(Wd(4, "ventriculos") + 0.2, [0.1, -0.3, 0], 6.1, 12, 2),
+      k(Wd(4, "pulmones") - 0.2, [0.35, 1.2, 0], 8.6, 18, 8),
+      k(tValve - 0.05, [0.35, 1.2, 0], 7.6, 26, 8),
       // válvula
       k(tValve, [0, 0.1, 0], 7.6, 10, 40),
       k(Wd(5, "valvulas") + 0.4, [0, 0.2, 0], 6.2, -20, 30),
       k(Wd(5, "sentido") + 0.1, [0, 0.1, 0], 5.6, 25, 18),
       k(tBack - 0.05, [0, 0.1, 0], 5.0, 35, 15),
       // corazón cerrado: la cifra
-      k(tBack, HC, 10.5, -16, 8),
-      k(be(5), HC, 9.6, 14, 8),
+      k(tBack, HC, 11.8, -16, 8),
+      k(be(5), HC, 10.8, 14, 8),
       // nervios cortados
-      k(bs(6), [-0.3, 1.5, 0], 8.0, -10, 12),
-      k(Wd(6, "corazon") - 0.2, HC, 9.6, 6, 8),
-      k(timing.voiceEnd - 0.6, HC, 12, 0, 6),
+      k(bs(6), [-0.3, 1.5, 0], 9.0, -10, 12),
+      k(Wd(6, "corazon") - 0.2, HC, 10.8, 6, 8),
+      k(timing.voiceEnd - 0.6, HC, 13.4, 0, 6),
       { ...first, f: durationInFrames - 1 },
     ];
   }, [timing]);
@@ -108,9 +110,9 @@ export const Corazon: React.FC<Props> = ({ timing, dpr = 1, debug = false, cover
   return (
     <AbsoluteFill style={{ backgroundColor: "#02080B" }}>
       <AbsoluteFill style={{ transform: `scale(${zoomIn})` }}>
-        <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
+        {loaded && <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
           {valveWorld ? <Valve open={vOpen} flow={vOpen} frame={frame} clip={vClip} /> : <Heart s={hs} clip={clip} frame={frame} />}
-        </BodyScene>
+        </BodyScene>}
       </AbsoluteFill>
       {/* destello cian del impulso eléctrico */}
       {flash > 0.02 && <AbsoluteFill style={{ background: `radial-gradient(circle at 50% 42%, rgba(95,230,255,${flash * 0.22}) 0%, rgba(0,0,0,0) 60%)` }} />}
