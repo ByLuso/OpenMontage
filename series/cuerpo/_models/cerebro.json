@@ -1,0 +1,46 @@
+{
+ "scale": 0.0135,
+ "center_groups": [
+  "cortexL",
+  "cortexR",
+  "cerebellum",
+  "stem"
+ ],
+ "groups": {
+  "cortexL": {
+   "ids": [
+    "FMA50801"
+   ],
+   "match": "^left .*(gyrus|lobe|lobule|insula)$",
+   "ao": true
+  },
+  "cortexR": {
+   "ids": [
+    "FMA50801"
+   ],
+   "match": "^right .*(gyrus|lobe|lobule|insula)$",
+   "ao": true
+  },
+  "cerebellum": {
+   "ids": [
+    "FMA50801"
+   ],
+   "match": "cerebellum",
+   "ao": true
+  },
+  "stem": {
+   "ids": [
+    "FMA50801"
+   ],
+   "match": "midbrain|pons|medulla|colliculus",
+   "ao": true
+  },
+  "inner": {
+   "ids": [
+    "FMA50801"
+   ]
+  }
+ },
+ "ao_dist": 15.0,
+ "ao_gamma": 1.8
+}

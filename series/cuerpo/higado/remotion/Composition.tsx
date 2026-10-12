@@ -6,12 +6,14 @@ import { CameraKey, project, shot } from "./kit3d/CameraRig";
 import { ramp } from "./kit3d/anim";
 import { Captions, MainLabel, Callout, Timing, K } from "./kit2d/Kit";
 import { BigNumber, CoverTitle, CutFlash, voice, win } from "./Common";
+import { usePreloadModel } from "./Model";
 import { Liver, Lobule, PORTAL, GALL, CUT_X, TRIAD, CELL_PT } from "./Liver";
 
 export type Props = { timing: Timing; dpr?: number; cover?: boolean };
 const C = [0, 0, 0];
 
 export const Higado: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => {
+  const loaded = usePreloadModel("higado.glb");
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const t = frame / fps;
@@ -78,9 +80,9 @@ export const Higado: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#02080B" }}>
       <AbsoluteFill style={{ transform: `scale(${zoomIn})` }}>
-        <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
+        {loaded && <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
           {lobWorld ? <Lobule s={lo} /> : <Liver s={ls} />}
-        </BodyScene>
+        </BodyScene>}
       </AbsoluteFill>
       {cover ? <CoverTitle before="Tu hígado puede" hl="volver a crecer" after="" bottom="y no es un mito" hlColor={K.cold} /> : (
         <>

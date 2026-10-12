@@ -7,12 +7,14 @@ import { CameraKey, project, shot } from "./kit3d/CameraRig";
 import { ramp } from "./kit3d/anim";
 import { Captions, MainLabel, Callout, Timing, K } from "./kit2d/Kit";
 import { BigNumber, CoverTitle, CutFlash, voice, win } from "./Common";
+import { usePreloadModel } from "./Model";
 import { Kidneys, Nephron, K_POS, BLADDER, RENAL_ART_L, TUBULE, PERITUB } from "./Kidneys";
 
 export type Props = { timing: Timing; dpr?: number; cover?: boolean };
-const C = [0, -0.3, 0];
+const C = [0, -1.1, 0];
 
 export const Rinones: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => {
+  const loaded = usePreloadModel("rinones.glb");
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const t = frame / fps;
@@ -24,12 +26,12 @@ export const Rinones: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => 
 
   const cam: CameraKey[] = useMemo(() => {
     const k = (sec: number, target: number[], d: number, az: number, el: number, fov = 30, breathe = 1): CameraKey => ({ ...shot(F(sec), target, d, az, el, fov), breathe });
-    const first = k(0, C, 36, 0, 5, 30, 0);
+    const first = k(0, C, 40, 0, 5, 30, 0);
     return [
       first,
       k(1.0, [0, 0.1, 0], 12.5, -8, 6),
       k(bs(2), [0, 0.1, 0], 11.5, 16, 8),
-      k(4.6, [0, -0.6, 0], 15, -18, 10),
+      k(4.6, [0, -1.6, 0], 20, -18, 10),
       k(bs(3), KL, 6.4, 12, 6),
       k(Wd(3, "millon") - 0.2, KL, 5.4, -10, 8),
       k(Wd(3, "reciben") - 0.2, [0.6, 0.4, 0], 5.4, 20, 10),
@@ -44,10 +46,10 @@ export const Rinones: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => 
       k(Wd(5, "sobra") - 0.2, [2.9, -1.9, 0], 4.8, -15, 4),
       k(tBack - 0.05, [3.2, -2.4, 0], 4.0, -20, 4),
       // riñones: orina hacia la vejiga y remate
-      k(tBack, [0, -1.3, 0], 12.5, 10, 8),
-      k(Wd(5, "vejiga") - 0.1, [0, -2.3, 0], 7.5, -10, 10),
-      k(bs(6), C, 15, 8, 6),
-      k(timing.voiceEnd - 0.4, C, 17, 0, 6),
+      k(tBack, [0, -2.0, 0], 16, 10, 8),
+      k(Wd(5, "vejiga") - 0.1, [0, -3.3, 0.2], 8.5, -10, 10),
+      k(bs(6), C, 20, 8, 6),
+      k(timing.voiceEnd - 0.4, C, 22, 0, 6),
       { ...first, f: durationInFrames - 1 },
     ];
   }, [timing]);
@@ -74,9 +76,9 @@ export const Rinones: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => 
   return (
     <AbsoluteFill style={{ backgroundColor: "#02080B" }}>
       <AbsoluteFill style={{ transform: `scale(${zoomIn})` }}>
-        <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
+        {loaded && <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
           {nephWorld ? <Nephron s={ns} /> : <Kidneys s={ks} clip={clip} />}
-        </BodyScene>
+        </BodyScene>}
       </AbsoluteFill>
       {cover ? <CoverTitle before="Llevas" hl="2 millones de filtros" after="en la espalda" bottom="tus riñones" hlColor={K.flow} /> : (
         <>

@@ -1,0 +1,69 @@
+{
+ "scale": 0.022,
+ "ao_gamma": 1.5,
+ "ao_dist": 20.0,
+ "center_groups": [
+  "remnant",
+  "donated"
+ ],
+ "groups": {
+  "donated": {
+   "ids": [
+    "FMA7197"
+   ],
+   "match": "hepatovenous segment (v|vi|vii|viii)$",
+   "ao": true,
+   "remesh": 2.4,
+   "smooth": 3
+  },
+  "remnant": {
+   "ids": [
+    "FMA7197"
+   ],
+   "match": "hepatovenous segment (ii|iii|iv)$|caudate lobe of liver",
+   "ao": true,
+   "remesh": 2.4,
+   "smooth": 3
+  },
+  "portal": {
+   "ids": [
+    "FMA50735",
+    "FMA7197"
+   ],
+   "match": "portal vein"
+  },
+  "artery": {
+   "ids": [
+    "FMA7197"
+   ],
+   "match": "hepatic artery"
+  },
+  "bile": {
+   "ids": [
+    "FMA7197",
+    "FMA14668",
+    "FMA14539"
+   ],
+   "match": "biliary|hepatic duct|cystic duct"
+  },
+  "hepvein": {
+   "ids": [
+    "FMA7197"
+   ],
+   "match": "hepatic vein"
+  },
+  "gall": {
+   "ids": [
+    "FMA7202"
+   ],
+   "subdiv": 1,
+   "ao": true
+  },
+  "ivc": {
+   "ids": [
+    "FMA10951"
+   ],
+   "subdiv": 1
+  }
+ }
+}

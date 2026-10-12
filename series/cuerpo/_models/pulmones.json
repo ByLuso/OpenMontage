@@ -1,0 +1,53 @@
+{
+ "scale": 0.012,
+ "ao_gamma": 1.3,
+ "ao_dist": 20.0,
+ "center_groups": [
+  "lungL",
+  "lungR"
+ ],
+ "groups": {
+  "lungR": {
+   "files": [
+    "/home/user/OpenMontage/projects/cuerpo/_models/lungR.obj"
+   ],
+   "decimate": 0.4,
+   "smooth": 25,
+   "ao": true
+  },
+  "lungL": {
+   "files": [
+    "/home/user/OpenMontage/projects/cuerpo/_models/lungL.obj"
+   ],
+   "decimate": 0.4,
+   "smooth": 25,
+   "ao": true
+  },
+  "bronchi": {
+   "ids": [
+    "FMA7393"
+   ]
+  },
+  "partery": {
+   "ids": [
+    "FMA8612",
+    "FMA50872",
+    "FMA50873"
+   ]
+  },
+  "diaphragm": {
+   "ids": [
+    "FMA13295"
+   ],
+   "smooth": 4,
+   "ao": true
+  }
+ },
+ "skip": [
+  "FJ2041",
+  "FJ2044"
+ ],
+ "ao_exclude": [
+  "diaphragm"
+ ]
+}

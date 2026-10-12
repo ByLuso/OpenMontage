@@ -7,12 +7,14 @@ import { CameraKey, project, shot } from "./kit3d/CameraRig";
 import { ramp } from "./kit3d/anim";
 import { Captions, MainLabel, Callout, Timing, K } from "./kit2d/Kit";
 import { BigNumber, CoverTitle, CutFlash, voice, win } from "./Common";
+import { usePreloadModel } from "./Model";
 import { Eye, Retina, CORNEA, LENS, RETINA_PT, NERVE, OBJ, IMG, RX } from "./Eye";
 
 export type Props = { timing: Timing; dpr?: number; cover?: boolean };
 const C = [0, 0, 0];
 
 export const Ojo: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => {
+  const loaded = usePreloadModel("ojo.glb");
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const t = frame / fps;
@@ -85,9 +87,9 @@ export const Ojo: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#02080B" }}>
       <AbsoluteFill style={{ transform: `scale(${zoomIn})` }}>
-        <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
+        {loaded && <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
           {retWorld ? <Retina s={rs} /> : <Eye s={es} clip={clip} />}
-        </BodyScene>
+        </BodyScene>}
       </AbsoluteFill>
       {cover ? <CoverTitle before="Tus ojos ven el mundo" hl="al revés" after="" bottom="y tú ni lo notas" hlColor={K.flow} /> : (
         <>

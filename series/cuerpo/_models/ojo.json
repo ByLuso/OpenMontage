@@ -1,0 +1,90 @@
+{
+ "scale": 0.092,
+ "ao_gamma": 1.3,
+ "ao_dist": 4.0,
+ "center_groups": [
+  "sclera"
+ ],
+ "groups": {
+  "sclera": {
+   "ids": [
+    "FMA12514"
+   ],
+   "match": "sclera",
+   "box": [
+    [
+     -60,
+     -200,
+     1490
+    ],
+    [
+     -12,
+     -100,
+     1550
+    ]
+   ]
+  },
+  "cornea": {
+   "ids": [
+    "FMA12514"
+   ],
+   "match": "cornea",
+   "box": [
+    [
+     -60,
+     -200,
+     1490
+    ],
+    [
+     -12,
+     -100,
+     1550
+    ]
+   ],
+   "subdiv": 1
+  },
+  "choroid": {
+   "ids": [
+    "FMA12514"
+   ],
+   "match": "choroid",
+   "box": [
+    [
+     -60,
+     -200,
+     1490
+    ],
+    [
+     -12,
+     -100,
+     1550
+    ]
+   ]
+  },
+  "iris": {
+   "ids": [
+    "FMA12514"
+   ],
+   "match": "iris",
+   "subdiv": 1
+  },
+  "lens": {
+   "ids": [
+    "FMA12514"
+   ],
+   "match": "^right lens$",
+   "subdiv": 2
+  },
+  "muscles": {
+   "ids": [
+    "FMA49044",
+    "FMA49046",
+    "FMA49054",
+    "FMA49056"
+   ],
+   "subdiv": 1,
+   "smooth": 2,
+   "ao": true
+  }
+ }
+}

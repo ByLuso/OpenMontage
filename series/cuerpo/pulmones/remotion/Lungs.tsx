@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import * as THREE from "three";
 import { random } from "remotion";
 import { Glow } from "./kit3d/Glow";
+import { useModel } from "./Model";
 import { mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 
 // textura de tejido esponjoso
@@ -73,72 +74,58 @@ function bronchialTree(start: number[], dir: number[], len: number, r: number, d
 
 export type LungsState = { breath: number; xray: number; air: number; airDir: number; frame: number; o2glow: number };
 
-export const LUNG_POS = { L: [0.66, 0.05, 0], R: [-0.7, 0.05, 0] };
+export const LUNG_POS = { L: [0.82, 0.0, 0], R: [-0.75, 0.0, 0] };
+const TOP = [-0.13, 1.87, -0.04], CARINA = [0.05, 0.45, -0.2];
 
+/** Pulmones reales (BodyParts3D): superficie pleural, árbol traqueobronquial, arterias pulmonares y diafragma. */
 export const Lungs: React.FC<{ s: LungsState }> = ({ s }) => {
-  const geoL = useMemo(() => lungGeo(1), []);
-  const geoR = useMemo(() => lungGeo(-1), []);
-  const tissue = useMemo(() => {
-    const tex = spongeTexture();
-    return new THREE.MeshPhysicalMaterial({
-      color: "#E07A90", roughness: 0.45, clearcoat: 0.6, clearcoatRoughness: 0.3, sheen: 1, sheenColor: new THREE.Color("#FFC2D0"),
-      emissive: new THREE.Color("#4A0F1E"), emissiveIntensity: 0.55, bumpMap: tex, bumpScale: 0.8, map: tex, transparent: true,
-    });
-  }, []);
-  tissue.opacity = 1 - 0.78 * s.xray;
-  tissue.depthWrite = s.xray < 0.3;
-  const branches = useMemo(() => {
-    const out: Branch[] = [];
-    bronchialTree([0, 1.05, 0], [0.55, -1, 0], 0.55, 0.075, 1, "L", 1, out);
-    bronchialTree([0, 1.05, 0], [-0.6, -1, 0], 0.5, 0.08, 1, "R", -1, out);
-    return out.map((b) => ({ g: new THREE.TubeGeometry(new THREE.CatmullRomCurve3(b.pts.map((q) => new THREE.Vector3(...q))), 8, b.r, 8, false), b }));
-  }, []);
-  const bronchusMat = useMemo(() => new THREE.MeshPhysicalMaterial({ color: "#F4D6DC", roughness: 0.35, clearcoat: 0.8, emissive: new THREE.Color("#35C4F0"), emissiveIntensity: 0 }), []);
-  bronchusMat.emissiveIntensity = 0.15 + 0.6 * s.air;
-  const cart = useMemo(() => new THREE.MeshPhysicalMaterial({ color: "#F2E4E6", roughness: 0.3, clearcoat: 1 }), []);
-  const diaph = useMemo(() => {
-    const pts: THREE.Vector2[] = [];
-    for (let i = 0; i <= 24; i++) { const r = (i / 24) * 1.85; pts.push(new THREE.Vector2(r, 0.8 * Math.cos((r / 1.85) * Math.PI / 2))); }
-    return new THREE.LatheGeometry(pts, 64);
-  }, []);
-  const diaphMat = useMemo(() => new THREE.MeshPhysicalMaterial({ map: spongeTexture(), color: "#9C2C40", roughness: 0.45, clearcoat: 0.5, sheen: 1, sheenColor: new THREE.Color("#FF9AB0"), side: THREE.DoubleSide, emissive: new THREE.Color("#3A0612"), emissiveIntensity: 0.5 }), []);
-  const tendon = useMemo(() => new THREE.MeshPhysicalMaterial({ color: "#E9D4D8", roughness: 0.3, clearcoat: 1, transparent: true, opacity: 0.9 }), []);
-
-  // respiración: inspirar = diafragma baja y se aplana, pulmones se expanden
-  const b = s.breath; // 0 espirado · 1 inspirado
-  const lungScale: [number, number, number] = [1 + 0.06 * b, 1 + 0.1 * b, 1 + 0.06 * b];
-  const diaphY = -1.85 - 0.3 * b, diaphFlat = 1 - 0.45 * b;
-
-  // aire: partículas por la tráquea y ramas (dirección según inspirar/espirar)
-  const air: number[][] = [];
-  if (s.air > 0.01) {
+  const G = useModel("pulmones.glb");
+  const m = useMemo(() => ({
+    tissue: new THREE.MeshPhysicalMaterial({ color: "#E58A9C", roughness: 0.5, clearcoat: 0.45, clearcoatRoughness: 0.35, sheen: 1, sheenRoughness: 0.5, sheenColor: new THREE.Color("#FFD0DA"), emissive: new THREE.Color("#4A0F1E"), emissiveIntensity: 0.45, vertexColors: true, transparent: true }),
+    bronchi: new THREE.MeshPhysicalMaterial({ color: "#F4DADF", roughness: 0.35, clearcoat: 0.8, emissive: new THREE.Color("#35C4F0"), emissiveIntensity: 0 }),
+    artery: new THREE.MeshPhysicalMaterial({ color: "#5A6AE0", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#141E5A"), emissiveIntensity: 0.6, transparent: true }),
+    diaph: new THREE.MeshPhysicalMaterial({ color: "#A02C3C", roughness: 0.55, clearcoat: 0.15, sheen: 1, sheenColor: new THREE.Color("#FF9AB0"), side: THREE.DoubleSide, emissive: new THREE.Color("#3A0612"), emissiveIntensity: 0.5, vertexColors: true,
+      clippingPlanes: [new THREE.Plane(new THREE.Vector3(0, 1, 0), 1.8)] }),
+  }), []);
+  m.tissue.opacity = 1 - 0.8 * s.xray;
+  m.tissue.depthWrite = s.xray < 0.3;
+  m.bronchi.emissiveIntensity = 0.12 + 0.7 * s.air;
+  m.artery.opacity = s.xray;
+  // destinos del aire: vértices del árbol bronquial (deterministas)
+  const targets = useMemo(() => {
+    if (!G) return [];
+    const p = G.bronchi.getAttribute("position") as THREE.BufferAttribute; const out: THREE.CatmullRomCurve3[] = [];
     for (let i = 0; i < 70; i++) {
-      const br = branches[Math.floor(random(`ab${i}`) * branches.length)].b;
-      let u = (s.frame / 28 + random(`au${i}`)) % 1;
-      if (s.airDir < 0) u = 1 - u;
-      const c = new THREE.CatmullRomCurve3(br.pts.map((q) => new THREE.Vector3(...q))).getPointAt(u);
-      air.push(c.toArray());
+      let k = Math.floor(random(`tb${i}`) * p.count), tries = 0;
+      while (p.getY(k) > 0.3 && tries++ < 20) k = Math.floor(random(`tb${i}-${tries}`) * p.count);
+      const t = new THREE.Vector3(p.getX(k), p.getY(k), p.getZ(k));
+      const mid = new THREE.Vector3(...CARINA).lerp(t, 0.45); mid.x += Math.sign(t.x) * 0.08;
+      out.push(new THREE.CatmullRomCurve3([new THREE.Vector3(...TOP), new THREE.Vector3(...CARINA), mid, t]));
     }
-    for (let i = 0; i < 16; i++) {
-      let u = (s.frame / 22 + random(`at${i}`)) % 1;
-      if (s.airDir < 0) u = 1 - u;
-      air.push([(random(`ax${i}`) - 0.5) * 0.08, 2.4 - u * 1.35, (random(`az${i}`) - 0.5) * 0.08]);
-    }
-  }
+    return out;
+  }, [G]);
+  if (!G) return null;
+  // respiración: inspirar = el diafragma baja y se aplana; los pulmones se expanden (sobre todo hacia abajo)
+  const b = s.breath;
+  const lungScale: [number, number, number] = [1 + 0.05 * b, 1 + 0.09 * b, 1 + 0.05 * b];
+  const air: number[][] = [];
+  if (s.air > 0.01) targets.forEach((c, i) => {
+    let u = (s.frame / 30 + random(`au${i}`)) % 1;
+    if (s.airDir < 0) u = 1 - u;
+    air.push(c.getPointAt(u).toArray());
+  });
   return (
     <group>
-      {/* tráquea con anillos de cartílago */}
-      <mesh material={bronchusMat} position={[0, 1.75, 0]}><cylinderGeometry args={[0.13, 0.13, 1.4, 24]} /></mesh>
-      {Array.from({ length: 11 }).map((_, i) => (
-        <mesh key={i} material={cart} position={[0, 1.15 + i * 0.12, 0]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.14, 0.025, 8, 28]} /></mesh>
-      ))}
-      {branches.map(({ g }, i) => <mesh key={i} geometry={g} material={bronchusMat} />)}
-      <group position={LUNG_POS.L as any} scale={lungScale}><mesh geometry={geoL} material={tissue} castShadow receiveShadow /></group>
-      <group position={LUNG_POS.R as any} scale={lungScale}><mesh geometry={geoR} material={tissue} castShadow receiveShadow /></group>
-      {/* diafragma */}
-      <group position={[0, diaphY, 0.05]} scale={[1, diaphFlat, 0.8]}>
-        <mesh geometry={diaph} material={diaphMat} receiveShadow />
-        <mesh material={tendon} position={[0, 0.805, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[1, 0.7, 1]}><circleGeometry args={[0.42, 32]} /></mesh>
+      <mesh geometry={G.bronchi} material={m.bronchi} />
+      {s.xray > 0.01 && <mesh geometry={G.partery} material={m.artery} />}
+      <group position={[0, 0.25, 0]} scale={lungScale}>
+        <group position={[0, -0.25, 0]}>
+          <mesh geometry={G.lungL} material={m.tissue} castShadow receiveShadow />
+          <mesh geometry={G.lungR} material={m.tissue} castShadow receiveShadow />
+        </group>
+      </group>
+      <group position={[0, -0.62 - 0.22 * b, 0]} scale={[1, 1 - 0.3 * b, 1]}>
+        <mesh geometry={G.diaphragm} material={m.diaph} receiveShadow />
       </group>
       {air.map((p, i) => <Glow key={i} position={p} color={s.airDir > 0 ? "#8FE6FF" : "#FFD27A"} size={0.11} opacity={s.air * 0.9} />)}
       {s.o2glow > 0.01 && <Glow position={[0, 0.2, 0.4]} color="#5FE6FF" size={4} opacity={s.o2glow * 0.25} />}

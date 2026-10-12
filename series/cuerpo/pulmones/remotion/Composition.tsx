@@ -6,11 +6,13 @@ import { CameraKey, project, shot } from "./kit3d/CameraRig";
 import { Captions, MainLabel, Callout, Timing, K, FONT } from "./kit2d/Kit";
 import { BigNumber, CoverTitle, CutFlash, voice, win } from "./Common";
 import { Lungs, Alveoli, LungsState } from "./Lungs";
+import { usePreloadModel } from "./Model";
 
 export type Props = { timing: Timing; dpr?: number; cover?: boolean };
 const C = [0, 0.2, 0];
 
 export const Pulmones: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => {
+  const loaded = usePreloadModel("pulmones.glb");
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const t = frame / fps;
@@ -27,9 +29,9 @@ export const Pulmones: React.FC<Props> = ({ timing, dpr = 1, cover = false }) =>
       k(1.0, C, 15, -10, 6),
       k(bs(2), C, 13.5, 14, 8),
       k(4.4, C, 13.5, -22, 10),
-      k(bs(3) - 0.1, [0, -1.5, 0], 9, 10, 24),
-      k(Wd(3, "musculo"), [0, -1.65, 0.2], 6.5, -16, 9),
-      k(Wd(3, "baja"), [0, -1.3, 0], 9.5, 0, 4),
+      k(bs(3) - 0.1, [0, -1.35, 0], 9.5, 10, 8),
+      k(Wd(3, "musculo"), [0, -1.3, 0.2], 10, -16, 6),
+      k(Wd(3, "baja"), [0, -1.2, 0], 9.5, 0, 8),
       k(Wd(3, "como") - 0.1, [0, -0.5, 0], 12.5, 15, 6),
       k(bs(4), C, 12.5, 0, 4),
       k(Wd(4, "aire"), [0, 0.9, 0], 8, -12, 6),
@@ -74,16 +76,16 @@ export const Pulmones: React.FC<Props> = ({ timing, dpr = 1, cover = false }) =>
   return (
     <AbsoluteFill style={{ backgroundColor: "#02080B" }}>
       <AbsoluteFill style={{ transform: `scale(${zoomIn})` }}>
-        <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
+        {loaded && <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
           {alvWorld ? <Alveoli frame={frame} exchange={win(t, Wd(5, "oxigeno") - 0.4, tBack, 0.4, 0.1)} /> : <Lungs s={s} />}
-        </BodyScene>
+        </BodyScene>}
       </AbsoluteFill>
       {cover ? <CoverTitle before="Tus pulmones" hl="no se mueven" after="solos" bottom="para respirar" /> : (
         <>
           <MainLabel text="Diafragma" color="#FF7AB0" t={t} t0={Wd(3, "diafragma")} t1={Wd(3, "como") - 0.2} />
-          <Callout text="se contrae y baja" anchor={pr([0.9, -1.6, 0.6])} offset={[-40, 200]} color={K.flow} t={t} t0={Wd(3, "contrae")} t1={Wd(3, "como") - 0.2} size={40} />
+          <Callout text="se contrae y baja" anchor={pr([0.8, -1.35, 0.55])} offset={[-40, 200]} color={K.flow} t={t} t0={Wd(3, "contrae")} t1={Wd(3, "como") - 0.2} size={40} />
           <Syringe t={t} t0={Wd(3, "como") - 0.1} t1={bs(4) + 0.2} />
-          <Callout text="tráquea" anchor={pr([0, 1.7, 0.15])} offset={[160, -150]} color={K.white} t={t} t0={Wd(4, "traquea")} t1={Wd(4, "bronquios") - 0.3} size={42} />
+          <Callout text="tráquea" anchor={pr([-0.12, 1.6, 0.1])} offset={[160, -150]} color={K.white} t={t} t0={Wd(4, "traquea")} t1={Wd(4, "bronquios") - 0.3} size={42} />
           <MainLabel text="Bronquios" color={K.cold} t={t} t0={Wd(4, "bronquios")} t1={tAlv} />
           <MainLabel text="Alvéolos" color="#FF7AB0" t={t} t0={Wd(5, "alveolos")} t1={Wd(5, "oxigeno") - 0.1} />
           <Callout text="oxígeno → sangre" anchor={pr([0.5, -0.6, 0.9])} offset={[-60, 230]} color={K.cold} t={t} t0={Wd(5, "oxigeno")} t1={tBack} size={40} />

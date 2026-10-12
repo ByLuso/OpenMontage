@@ -8,15 +8,16 @@ import { random } from "remotion";
 import { Glow } from "./kit3d/Glow";
 import { Flow } from "./kit3d/Flow";
 import { tubeGeo } from "./kit3d/Parts";
+import { useModel } from "./Model";
 
 export const R = 1.2;
 export const CORNEA = [-1.33, 0.35, 0.05];
-export const LENS = [-0.68, 0.0, 0];
-export const RETINA_PT = [1.0, 0.55, 0.05];
+export const LENS = [-0.75, 0.0, 0];
+export const RETINA_PT = [0.86, 0.5, 0.05];
 export const NERVE = [2.2, -0.12, 0];
 export const OBJ = { x: -3.1, y0: -0.7, y1: 0.8 };
 // imagen invertida sobre la retina (radio interior ~1.12)
-export const IMG = { tip: [1.04, -0.36, 0.05], base: [1.07, 0.3, 0.05] };
+export const IMG = { tip: [0.89, -0.33, 0.05], base: [0.92, 0.27, 0.05] };
 
 /** Casquete esférico alrededor de +X (o -X con dir=-1). */
 const cap = (r: number, theta: number, dir = 1, seg = 96) => {
@@ -24,6 +25,29 @@ const cap = (r: number, theta: number, dir = 1, seg = 96) => {
   g.rotateZ(-dir * Math.PI / 2);
   return g;
 };
+
+/** Textura de iris: fibras radiales, collarete y anillo límbico (en UV de un ringGeometry). */
+let irisTex: THREE.Texture | null = null;
+function irisTexture() {
+  if (irisTex) return irisTex;
+  const n = 512, cv = document.createElement("canvas"); cv.width = cv.height = n; const g = cv.getContext("2d")!;
+  const c = n / 2;
+  const grd = g.createRadialGradient(c, c, n * 0.08, c, c, n * 0.5);
+  grd.addColorStop(0, "#0E3A2E"); grd.addColorStop(0.3, "#2F7A8C"); grd.addColorStop(0.55, "#3E9AB4"); grd.addColorStop(0.85, "#256E86"); grd.addColorStop(1, "#0B2430");
+  g.fillStyle = grd; g.fillRect(0, 0, n, n);
+  for (let i = 0; i < 420; i++) {
+    const a = random(`ia${i}`) * Math.PI * 2, r0 = n * (0.12 + random(`ir${i}`) * 0.1), r1 = n * (0.32 + random(`is${i}`) * 0.17);
+    const v = random(`iv${i}`);
+    g.strokeStyle = v > 0.5 ? `rgba(170,225,235,${0.12 + v * 0.18})` : `rgba(5,30,40,${0.2 + v * 0.3})`;
+    g.lineWidth = 0.6 + random(`iw${i}`) * 1.6;
+    g.beginPath(); g.moveTo(c + Math.cos(a) * r0, c + Math.sin(a) * r0);
+    g.quadraticCurveTo(c + Math.cos(a + 0.08) * (r0 + r1) / 2, c + Math.sin(a + 0.08) * (r0 + r1) / 2, c + Math.cos(a) * r1, c + Math.sin(a) * r1); g.stroke();
+  }
+  g.strokeStyle = "rgba(210,170,90,0.45)"; g.lineWidth = 6; g.beginPath();
+  for (let k = 0; k <= 64; k++) { const a = (k / 64) * Math.PI * 2, r = n * (0.2 + 0.012 * Math.sin(a * 9)); k ? g.lineTo(c + Math.cos(a) * r, c + Math.sin(a) * r) : g.moveTo(c + Math.cos(a) * r, c + Math.sin(a) * r); }
+  g.stroke();
+  irisTex = new THREE.CanvasTexture(cv); return irisTex;
+}
 
 /** Flecha (eje +Y): astil + punta. */
 const Arrow: React.FC<{ position: number[]; h: number; color: string; flip?: boolean; opacity?: number; emissive?: number; clip?: THREE.Plane[] }> =
@@ -44,14 +68,17 @@ export type EyeState = { open: number; rays: number; cross: number; proj: number
 
 export const Eye: React.FC<{ s: EyeState; clip: THREE.Plane }> = ({ s, clip }) => {
   const cl = [clip];
+  const GM = useModel("ojo.glb");
   const m = useMemo(() => ({
     sclera: new THREE.MeshPhysicalMaterial({ color: "#E6D6D0", roughness: 0.35, clearcoat: 0.8, clearcoatRoughness: 0.2, sheen: 0.6, sheenColor: new THREE.Color("#FFC8D0"), emissive: new THREE.Color("#2A0E14"), emissiveIntensity: 0.4, clippingPlanes: cl }),
     choroid: new THREE.MeshStandardMaterial({ color: "#2A0710", roughness: 0.6, side: THREE.BackSide, clippingPlanes: cl }),
     retina: new THREE.MeshPhysicalMaterial({ color: "#D23A5E", roughness: 0.45, side: THREE.BackSide, emissive: new THREE.Color("#5A0A20"), emissiveIntensity: 0.6, clippingPlanes: cl }),
     vessel: new THREE.MeshStandardMaterial({ color: "#8E0F22", roughness: 0.4, emissive: new THREE.Color("#3A0008"), clippingPlanes: cl }),
-    cornea: new THREE.MeshPhysicalMaterial({ color: "#CFF4FF", roughness: 0.05, clearcoat: 1, transparent: true, opacity: 0.28, depthWrite: false, side: THREE.DoubleSide, clippingPlanes: cl }),
-    iris: new THREE.MeshPhysicalMaterial({ color: "#1F86AE", roughness: 0.5, side: THREE.DoubleSide, emissive: new THREE.Color("#0A3346"), emissiveIntensity: 0.7, clippingPlanes: cl }),
+    cornea: new THREE.MeshPhysicalMaterial({ color: "#CFF4FF", roughness: 0.03, clearcoat: 1, transparent: true, opacity: 0.22, depthWrite: false, side: THREE.DoubleSide, clippingPlanes: cl }),
+    iris: new THREE.MeshPhysicalMaterial({ map: irisTexture(), roughness: 0.55, side: THREE.DoubleSide, emissive: new THREE.Color("#0A3346"), emissiveIntensity: 0.35, clippingPlanes: cl }),
+    irisBack: new THREE.MeshStandardMaterial({ color: "#1A0A10", roughness: 0.7, side: THREE.DoubleSide, clippingPlanes: cl }),
     lens: new THREE.MeshPhysicalMaterial({ color: "#EAF6FF", roughness: 0.08, clearcoat: 1, transparent: true, opacity: 0.6, emissive: new THREE.Color("#6FE8FF"), emissiveIntensity: 0.15, clippingPlanes: cl }),
+    muscleV: new THREE.MeshPhysicalMaterial({ color: "#B0283E", roughness: 0.5, sheen: 1, sheenColor: new THREE.Color("#FF8FA8"), emissive: new THREE.Color("#3A0610"), emissiveIntensity: 0.5, vertexColors: true, clippingPlanes: cl }),
     muscle: new THREE.MeshPhysicalMaterial({ color: "#B0283E", roughness: 0.5, sheen: 1, sheenColor: new THREE.Color("#FF8FA8"), emissive: new THREE.Color("#3A0610"), emissiveIntensity: 0.5, clippingPlanes: cl }),
     nerve: new THREE.MeshPhysicalMaterial({ color: "#E9CD92", roughness: 0.45, clearcoat: 0.5, side: THREE.DoubleSide, emissive: new THREE.Color("#3A2A08"), emissiveIntensity: 0.5, clippingPlanes: cl }),
     ray: new THREE.MeshBasicMaterial({ color: "#FFD23F", transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }),
@@ -73,13 +100,13 @@ export const Eye: React.FC<{ s: EyeState; clip: THREE.Plane }> = ({ s, clip }) =
         const wig = Math.sin(u * 7 + b) * 0.08 * u;
         const dir = new THREE.Vector3(Math.cos(th), Math.sin(th) * Math.cos(ang + wig), Math.sin(th) * Math.sin(ang + wig));
         dir.applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.1);
-        pts.push(dir.multiplyScalar(1.105).toArray());
+        pts.push(dir.multiplyScalar(0.985).toArray());
       }
-      vessels.push(tubeGeo(`v${b}`, pts, 0.022 - (b % 3) * 0.004, 60));
+      vessels.push(tubeGeo(`v${b}`, pts, 0.016 - (b % 3) * 0.003, 60));
     }
     // rayos: desde la punta y la base de la flecha, por 3 puntos del cristalino, hasta la imagen invertida
     const tip = [OBJ.x, OBJ.y1, 0.05], base = [OBJ.x, OBJ.y0, 0.05];
-    const lensPts = [[-0.68, 0.18, 0.05], [-0.68, 0, 0.05], [-0.68, -0.18, 0.05]];
+    const lensPts = [[-0.75, 0.18, 0.05], [-0.75, 0, 0.05], [-0.75, -0.18, 0.05]];
     const rays: number[][][] = [];
     lensPts.forEach((lp) => rays.push([tip, lp, IMG.tip]));
     lensPts.forEach((lp) => rays.push([base, lp, IMG.base]));
@@ -96,28 +123,34 @@ export const Eye: React.FC<{ s: EyeState; clip: THREE.Plane }> = ({ s, clip }) =
   const f = s.frame;
   return (
     <group>
-      {/* globo */}
-      <mesh geometry={useMemo(() => cap(R, Math.PI - 0.486, 1, 128), [])} material={m.sclera} castShadow />
-      <mesh geometry={useMemo(() => cap(R * 0.975, Math.PI - 0.5, 1), [])} material={m.choroid} />
-      <mesh geometry={useMemo(() => cap(R * 0.95, 2.0, 1), [])} material={m.retina} />
+      {/* globo real (BodyParts3D): eje anterior +Z del modelo → -X de la escena */}
+      {GM && (
+        <group rotation={[0, -Math.PI / 2, 0]}>
+          <mesh geometry={GM.sclera} material={m.sclera} castShadow />
+          <mesh geometry={GM.choroid} material={m.choroid} scale={0.975} />
+          <mesh geometry={GM.cornea} material={m.cornea} />
+          <mesh geometry={GM.iris} material={m.irisBack} />
+          <mesh geometry={GM.lens} material={m.lens} />
+          <mesh geometry={GM.muscles} material={m.muscleV} castShadow />
+        </group>
+      )}
+      <mesh geometry={useMemo(() => cap(1.0, 2.0, 1), [])} material={m.retina} />
       {geo.vessels.map((g, i) => <mesh key={i} geometry={g} material={m.vessel} />)}
-      <Glow position={geo.disc.clone().multiplyScalar(1.09).toArray()} color="#FFE3A0" size={0.35} opacity={0.6 * s.open} />
+      <Glow position={geo.disc.clone().multiplyScalar(0.97).toArray()} color="#FFE3A0" size={0.35} opacity={0.6 * s.open} />
       {/* córnea, iris, cristalino */}
-      <mesh geometry={useMemo(() => cap(0.65, 1.04, -1), [])} material={m.cornea} position={[-0.73, 0, 0]} />
-      <mesh material={m.iris} position={[-0.98, 0, 0]} rotation={[0, Math.PI / 2, 0]}><ringGeometry args={[0.2, 0.57, 64, 4]} /></mesh>
-      <mesh material={m.pupil} position={[-0.965, 0, 0]} rotation={[0, Math.PI / 2, 0]}><circleGeometry args={[0.2, 48]} /></mesh>
-      <mesh material={m.lens} position={LENS as [number, number, number]} scale={[0.2, 0.44, 0.44]}><sphereGeometry args={[1, 64, 48]} /></mesh>
+      <mesh material={m.iris} position={[-0.965, -0.017, -0.053]} rotation={[0, -Math.PI / 2, 0]}><ringGeometry args={[0.19, 0.58, 96, 6]} /></mesh>
+      <mesh material={m.pupil} position={[-0.955, -0.017, -0.053]} rotation={[0, -Math.PI / 2, 0]}><circleGeometry args={[0.19, 64]} /></mesh>
       {/* nervio */}
 
-      <mesh material={m.nerve} position={[1.75, -0.12, 0]} rotation={[0, 0, Math.PI / 2]}><cylinderGeometry args={[0.24, 0.27, 1.3, 32]} /></mesh>
+      <mesh material={m.nerve} geometry={useMemo(() => tubeGeo("on", [[1.02, -0.1, 0.02], [1.5, -0.12, 0.05], [2.1, -0.08, 0.1], [2.7, 0.0, 0.15]], 0.2, 60), [])} />
       {/* objeto exterior y luz */}
       <Arrow position={[OBJ.x, (OBJ.y0 + OBJ.y1) / 2, 0]} h={OBJ.y1 - OBJ.y0} color="#FFC83F" opacity={s.parts} emissive={0.6 + 0.5 * s.rays} />
       {s.rays > 0.01 && geo.rayGeos.map((g, i) => <mesh key={`ry${i}`} geometry={g} material={m.ray} />)}
       {geo.rays.map((r, i) => <Flow key={i} points={[r[0], r[1], r[2]]} frame={f} color="#FFE07A" count={5} speed={0.012} size={0.16} trail={4} opacity={s.rays} seed={`r${i}`} />)}
-      {s.cross > 0.01 && <Glow position={[-0.68, 0, 0.1]} color="#FFE9A0" size={0.9} opacity={s.cross * 0.8} />}
+      {s.cross > 0.01 && <Glow position={[-0.75, 0, 0.1]} color="#FFE9A0" size={0.9} opacity={s.cross * 0.8} />}
       {/* imagen invertida en la retina */}
       <Arrow position={[(IMG.tip[0] + IMG.base[0]) / 2 - 0.04, (IMG.tip[1] + IMG.base[1]) / 2, 0.05]} h={IMG.base[1] - IMG.tip[1]} color="#FFD23F" flip opacity={s.proj} emissive={1.4} />
-      {s.proj > 0.01 && <Glow position={[1.0, -0.03, 0.1]} color="#FFD23F" size={1.1} opacity={0.45 * s.proj} scaleY={1.4} />}
+      {s.proj > 0.01 && <Glow position={[0.88, -0.03, 0.1]} color="#FFD23F" size={1.1} opacity={0.45 * s.proj} scaleY={1.4} />}
       {/* señal por el nervio óptico */}
       <Flow points={[[1.0, -0.1, 0.05], [1.4, -0.12, 0.05], [2.0, -0.12, 0.05], [2.5, -0.12, 0.05]]} frame={f} color="#5FE6FF" count={10} speed={0.02} size={0.24} trail={5} opacity={s.signal} seed="nv" />
       {s.signal > 0.01 && <Glow position={[2.45, -0.12, 0.1]} color="#5FE6FF" size={0.8} opacity={s.signal * 0.7} />}

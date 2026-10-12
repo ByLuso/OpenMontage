@@ -1,0 +1,85 @@
+{
+ "scale": 0.019,
+ "ao_gamma": 1.4,
+ "ao_dist": 15.0,
+ "center_groups": [
+  "kidneyL",
+  "kidneyR"
+ ],
+ "groups": {
+  "kidneyL": {
+   "ids": [
+    "FMA7205"
+   ],
+   "subdiv": 2,
+   "smooth": 2,
+   "ao": true
+  },
+  "kidneyR": {
+   "ids": [
+    "FMA7204"
+   ],
+   "subdiv": 2,
+   "smooth": 2,
+   "ao": true
+  },
+  "aorta": {
+   "ids": [
+    "FMA3789"
+   ],
+   "subdiv": 1
+  },
+  "ivc": {
+   "ids": [
+    "FMA10951"
+   ],
+   "subdiv": 1
+  },
+  "artL": {
+   "ids": [
+    "FMA14753"
+   ],
+   "subdiv": 1
+  },
+  "artR": {
+   "ids": [
+    "FMA14752"
+   ],
+   "subdiv": 1
+  },
+  "ureterL": {
+   "ids": [
+    "FMA15572"
+   ],
+   "subdiv": 1
+  },
+  "ureterR": {
+   "ids": [
+    "FMA15571"
+   ],
+   "subdiv": 1
+  },
+  "bladder": {
+   "ids": [
+    "FMA15900"
+   ],
+   "subdiv": 2,
+   "smooth": 2,
+   "ao": true
+  },
+  "adrenalL": {
+   "ids": [
+    "FMA15630"
+   ],
+   "subdiv": 1,
+   "ao": true
+  },
+  "adrenalR": {
+   "ids": [
+    "FMA15629"
+   ],
+   "subdiv": 1,
+   "ao": true
+  }
+ }
+}

@@ -7,82 +7,69 @@ import { random } from "remotion";
 import { Glow } from "./kit3d/Glow";
 import { Flow } from "./kit3d/Flow";
 import { tubeGeo, roundedBox } from "./kit3d/Parts";
+import { useModel } from "./Model";
 
-function liverGeo() {
-  const g = new THREE.SphereGeometry(1, 128, 96);
-  const p = g.getAttribute("position") as THREE.BufferAttribute;
-  for (let i = 0; i < p.count; i++) {
-    const vx = p.getX(i), vy = p.getY(i), vz = p.getZ(i);
-    const x = vx < 0 ? vx * 1.7 : vx * 2.7;                    // lóbulo derecho romo, izquierdo largo y afilado
-    const t = Math.min(1, Math.max(0, (x + 0.4) / 3.1));
-    const sh = 1 - 0.78 * Math.pow(t, 0.9), sz = 1 - 0.5 * t;
-    const b = Math.min(1, Math.max(0, (vy + 0.35) / 0.7)), bl = b * b * (3 - 2 * b);
-    let y = vy * ((0.62 - 0.25 * t) + (1.5 - (0.62 - 0.25 * t)) * bl) * sh;
-    y += 0.35 * t - 0.15 * Math.max(0, -x - 0.8);
-    let z = vz * 1.3 * sz;
-    if (vz > 0) z *= 1 - 0.18 * (1 - bl);
-    const n = 1 + 0.015 * Math.sin(vx * 9 + vz * 5) * Math.sin(vy * 7 + 1);
-    p.setXYZ(i, x * n, y * n, z * n);
-  }
-  g.computeVertexNormals();
-  return g;
-}
-
-export const PORTAL = [[0.15, -2.3, 0.3], [0.08, -1.6, 0.25], [-0.02, -1.0, 0.2], [-0.1, -0.55, 0.1]];
-export const ARTERY = [[0.5, -2.2, 0.3], [0.42, -1.6, 0.3], [0.28, -1.0, 0.25], [0.15, -0.55, 0.15]];
-export const BILE = [[-0.55, -0.85, 0.6], [-0.35, -1.1, 0.5], [-0.2, -1.6, 0.45], [-0.2, -2.2, 0.42]];
-export const GALL = [-0.75, -0.62, 0.7];
-export const CUT_X = -0.5;
+export const PORTAL = [[0.15, -2.6, 0.25], [0.1, -1.9, 0.2], [0.03, -1.3, 0.12], [-0.01, -0.95, 0.09]];
+export const GALL = [-0.82, -0.81, 0.71];
+export const CUT_X = -0.2;
+const X0 = -2.35, X1 = 0.0;   // extensión en X del lóbulo derecho (donado)
 
 export type LiverState = { cut: number; ghost: number; portal: number; regrow: number; glow: number; frame: number };
 
+/** Hígado real (BodyParts3D): segmentos V–VIII (lóbulo derecho, parte donable) y II–IV + caudado (lo que queda),
+ *  con vena porta, arterias, vías biliares, venas hepáticas, vesícula y cava. */
 export const Liver: React.FC<{ s: LiverState }> = ({ s }) => {
-  const geo = useMemo(() => liverGeo(), []);
-  const clip = useMemo(() => new THREE.Plane(new THREE.Vector3(-1, 0, 0), 5), []);
-  const clipG = useMemo(() => new THREE.Plane(new THREE.Vector3(1, 0, 0), -5), []);
-  const c = 3 - s.cut * (3 - CUT_X);           // x máximo visible
-  clip.constant = c; clipG.constant = -c;
-  const m = useMemo(() => ({
-    liver: new THREE.MeshPhysicalMaterial({ color: "#8E2E2C", roughness: 0.3, clearcoat: 0.9, clearcoatRoughness: 0.15, sheen: 0.8, sheenColor: new THREE.Color("#FF9A8A"), emissive: new THREE.Color("#3A0808"), emissiveIntensity: 0.5, clippingPlanes: [clip] }),
-    inside: new THREE.MeshStandardMaterial({ color: "#6A1A1C", roughness: 0.7, side: THREE.BackSide, emissive: new THREE.Color("#3A0606"), emissiveIntensity: 0.6, clippingPlanes: [clip] }),
-    ghost: new THREE.MeshBasicMaterial({ color: "#5FE6FF", transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide, clippingPlanes: [clipG] }),
-    ghostW: new THREE.MeshBasicMaterial({ color: "#5FE6FF", wireframe: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, clippingPlanes: [clipG] }),
-    gall: new THREE.MeshPhysicalMaterial({ color: "#4F8F3A", roughness: 0.25, clearcoat: 1, emissive: new THREE.Color("#0E2A08"), emissiveIntensity: 0.6 }),
-    portal: new THREE.MeshPhysicalMaterial({ color: "#6A4AB8", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#1A0A3A"), emissiveIntensity: 0.5 }),
-    artery: new THREE.MeshPhysicalMaterial({ color: "#E0404E", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#3A0408"), emissiveIntensity: 0.5 }),
-    bile: new THREE.MeshPhysicalMaterial({ color: "#9FBF3A", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#203008"), emissiveIntensity: 0.5 }),
-    cava: new THREE.MeshPhysicalMaterial({ color: "#3F5AB8", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#0A1440"), emissiveIntensity: 0.5 }),
-  }), [clip, clipG]);
-  m.liver.emissiveIntensity = 0.5 + 0.6 * s.glow;
-  m.ghost.opacity = 0.13 * s.ghost;
-  m.ghostW.opacity = 0.05 * s.ghost;
-  const tubes = useMemo(() => ({
-    portal: tubeGeo("lp", PORTAL, 0.17, 80), artery: tubeGeo("la", ARTERY, 0.08, 80), bile: tubeGeo("lb", BILE, 0.08, 80),
-    cava: tubeGeo("lc", [[-0.55, -2.0, -0.85], [-0.6, -1.0, -0.9], [-0.6, 0.6, -0.95], [-0.55, 2.1, -0.85]], 0.24, 80),
-  }), []);
+  const G = useModel("higado.glb");
+  const keep = useMemo(() => new THREE.Plane(new THREE.Vector3(1, 0, 0), 5), []);     // x >= c visible
+  const gone = useMemo(() => new THREE.Plane(new THREE.Vector3(-1, 0, 0), -5), []);   // x <= c (fantasma)
+  const c = X0 + s.cut * (X1 - X0);
+  keep.constant = -c; gone.constant = c;
+  const m = useMemo(() => {
+    const tissue = (clip: THREE.Plane[]) => new THREE.MeshPhysicalMaterial({ color: "#9A3230", roughness: 0.3, clearcoat: 0.85, clearcoatRoughness: 0.18, sheen: 0.6, sheenColor: new THREE.Color("#FF9A8A"), emissive: new THREE.Color("#3A0808"), emissiveIntensity: 0.45, vertexColors: true, transparent: true, clippingPlanes: clip });
+    return {
+      remnant: tissue([]), donated: tissue([keep]),
+      inside: new THREE.MeshStandardMaterial({ color: "#5A1416", roughness: 0.7, side: THREE.BackSide, emissive: new THREE.Color("#3A0606"), emissiveIntensity: 0.6, clippingPlanes: [keep] }),
+      ghost: new THREE.MeshBasicMaterial({ color: "#5FE6FF", transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide, clippingPlanes: [gone] }),
+      portal: new THREE.MeshPhysicalMaterial({ color: "#7A55D0", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#22104A"), emissiveIntensity: 0.6, clippingPlanes: [keep] }),
+      artery: new THREE.MeshPhysicalMaterial({ color: "#E8404E", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#3A0408"), emissiveIntensity: 0.5, clippingPlanes: [keep] }),
+      bile: new THREE.MeshPhysicalMaterial({ color: "#A6C83A", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#203008"), emissiveIntensity: 0.5, clippingPlanes: [keep] }),
+      hepvein: new THREE.MeshPhysicalMaterial({ color: "#4A66C8", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#0A1440"), emissiveIntensity: 0.5, clippingPlanes: [keep] }),
+      gall: new THREE.MeshPhysicalMaterial({ color: "#5E9A3A", roughness: 0.22, clearcoat: 1, sheen: 0.5, sheenColor: new THREE.Color("#C8FF9A"), emissive: new THREE.Color("#0E2A08"), emissiveIntensity: 0.6, vertexColors: true }),
+      ivc: new THREE.MeshPhysicalMaterial({ color: "#3F5AB8", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#0A1440"), emissiveIntensity: 0.5, clippingPlanes: [new THREE.Plane(new THREE.Vector3(0, 1, 0), 2.3)] }),
+      trunk: new THREE.MeshPhysicalMaterial({ color: "#7A55D0", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#22104A"), emissiveIntensity: 0.6 }),
+    };
+  }, [keep, gone]);
+  const op = 1 - 0.62 * s.portal;
+  [m.remnant, m.donated].forEach((x) => { x.opacity = op; x.depthWrite = s.portal < 0.3; x.emissiveIntensity = 0.45 + 0.5 * s.glow; });
+  m.ghost.opacity = 0.12 * s.ghost;
+  const trunk = useMemo(() => tubeGeo("ptr", PORTAL, 0.13, 60), []);
   const f = s.frame;
-  // chispas de células que se multiplican en el borde que crece
+  if (!G) return null;
   const sparks: React.ReactNode[] = [];
-  if (s.regrow > 0.01) for (let i = 0; i < 26; i++) {
+  if (s.regrow > 0.01 && s.cut > 0.02 && s.cut < 0.995) for (let i = 0; i < 30; i++) {
     const ph = (f + Math.floor(random(`lr${i}`) * 16)) % 16;
     const a = ph < 7 ? Math.sin((ph / 7) * Math.PI) : 0;
     if (a <= 0) continue;
-    const y = -0.4 + random(`ly${i}-${Math.floor((f + Math.floor(random(`lr${i}`) * 16)) / 16)}`) * 1.3, z = (random(`lz${i}`) - 0.3) * 0.9;
-    sparks.push(<Glow key={i} position={[c - 0.05, y, z + 0.2]} color={i % 3 ? "#FFD23F" : "#5FE6FF"} size={0.4} opacity={a * s.regrow} />);
+    const k = Math.floor((f + Math.floor(random(`lr${i}`) * 16)) / 16);
+    const y = -1.1 + random(`ly${i}-${k}`) * 2.6, z = -1.2 + random(`lz${i}-${k}`) * 2.6;
+    sparks.push(<Glow key={i} position={[c + 0.02, y, z]} color={i % 3 ? "#FFD23F" : "#5FE6FF"} size={0.42} opacity={a * s.regrow} />);
   }
   return (
     <group>
-      <mesh geometry={geo} material={m.liver} castShadow />
-      <mesh geometry={geo} material={m.inside} />
-      {s.ghost > 0.01 && <mesh geometry={geo} material={m.ghost} />}
-      <mesh material={m.gall} position={GALL as [number, number, number]} rotation={[0.5, 0, 0.5]} scale={[0.22, 0.4, 0.22]}><sphereGeometry args={[1, 48, 32]} /></mesh>
-      <mesh geometry={tubes.portal} material={m.portal} />
-      <mesh geometry={tubes.artery} material={m.artery} />
-      <mesh geometry={tubes.bile} material={m.bile} />
-      <mesh geometry={tubes.cava} material={m.cava} />
-      <Flow points={PORTAL.map((q) => [q[0], q[1], q[2] + 0.12])} frame={f} color="#FFD23F" count={14} speed={0.012} size={0.22} trail={5} opacity={s.portal} seed="pf" />
-      <Flow points={PORTAL.map((q) => [q[0] + 0.05, q[1], q[2] + 0.16])} frame={f} color="#C8A0FF" count={10} speed={0.014} size={0.18} trail={4} opacity={s.portal} seed="pv" />
-      {s.portal > 0.01 && <Glow position={[-0.1, -0.4, 0.4]} color="#FFD23F" size={1.2} opacity={0.4 * s.portal} />}
+      <mesh geometry={G.remnant} material={m.remnant} castShadow />
+      {s.cut < 0.999 && <mesh geometry={G.donated} material={m.donated} castShadow />}
+      {s.cut > 0.001 && s.cut < 0.999 && <mesh geometry={G.donated} material={m.inside} />}
+      {s.ghost > 0.01 && <mesh geometry={G.donated} material={m.ghost} />}
+      <mesh geometry={G.portal} material={m.portal} />
+      <mesh geometry={G.artery} material={m.artery} />
+      <mesh geometry={G.bile} material={m.bile} />
+      <mesh geometry={G.hepvein} material={m.hepvein} />
+      <mesh geometry={G.gall} material={m.gall} />
+      <mesh geometry={G.ivc} material={m.ivc} />
+      <mesh geometry={trunk} material={m.trunk} />
+      <Flow points={PORTAL.map((q) => [q[0], q[1], q[2] + 0.1])} frame={f} color="#FFD23F" count={14} speed={0.012} size={0.24} trail={5} opacity={s.portal} seed="pf" />
+      <Flow points={PORTAL.map((q) => [q[0] + 0.04, q[1], q[2] + 0.14])} frame={f} color="#C8A0FF" count={10} speed={0.014} size={0.2} trail={4} opacity={s.portal} seed="pv" />
+      {s.portal > 0.01 && <Glow position={[-0.05, -0.85, 0.3]} color="#FFD23F" size={1.2} opacity={0.45 * s.portal} />}
       {sparks}
     </group>
   );
@@ -101,17 +88,37 @@ export const Lobule: React.FC<{ s: LobuleState }> = ({ s }) => {
     for (let k = 0; k < 12; k++) {
       const ang = (k * Math.PI) / 6 + Math.PI / 6;
       const rmax = k % 2 === 0 ? LR - 0.35 : LR * 0.866 - 0.2;
-      for (let r = 0.62; r < rmax; r += 0.33) out.push([Math.cos(ang) * r, Math.sin(ang) * r, 0, ang]);
+      for (let r = 0.6; r < rmax; r += 0.27) {
+        const j = (random(`cj${k}${r}`) - 0.5) * 0.05;
+        out.push([Math.cos(ang + j) * r, Math.sin(ang + j) * r, 0, ang + (random(`cr${k}${r}`) - 0.5) * 0.5, 0.85 + random(`cs${k}${r}`) * 0.3]);
+      }
     }
     return out;
   }, []);
-  const cellGeo = useMemo(() => roundedBox(0.28, 0.24, 0.5, 0.07, 3), []);
+  // hepatocito: poliedro redondeado irregular (no cubo)
+  const cellGeos = useMemo(() => [0, 1, 2].map((v) => {
+    const g = new THREE.IcosahedronGeometry(1, 4); const p = g.getAttribute("position") as THREE.BufferAttribute; const q = new THREE.Vector3();
+    for (let i = 0; i < p.count; i++) {
+      q.fromBufferAttribute(p, i);
+      const n = 1 + 0.08 * Math.sin(q.x * 4 + v * 2) * Math.cos(q.y * 3 + v) + 0.05 * Math.sin(q.z * 5 + v * 3);
+      const box = 1 / Math.pow(Math.pow(Math.abs(q.x), 4) + Math.pow(Math.abs(q.y), 4) + Math.pow(Math.abs(q.z), 4), 0.25) * 0.35 + 0.65;
+      p.setXYZ(i, q.x * 0.15 * n * box, q.y * 0.13 * n * box, q.z * 0.24 * n * box);
+    }
+    g.computeVertexNormals(); return g;
+  }), []);
+  const nucGeo = useMemo(() => new THREE.SphereGeometry(0.05, 16, 12), []);
+  const sinus = useMemo(() => Array.from({ length: 12 }).map((_, k) => {
+    const a = (k * Math.PI) / 6 + Math.PI / 6 + Math.PI / 12;
+    return tubeGeo(`sn${k}`, [[Math.cos(a) * 0.45, Math.sin(a) * 0.45, -0.05], [Math.cos(a + 0.03) * 1.3, Math.sin(a + 0.03) * 1.3, -0.08], [Math.cos(a) * (k % 2 ? 2.15 : 2.35), Math.sin(a) * (k % 2 ? 2.15 : 2.35), -0.05]], 0.055, 30);
+  }), []);
   const m = useMemo(() => ({
-    cell: new THREE.MeshPhysicalMaterial({ color: "#C0604E", roughness: 0.4, clearcoat: 0.6, sheen: 1, sheenColor: new THREE.Color("#FFB09A"), emissive: new THREE.Color("#4A1008"), emissiveIntensity: 0.5 }),
+    cell: new THREE.MeshPhysicalMaterial({ color: "#C86A56", roughness: 0.45, clearcoat: 0.4, sheen: 1, sheenColor: new THREE.Color("#FFB09A"), emissive: new THREE.Color("#4A1008"), emissiveIntensity: 0.5 }),
     central: new THREE.MeshPhysicalMaterial({ color: "#3F5AB8", roughness: 0.3, clearcoat: 0.8, emissive: new THREE.Color("#0A1440"), emissiveIntensity: 0.6 }),
     portal: new THREE.MeshPhysicalMaterial({ color: "#6A4AB8", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#1A0A3A"), emissiveIntensity: 0.5 }),
     artery: new THREE.MeshPhysicalMaterial({ color: "#E0404E", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#3A0408"), emissiveIntensity: 0.5 }),
     bile: new THREE.MeshPhysicalMaterial({ color: "#9FBF3A", roughness: 0.35, clearcoat: 0.7, emissive: new THREE.Color("#203008"), emissiveIntensity: 0.5 }),
+    nuc: new THREE.MeshPhysicalMaterial({ color: "#5A1A40", roughness: 0.4, emissive: new THREE.Color("#2A0820"), emissiveIntensity: 0.4 }),
+    sinus: new THREE.MeshPhysicalMaterial({ color: "#8A1A3A", roughness: 0.35, clearcoat: 0.6, transparent: true, opacity: 0.85, emissive: new THREE.Color("#3A0614"), emissiveIntensity: 0.6 }),
     floor: new THREE.MeshStandardMaterial({ color: "#3A0E10", roughness: 0.8, emissive: new THREE.Color("#1A0406") }),
     edge: new THREE.LineBasicMaterial({ color: "#5FE6FF", transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false }),
   }), []);
@@ -131,15 +138,21 @@ export const Lobule: React.FC<{ s: LobuleState }> = ({ s }) => {
     <group>
       <mesh geometry={floorGeo} material={m.floor} position={[0, 0, -0.32]} />
       <lineLoop geometry={edgeGeo} material={m.edge} />
-      {cells.map((c, i) => <mesh key={i} geometry={cellGeo} material={m.cell} position={[c[0], c[1], 0]} rotation={[0, 0, c[3]]} />)}
-      <mesh material={m.central} rotation={[Math.PI / 2, 0, 0]}><cylinderGeometry args={[0.36, 0.36, 0.9, 40]} /></mesh>
+      {cells.map((c, i) => (
+        <group key={i} position={[c[0], c[1], 0]} rotation={[0, 0, c[3]]} scale={c[4]}>
+          <mesh geometry={cellGeos[i % 3]} material={m.cell} />
+          <mesh geometry={nucGeo} material={m.nuc} position={[0, 0, 0.17]} />
+        </group>
+      ))}
+      {sinus.map((g, i) => <mesh key={`sn${i}`} geometry={g} material={m.sinus} />)}
+      <mesh material={m.central} rotation={[Math.PI / 2, 0, 0]}><capsuleGeometry args={[0.36, 0.5, 12, 40]} /></mesh>
       {Array.from({ length: 6 }).map((_, k) => {
         const c = corner(k);
         return (
           <group key={k} position={c as [number, number, number]}>
-            <mesh material={m.portal} position={[0.0, 0.08, 0]} rotation={[Math.PI / 2, 0, 0]}><cylinderGeometry args={[0.2, 0.2, 0.8, 28]} /></mesh>
-            <mesh material={m.artery} position={[0.24, -0.16, 0]} rotation={[Math.PI / 2, 0, 0]}><cylinderGeometry args={[0.09, 0.09, 0.8, 20]} /></mesh>
-            <mesh material={m.bile} position={[-0.22, -0.18, 0]} rotation={[Math.PI / 2, 0, 0]}><cylinderGeometry args={[0.09, 0.09, 0.8, 20]} /></mesh>
+            <mesh material={m.portal} position={[0.0, 0.08, 0]} rotation={[Math.PI / 2, 0, 0]}><capsuleGeometry args={[0.2, 0.45, 10, 28]} /></mesh>
+            <mesh material={m.artery} position={[0.24, -0.16, 0]} rotation={[Math.PI / 2, 0, 0]}><capsuleGeometry args={[0.09, 0.6, 8, 20]} /></mesh>
+            <mesh material={m.bile} position={[-0.22, -0.18, 0]} rotation={[Math.PI / 2, 0, 0]}><capsuleGeometry args={[0.09, 0.6, 8, 20]} /></mesh>
           </group>
         );
       })}

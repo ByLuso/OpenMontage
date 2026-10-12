@@ -4,81 +4,49 @@ import React, { useMemo } from "react";
 import * as THREE from "three";
 import { random } from "remotion";
 import { Glow } from "./kit3d/Glow";
-import { mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
+import { useModel } from "./Model";
 
 const tube = (pts: number[][], r: number, seg = 48, closed = false) =>
   new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map((p) => new THREE.Vector3(...p)), closed, "centripetal"), seg, r, 14, closed);
 const curve = (pts: number[][]) => new THREE.CatmullRomCurve3(pts.map((p) => new THREE.Vector3(...p)), false, "centripetal");
 
-let tex: THREE.Texture | null = null;
-function organTexture() {
-  if (tex) return tex;
-  const n = 512, cv = document.createElement("canvas"); cv.width = cv.height = n;
-  const g = cv.getContext("2d")!;
-  g.fillStyle = "#8a8a8a"; g.fillRect(0, 0, n, n);
-  for (let i = 0; i < 1800; i++) {
-    const v = 70 + Math.floor(random(`kv${i}`) * 120);
-    g.fillStyle = `rgba(${v},${v},${v},0.3)`;
-    g.beginPath(); g.arc(random(`kx${i}`) * n, random(`ky${i}`) * n, 1 + random(`kr${i}`) * 3, 0, Math.PI * 2); g.fill();
-  }
-  tex = new THREE.CanvasTexture(cv); tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-  return tex;
-}
-
-/** Alubia: esfera escalada con hendidura (hilio) en la cara medial. side = +1 riñón izquierdo (x>0). */
-function beanGeo(side: number) {
-  const g = mergeVertices(new THREE.IcosahedronGeometry(1, 5).deleteAttribute("normal").deleteAttribute("uv"));
-  const p = g.getAttribute("position") as THREE.BufferAttribute;
-  const v = new THREE.Vector3();
-  for (let i = 0; i < p.count; i++) {
-    v.fromBufferAttribute(p, i);
-    const medial = -side * v.x;
-    let x = v.x * 0.58, y = v.y * 1.0, z = v.z * 0.38;
-    if (medial > 0.2) x += side * (medial - 0.2) * 0.42 * Math.exp(-Math.pow(v.y / 0.42, 2)); // hilio
-    p.setXYZ(i, x, y, z);
-  }
-  g.computeVertexNormals();
-  return g;
-}
-
-export const K_POS = { L: [1.15, 0.25, 0], R: [-1.15, 0.05, 0] };
-export const BLADDER = [0, -2.9, 0.25];
-const URETER = (side: number) => [[side * 0.82, 0.05 + (side > 0 ? 0.2 : 0), 0.05], [side * 0.7, -0.8, 0.1], [side * 0.45, -2.1, 0.2], [side * 0.2, -2.7, 0.25]];
-const ART = (side: number) => [[side * 0.12, 0.5 + (side > 0 ? 0.15 : 0), 0.05], [side * 0.5, 0.35 + (side > 0 ? 0.15 : 0), 0.05], [side * 0.8, 0.3 + (side > 0 ? 0.15 : 0), 0.0]];
-const VEIN = (side: number) => [[side * -0.18 + 0.0, 0.15 + (side > 0 ? 0.15 : 0), 0.08], [side * 0.45, 0.12 + (side > 0 ? 0.15 : 0), 0.1], [side * 0.8, 0.12 + (side > 0 ? 0.15 : 0), 0.06]];
-export const RENAL_ART_L = ART(1);
+// Datos del modelo real (BodyParts3D, escala 0.019, Y arriba, Z anterior)
+export const K_POS = { L: [1.07, 0.14, -0.09], R: [-1.035, -0.15, 0.12] };
+const HILUM = { L: [0.74, 0.3, -0.05], R: [-0.72, -0.35, 0.13] };
+export const BLADDER = [0.02, -4.09, -0.07];
+const UR_L = [[1.0, 0.3, -0.12], [1.13, -0.23, -0.05], [0.88, -0.69, 0.17], [0.53, -1.63, 0.54], [0.54, -2.31, 0.49], [0.63, -2.97, -0.09], [0.4, -3.75, -0.2]];
+const UR_R = [[-0.95, -0.2, 0.05], [-1.11, -0.46, 0.1], [-0.9, -0.97, 0.24], [-0.65, -1.84, 0.51], [-0.66, -2.39, 0.45], [-0.74, -3.14, -0.3], [-0.4, -3.85, -0.2]];
+const AORTA = [[0.17, 1.88, 0.12], [0.15, 1.29, 0.36], [0.15, 0.85, 0.46], [0.14, 0.31, 0.62]];
+const ART_L = [[0.15, 0.31, 0.57], [0.41, 0.26, 0.42], [0.62, 0.3, 0.15], [0.76, 0.32, -0.02]];
+const ART_R = [[0.12, 0.25, 0.55], [-0.28, 0.17, 0.42], [-0.55, -0.1, 0.27], [-0.7, -0.33, 0.14]];
+const VEIN_L = [[0.74, 0.22, 0.02], [0.45, 0.16, 0.6], [0.12, 0.12, 0.95], [-0.22, 0.1, 0.72]];
+const VEIN_R = [[-0.72, -0.42, 0.18], [-0.5, -0.25, 0.5], [-0.27, -0.12, 0.66]];
+export const RENAL_ART_L = ART_L;
 
 export type KidneyState = { open: number; blood: number; urine: number; sparkle: number; frame: number };
 
+/** Riñones reales con corte frontal (cada uno por su plano medio): corteza, pirámides medulares y pelvis renal. */
 export const Kidneys: React.FC<{ s: KidneyState; clip: THREE.Plane }> = ({ s, clip }) => {
-  const cl = [clip];
+  const G = useModel("rinones.glb");
+  const planes = useMemo(() => ({ L: new THREE.Plane(new THREE.Vector3(0, 0, -1), 5), R: new THREE.Plane(new THREE.Vector3(0, 0, -1), 5) }), []);
+  // corte: de fuera (sin corte) al plano medio de cada riñón
+  planes.L.constant = 2 - s.open * (2 + K_POS.L[2]); planes.R.constant = 2 - s.open * (2 + K_POS.R[2]);
   const m = useMemo(() => {
-    const t = organTexture();
-    const tissue = (c: string, e: string, clip = true) => new THREE.MeshPhysicalMaterial({ color: c, roughness: 0.38, clearcoat: 0.7, clearcoatRoughness: 0.25, sheen: 1, sheenColor: new THREE.Color("#FF9AB0"), emissive: new THREE.Color(e), emissiveIntensity: 0.55, bumpMap: t, bumpScale: 0.6, clippingPlanes: clip ? cl : [] });
+    const mk = (k: "L" | "R") => ({
+      kidney: new THREE.MeshPhysicalMaterial({ color: "#A3363A", roughness: 0.32, clearcoat: 0.8, clearcoatRoughness: 0.2, sheen: 0.8, sheenColor: new THREE.Color("#FF9AB0"), emissive: new THREE.Color("#33080C"), emissiveIntensity: 0.5, vertexColors: true, clippingPlanes: [planes[k]] }),
+      cortex: new THREE.MeshStandardMaterial({ color: "#D88068", roughness: 0.6, side: THREE.BackSide, clippingPlanes: [planes[k]], emissive: new THREE.Color("#300808"), emissiveIntensity: 0.55 }),
+      medulla: new THREE.MeshStandardMaterial({ color: "#6A1424", roughness: 0.55, side: THREE.DoubleSide, clippingPlanes: [planes[k]], emissive: new THREE.Color("#200408"), emissiveIntensity: 0.4 }),
+      pelvis: new THREE.MeshPhysicalMaterial({ color: "#F0D9C8", roughness: 0.35, clearcoat: 0.8, side: THREE.DoubleSide, clippingPlanes: [planes[k]] }),
+    });
+    const vessel = (c: string, e: string) => new THREE.MeshPhysicalMaterial({ color: c, roughness: 0.32, clearcoat: 0.8, sheen: 0.6, sheenColor: new THREE.Color("#FFC0C8"), emissive: new THREE.Color(e), emissiveIntensity: 0.5 });
     return {
-      kidney: tissue("#9E3036", "#33080C"),
-      cortex: new THREE.MeshStandardMaterial({ color: "#D07A64", roughness: 0.6, side: THREE.BackSide, clippingPlanes: cl, emissive: new THREE.Color("#300808"), emissiveIntensity: 0.5 }),
-      medulla: new THREE.MeshStandardMaterial({ color: "#5A1020", roughness: 0.55, side: THREE.DoubleSide, clippingPlanes: cl, emissive: new THREE.Color("#200408"), emissiveIntensity: 0.4 }),
-      pelvis: new THREE.MeshPhysicalMaterial({ color: "#F0D9C8", roughness: 0.35, clearcoat: 0.8, side: THREE.DoubleSide, clippingPlanes: cl }),
-      art: tissue("#D8384A", "#4A0812", false),
-      vein: tissue("#4B4FB8", "#10144A", false),
-      ureter: tissue("#E8CDA8", "#2A1A08", false),
-      bladder: new THREE.MeshPhysicalMaterial({ color: "#E7B9A8", roughness: 0.3, clearcoat: 1, transparent: true, opacity: 0.85, sheen: 1, sheenColor: new THREE.Color("#FFD6C8") }),
+      L: mk("L"), R: mk("R"),
+      art: vessel("#D8384A", "#4A0812"), vein: vessel("#4B4FB8", "#10144A"), ureter: vessel("#E8CDA8", "#2A1A08"),
+      adrenal: new THREE.MeshPhysicalMaterial({ color: "#E0A040", roughness: 0.45, clearcoat: 0.5, emissive: new THREE.Color("#3A2006"), emissiveIntensity: 0.4, vertexColors: true }),
+      bladder: new THREE.MeshPhysicalMaterial({ color: "#E7B9A8", roughness: 0.3, clearcoat: 1, transparent: true, opacity: 0.88, sheen: 1, sheenColor: new THREE.Color("#FFD6C8"), vertexColors: true }),
     };
-  }, [clip]);
-  const geo = useMemo(() => ({ L: beanGeo(1), R: beanGeo(-1) }), []);
-  const vessels = useMemo(() => ({
-    aorta: tube([[0.12, 2.4, -0.15], [0.12, 0.5, -0.1], [0.1, -1.6, -0.1], [0.4, -2.4, -0.1]], 0.16),
-    cava: tube([[-0.22, 2.4, 0.0], [-0.2, 0.2, 0.05], [-0.25, -1.6, 0.0], [-0.5, -2.4, 0.0]], 0.17),
-    artL: tube(ART(1), 0.07), artR: tube(ART(-1), 0.07), veinL: tube(VEIN(1), 0.08), veinR: tube(VEIN(-1), 0.08),
-    urL: tube(URETER(1), 0.045), urR: tube(URETER(-1), 0.045),
-  }), []);
-  // pirámides medulares (conos hacia el hilio) dentro de cada riñón
-  const pyr = (side: number) => [-0.55, -0.2, 0.15, 0.5].map((y, i) => (
-    <mesh key={i} material={m.medulla} position={[side * -0.08, y * 1.1, 0]} rotation={[0, 0, side * (Math.PI / 2) + y * 0.5 * side]} scale={[1, 1, 0.55]}>
-      <coneGeometry args={[0.2, 0.42, 20]} />
-    </mesh>
-  ));
+  }, [planes]);
+  const veins = useMemo(() => ({ L: tube(VEIN_L, 0.085), R: tube(VEIN_R, 0.09) }), []);
   const flow = (pts: number[][], n: number, color: string, seed: string, speed: number, a: number, size = 0.1) => {
     if (a <= 0.01) return null;
     const c = curve(pts);
@@ -87,32 +55,47 @@ export const Kidneys: React.FC<{ s: KidneyState; clip: THREE.Plane }> = ({ s, cl
       return <Glow key={`${seed}${i}`} position={c.getPointAt(u).toArray()} color={color} size={size} opacity={a * 0.9} />;
     });
   };
+  if (!G) return null;
+  // interior: pirámides con la base hacia fuera y el vértice hacia el hilio; pelvis en embudo hacia el uréter
+  const inner = (k: "L" | "R") => {
+    const side = k === "L" ? 1 : -1, c = K_POS[k], h = HILUM[k], mm = m[k];
+    const out: React.ReactNode[] = [];
+    [-64, -40, -16, 8, 32, 56].forEach((deg, i) => {
+      const t = (deg * Math.PI) / 180;
+      // sobre una elipse entre el seno renal y la corteza; base hacia fuera, vértice hacia el seno
+      const out_ = new THREE.Vector3(side * Math.cos(t) * 0.42, Math.sin(t) * 0.82, 0);
+      const pos = [c[0] + side * 0.06 + out_.x * 0.62, c[1] + out_.y * 0.62, c[2]];
+      const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), out_.clone().normalize().negate());
+      out.push(<mesh key={`p${k}${i}`} material={mm.medulla} position={pos as any} quaternion={q} scale={[1, 1, 0.7]}><coneGeometry args={[0.13, 0.3, 32]} /></mesh>);
+    });
+    return out;
+  };
   const sparkle = s.sparkle > 0.01 ? Array.from({ length: 60 }).map((_, i) => {
     const side = i % 2 ? 1 : -1, P = side > 0 ? K_POS.L : K_POS.R;
     const th = random(`st${i}`) * Math.PI * 2, ph = Math.acos(2 * random(`sp${i}`) - 1);
     const tw = 0.5 + 0.5 * Math.sin(s.frame / 4 + i * 1.7);
-    return <Glow key={`s${i}`} position={[P[0] + Math.sin(ph) * Math.cos(th) * 0.6, P[1] + Math.cos(ph) * 1.0, P[2] + Math.sin(ph) * Math.sin(th) * 0.4 + 0.05]} color="#FFD23F" size={0.14} opacity={s.sparkle * tw} />;
+    return <Glow key={`s${i}`} position={[P[0] + Math.sin(ph) * Math.cos(th) * 0.55, P[1] + Math.cos(ph) * 1.0, P[2] + Math.sin(ph) * Math.sin(th) * 0.35 + 0.05]} color="#FFD23F" size={0.14} opacity={s.sparkle * tw} />;
   }) : null;
   return (
     <group>
-      <mesh geometry={vessels.aorta} material={m.art} castShadow />
-      <mesh geometry={vessels.cava} material={m.vein} castShadow />
-      <mesh geometry={vessels.artL} material={m.art} /><mesh geometry={vessels.artR} material={m.art} />
-      <mesh geometry={vessels.veinL} material={m.vein} /><mesh geometry={vessels.veinR} material={m.vein} />
-      <mesh geometry={vessels.urL} material={m.ureter} /><mesh geometry={vessels.urR} material={m.ureter} />
-      {([["L", 1], ["R", -1]] as const).map(([k, side]) => (
-        <group key={k} position={(k === "L" ? K_POS.L : K_POS.R) as any} rotation={[0, 0, side * -0.18]}>
-          <mesh geometry={geo[k]} material={m.kidney} castShadow receiveShadow />
-          <mesh geometry={geo[k]} material={m.cortex} />
-          {s.open > 0.01 && pyr(side)}
-          {s.open > 0.01 && <mesh material={m.pelvis} position={[side * 0.3, 0, 0]} rotation={[0, 0, side * Math.PI / 2]} scale={[1, 1, 0.6]}><coneGeometry args={[0.3, 0.6, 24, 1, true]} /></mesh>}
+      <mesh geometry={G.aorta} material={m.art} castShadow />
+      <mesh geometry={G.ivc} material={m.vein} castShadow />
+      <mesh geometry={G.artL} material={m.art} /><mesh geometry={G.artR} material={m.art} />
+      <mesh geometry={veins.L} material={m.vein} /><mesh geometry={veins.R} material={m.vein} />
+      <mesh geometry={G.ureterL} material={m.ureter} /><mesh geometry={G.ureterR} material={m.ureter} />
+      <mesh geometry={G.adrenalL} material={m.adrenal} /><mesh geometry={G.adrenalR} material={m.adrenal} />
+      {(["L", "R"] as const).map((k) => (
+        <group key={k}>
+          <mesh geometry={G[`kidney${k}`]} material={m[k].kidney} castShadow receiveShadow />
+          <mesh geometry={G[`kidney${k}`]} material={m[k].cortex} />
+          {s.open > 0.01 && inner(k)}
         </group>
       ))}
-      <mesh material={m.bladder} position={BLADDER as any} scale={[0.55, 0.45, 0.45]}><sphereGeometry args={[1, 32, 24]} /></mesh>
-      {flow([[0.12, 2.4, -0.1], [0.12, 0.6, -0.05], ...ART(1).slice(1)], 14, "#FF3A4A", "bl", 50, s.blood)}
-      {flow([[0.12, 2.4, -0.1], [0.12, 0.6, -0.05], ...ART(-1).slice(1)], 14, "#FF3A4A", "br", 50, s.blood)}
-      {flow(URETER(1), 10, "#FFD23F", "ul", 60, s.urine)}
-      {flow(URETER(-1), 10, "#FFD23F", "ur", 60, s.urine)}
+      <mesh geometry={G.bladder} material={m.bladder} />
+      {flow([...AORTA, ...ART_L.slice(1)], 14, "#FF3A4A", "bl", 50, s.blood)}
+      {flow([...AORTA, ...ART_R.slice(1)], 14, "#FF3A4A", "br", 50, s.blood)}
+      {flow(UR_L, 12, "#FFD23F", "ul", 70, s.urine)}
+      {flow(UR_R, 12, "#FFD23F", "ur", 70, s.urine)}
       {sparkle}
     </group>
   );

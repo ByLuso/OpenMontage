@@ -6,11 +6,13 @@ import { CameraKey, project, shot } from "./kit3d/CameraRig";
 import { Captions, MainLabel, Callout, Timing, K } from "./kit2d/Kit";
 import { BigNumber, CoverTitle, CutFlash, voice, win } from "./Common";
 import { Brain, Neurons, SOMA_A, AXON, SYN, SOMA_B } from "./Brain";
+import { usePreloadModel } from "./Model";
 
 export type Props = { timing: Timing; dpr?: number; cover?: boolean };
 const C = [0, 0, 0];
 
 export const Cerebro: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => {
+  const loaded = usePreloadModel("cerebro.glb");
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const t = frame / fps;
@@ -21,14 +23,14 @@ export const Cerebro: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => 
 
   const cam: CameraKey[] = useMemo(() => {
     const k = (sec: number, target: number[], d: number, az: number, el: number, fov = 30, breathe = 1): CameraKey => ({ ...shot(F(sec), target, d, az, el, fov), breathe });
-    const first = k(0, C, 28, 0, 6, 30, 0);
+    const first = k(0, C, 28, -55, 12, 30, 0);
     return [
       first,
-      k(1.0, C, 9, -15, 10),
-      k(bs(2), C, 8.5, 20, 15),
-      k(4.8, C, 8.5, -40, 5),
-      k(bs(3), C, 7.6, 0, 8),
-      k(Wd(3, "millones") - 0.1, C, 6.2, 15, 12),
+      k(1.0, C, 10, -65, 14),
+      k(bs(2), C, 8.5, -105, 18),
+      k(4.8, C, 8.5, -40, 28),
+      k(bs(3), C, 7.6, -75, 10),
+      k(Wd(3, "millones") - 0.1, C, 7.0, -90, 12),
       // neuronas
       k(tN, [0.3, -0.2, 0], 11.5, 0, 6),
       k(Wd(3, "ramas") - 0.2, [-2.0, 0.5, 0], 5.4, -20, 10),
@@ -43,9 +45,9 @@ export const Cerebro: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => 
       k(Wd(5, "encienden") - 0.2, [2.8, -0.9, 0], 4.8, 15, 6),
       k(tBack - 0.05, [3.2, -1.3, 0], 4.2, 20, 6),
       // cerebro: remate
-      k(tBack, C, 9, 10, 8),
-      k(Wd(6, "literalmente") - 0.2, C, 8, -20, 10),
-      k(timing.voiceEnd - 0.4, C, 12, 0, 6),
+      k(tBack, C, 9, -60, 12),
+      k(Wd(6, "literalmente") - 0.2, C, 8, -88, 15),
+      k(timing.voiceEnd - 0.4, C, 12, -60, 10),
       { ...first, f: durationInFrames - 1 },
     ];
   }, [timing]);
@@ -70,9 +72,9 @@ export const Cerebro: React.FC<Props> = ({ timing, dpr = 1, cover = false }) => 
   return (
     <AbsoluteFill style={{ backgroundColor: "#02080B" }}>
       <AbsoluteFill style={{ transform: `scale(${zoomIn})` }}>
-        <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
+        {loaded && <BodyScene frame={frame} camKeys={cam} dpr={dpr}>
           {neuronWorld ? <Neurons s={ns} /> : <Brain s={bsState} />}
-        </BodyScene>
+        </BodyScene>}
       </AbsoluteFill>
       {bsState.flash > 0.02 && !neuronWorld && <AbsoluteFill style={{ background: `radial-gradient(circle at 50% 42%, rgba(95,230,255,${bsState.flash * 0.25}) 0%, rgba(0,0,0,0) 60%)` }} />}
       {cover ? <CoverTitle before="Cada pensamiento es una" hl="chispa eléctrica" after="" bottom="dentro de tu cerebro" /> : (
