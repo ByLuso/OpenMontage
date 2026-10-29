@@ -65,10 +65,18 @@ const Callout: React.FC<{ text: string; at: { x: number; y: number; behind: bool
   );
 };
 
+// marca fija en la esquina superior izquierda durante todo el vídeo
+const LogoBug: React.FC<{ o: number }> = ({ o }) => (
+  <div style={{ position: "absolute", top: 70, left: 44, opacity: o, background: "rgba(255,255,255,0.94)", borderRadius: 22, padding: "14px 20px",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.35)" }}>
+    <Img src={staticFile("logo_orcave_hd.png")} style={{ width: 300, height: "auto", display: "block" }} />
+  </div>
+);
+
 const LogoCard: React.FC<{ o: number; scale?: number; top?: number }> = ({ o, scale = 1, top = 640 }) => (
   <div style={{ position: "absolute", top, left: 90, width: 900, opacity: o, transform: `scale(${scale})`, background: "#FFFFFF", borderRadius: 40, padding: "36px 40px",
     boxShadow: "0 30px 80px rgba(0,0,0,0.45)", display: "flex", justifyContent: "center" }}>
-    <Img src={staticFile("logo_orcave_crop.png")} style={{ width: 780, height: "auto" }} />
+    <Img src={staticFile("logo_orcave_hd.png")} style={{ width: 780, height: "auto" }} />
   </div>
 );
 
@@ -213,6 +221,7 @@ export const Patinillo: React.FC<Props> = ({ timing, dpr = 1, cover = false }) =
         </AbsoluteFill>
       )}
 
+      <LogoBug o={ramp(t, 0.2, 0.6) * (1 - endO)} />
       <Captions words={words} t={t} />
     </AbsoluteFill>
   );
