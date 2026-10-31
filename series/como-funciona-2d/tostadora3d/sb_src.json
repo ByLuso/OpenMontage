@@ -1,0 +1,172 @@
+{
+ "tema": "Cómo funciona la tostadora",
+ "estilo_base": "3D procedural en corte transversal sobre fondo azul noche con profundidad (#0F2747 → #070F1E), luz principal cálida y borde cian, materiales neutros (acero, aluminio, mica). Código de color: naranja #FF7A1A = calor y resistencias al rojo, cian #35C4F0 = electroimán y núcleo del personaje, amarillo #FFD23F = corriente eléctrica, blanco #FFFFFF = vapor. Personaje guía de porcelana con kintsugi en los beats PJ, en el mismo mundo 3D.",
+ "beats": [
+  {
+   "n": 1,
+   "tipo": "PJ",
+   "subtitulos": "Tu tostadora no tiene fuego dentro. Tiene un alambre que brilla al rojo y un reloj escondido.",
+   "plano": "Tostadora cerrada al rojo por las ranuras; el plano de corte barre y la abre (firma 'destripando')",
+   "camara": "dolly-in de plano general a plano medio de la tostadora",
+   "etiquetas_pantalla": "Sin fuego dentro · 'alambre al rojo' anclada a la resistencia",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "sting, whoosh, pop",
+   "accion_personaje": "Asomado a la tostadora (peek) → susto con salto al decir 'brilla' (surprise)"
+  },
+  {
+   "n": 2,
+   "tipo": "PJ",
+   "subtitulos": "Antes se tostaba el pan junto al fuego, con un tenedor largo, y había que vigilarlo sin parar.",
+   "plano": "Brasero con llama naranja; la tostadora apagada al fondo",
+   "camara": "orbit lento alrededor del personaje",
+   "etiquetas_pantalla": "Línea de tiempo Antes→1905→1921→Hoy · Tostar a mano",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "whoosh",
+   "accion_personaje": "Sujeta un tenedor largo con una rebanada sobre una llama (hold), mirada preocupada"
+  },
+  {
+   "n": 3,
+   "tipo": "TECH",
+   "subtitulos": "Hacia 1905, Albert Marsh creó un alambre de níquel y cromo que aguanta el rojo vivo sin romperse.",
+   "plano": "Macro de la resistencia de nicromo en zigzag sobre la placa central, al rojo (#FF7A1A)",
+   "camara": "track-along de izquierda a derecha por el alambre",
+   "etiquetas_pantalla": "Níquel + cromo · línea de tiempo en 1905",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "whoosh"
+  },
+  {
+   "n": 4,
+   "tipo": "PJ",
+   "subtitulos": "Y en 1921, Charles Strite patentó la tostadora que salta sola cuando el pan está listo.",
+   "plano": "Ciclo completo: el carro baja y salta con muelle",
+   "camara": "pull-back a plano general",
+   "etiquetas_pantalla": "Salta sola · línea de tiempo en 1921",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "click, pop",
+   "accion_personaje": "Celebra con salto cuando el pan salta (cheer)"
+  },
+  {
+   "n": 5,
+   "tipo": "TECH",
+   "subtitulos": "La idea clave: calor radiante por los dos lados del pan, durante un tiempo exacto, y luego un muelle.",
+   "plano": "Vista cenital del corte: pan entre dos placas al rojo; partículas de calor naranja viajan de las placas al pan",
+   "camara": "orbit cenital",
+   "etiquetas_pantalla": "La idea clave · etiquetas calor radiante / tiempo / muelle",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "whoosh"
+  },
+  {
+   "n": 6,
+   "tipo": "TECH",
+   "subtitulos": "Primero, la palanca. Al bajarla, el pan baja, el muelle se comprime y se cierra el circuito.",
+   "plano": "Lateral del mecanismo: la palanca baja, el muelle se comprime, se cierra el circuito; pared lateral translúcida",
+   "camara": "dolly-in hacia el mecanismo",
+   "etiquetas_pantalla": "1 · Palanca · muelle · circuito cerrado (amarillo)",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "click"
+  },
+  {
+   "n": 7,
+   "tipo": "TECH",
+   "subtitulos": "Un pequeño electroimán sujeta la bandeja abajo. Mientras le llegue corriente, la palanca no puede subir.",
+   "plano": "Macro del electroimán (núcleo de acero + bobina de cobre) brillando en cian con la armadura pegada",
+   "camara": "macro con dolly-in",
+   "etiquetas_pantalla": "Electroimán · sujeta la bandeja (cian)",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "hum"
+  },
+  {
+   "n": 8,
+   "tipo": "TECH",
+   "subtitulos": "Segundo, las resistencias. La corriente atraviesa el alambre, que se calienta a unos seiscientos grados y brilla.",
+   "plano": "Frontal de la placa central con el pan atenuado: la corriente amarilla recorre el zigzag, que pasa de gris a naranja",
+   "camara": "dolly-in frontal",
+   "etiquetas_pantalla": "2 · Resistencias · medidor 20→600 °C (aprox.)",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "hum"
+  },
+  {
+   "n": 9,
+   "tipo": "TECH",
+   "subtitulos": "El alambre va enrollado en placas de mica, un mineral que aguanta el calor y aísla la electricidad.",
+   "plano": "Borde de las placas de mica que destellan; el alambre enrollado sobre ellas",
+   "camara": "orbit macro",
+   "etiquetas_pantalla": "Placas de mica · aguanta el calor (naranja) · aísla (cian)",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "whoosh"
+  },
+  {
+   "n": 10,
+   "tipo": "TECH",
+   "subtitulos": "Tercero, el pan. Le llega sobre todo radiación infrarroja: primero pierde agua y después la superficie se dora.",
+   "plano": "Pan entre placas; partículas de calor hacia el pan; vapor blanco que sube",
+   "camara": "orbit desde arriba",
+   "etiquetas_pantalla": "3 · El pan · infrarrojos · vapor de agua",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "hiss"
+  },
+  {
+   "n": 11,
+   "tipo": "TECH",
+   "subtitulos": "Ese dorado es la reacción de Maillard: azúcares y proteínas que reaccionan a partir de unos ciento cuarenta grados.",
+   "plano": "Macro de la cara del pan, que se dora con su textura de miga",
+   "camara": "macro dolly-in",
+   "etiquetas_pantalla": "Reacción de Maillard · medidor desde 140 °C",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "whoosh"
+  },
+  {
+   "n": 12,
+   "tipo": "TECH",
+   "subtitulos": "Cuarto, el temporizador. Un pequeño circuito cuenta el tiempo, y la rueda del tostado lo alarga o lo acorta.",
+   "plano": "Placa del temporizador (verde, chips, condensador) y rueda del tostado que gira",
+   "camara": "orbit hacia el lateral",
+   "etiquetas_pantalla": "4 · Temporizador · cuenta el tiempo · rueda del tostado",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "tick x4"
+  },
+  {
+   "n": 13,
+   "tipo": "TECH",
+   "subtitulos": "Cuando se acaba, corta la corriente del electroimán, la bandeja queda libre y el muelle la lanza arriba.",
+   "plano": "El electroimán se apaga (cian → gris) y el muelle lanza el carro y el pan hacia arriba con rebote",
+   "camara": "pull-back",
+   "etiquetas_pantalla": "¡Arriba! · imán apagado",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "pop"
+  },
+  {
+   "n": 14,
+   "tipo": "TECH",
+   "subtitulos": "Todo junto: palanca, corriente, alambre al rojo, pan dorándose, tiempo cumplido y, de un salto, tostada lista.",
+   "plano": "Ciclo completo acelerado con todos los flujos",
+   "camara": "orbit amplio de 80°",
+   "etiquetas_pantalla": "Todo junto: cadena palanca → corriente → calor → pan → tiempo → ¡salto!",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "click, pop",
+   "accion_personaje": "Celebra de nuevo en el '¡salto!' (cheer, de fondo)"
+  },
+  {
+   "n": 15,
+   "tipo": "PJ",
+   "subtitulos": "Curiosidad: lo marrón no está quemado. Si se pasa y se pone negro, eso sí es carbón.",
+   "plano": "Tostada dorada con brillo y tostada negra con humo gris",
+   "camara": "orbit suave al personaje",
+   "etiquetas_pantalla": "Dorado no es quemado · Maillard / carbón",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "whoosh",
+   "accion_personaje": "Enseña una tostada dorada y otra quemada (showTwo) y pone cara de duda con la negra"
+  },
+  {
+   "n": 16,
+   "tipo": "PJ",
+   "subtitulos": "Y nunca saques el pan con un cuchillo: el alambre lleva corriente.",
+   "plano": "Personaje junto a la tostadora; icono 2D de cuchillo prohibido",
+   "camara": "pull-back al cierre",
+   "etiquetas_pantalla": "¡Nunca un cuchillo! (rojo de aviso) · cierre con la pregunta CTA",
+   "transicion": "continuidad de cámara hacia el siguiente encuadre (sin corte)",
+   "sfx": "whoosh, ding",
+   "accion_personaje": "Dedo arriba advirtiendo (wagNo) → en el cierre saluda (wave) mientras la tostadora se vuelve a cerrar"
+  }
+ ]
+}
