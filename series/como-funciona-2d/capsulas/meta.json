@@ -1,0 +1,17 @@
+{
+  "n": 128,
+  "slug": "capsulas",
+  "comp_id": "Capsulas",
+  "tema": "Cómo funciona una cafetera de cápsulas",
+  "formato": "medio",
+  "portada": "La abre el agua",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que en España las cápsulas de café no van al contenedor amarillo porque no cuentan como envase? ♻️ ¿Tú dónde las tiras?",
+  "tiktok_hashtags": ["#comofunciona", "#cafe", "#cafetera", "#ciencia", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Así se ve una cafetera de cápsulas por dentro, y te juro que no te lo esperas: la cápsula se perfora sola. (inexacto: el lado estrecho lo pinchan unas puntas de la máquina; lo que se rompe «solo» es la tapa, por la presión del agua contra la placa)",
+    "Así se ve tu cafetera de cápsulas por dentro, y te juro que no te lo esperas: revienta la cápsula. (ambiguo y exagerado: la tapa se rasga en agujeritos, no revienta)",
+    "Todos creen que la cafetera corta la cápsula con una cuchilla… y están muy equivocados. (a medias: sí hay puntas que pinchan la entrada)"
+  ]
+}

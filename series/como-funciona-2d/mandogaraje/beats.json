@@ -1,0 +1,15 @@
+[
+  "Este mando esconde un secreto que casi nadie conoce: cada vez que pulsas, envía una contraseña distinta.",
+  "Se llama código rodante, y es lo que impide que alguien grabe tu señal y la repita.",
+  "La idea clave: el mando y el motor comparten un secreto, y ese secreto no se envía al pulsar.",
+  "Primero: al pulsar, el mando emite por radio, por ejemplo a cuatrocientos treinta y tres megahercios.",
+  "Segundo: los mandos antiguos enviaban siempre el mismo código, elegido con ocho a doce interruptores diminutos.",
+  "Eso sí se podía grabar y repetir: quien lo copiaba tenía tu llave hasta que cambiaras los interruptores.",
+  "Tercero: el mando moderno lleva un contador que sube uno en cada pulsación.",
+  "Lo mezcla con la clave secreta, y sale un código cifrado que parece puesto al azar.",
+  "Cuarto: el motor descifra, comprueba el contador y solo abre si el número es nuevo.",
+  "Y acepta unos cuantos números por delante, por si pulsaste lejos y no te oyó.",
+  "Curiosidad: si pulsas muchísimas veces lejos de casa, el mando se pasa de la ventana y hay que emparejarlo.",
+  "Otra: con la pila baja la señal sale más débil, por eso solo te abre si estás cerca.",
+  "Así que cada pulsación es una llave nueva que solo sirve una vez."
+]

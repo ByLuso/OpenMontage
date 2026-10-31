@@ -1,0 +1,17 @@
+{
+  "n": 125,
+  "slug": "insulina",
+  "comp_id": "Insulina",
+  "tema": "Cómo funciona una bomba de insulina",
+  "formato": "medio",
+  "portada": "Imita al páncreas",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que la primera persona tratada con inyecciones de insulina fue un chaval de Toronto, en enero de 1922? 💉 ¿Conocías esta historia?",
+  "tiktok_hashtags": ["#comofunciona", "#diabetes", "#bombadeinsulina", "#ciencia", "#aprendeentiktok"],
+  "hospital": true,
+  "ganchos_descartados": [
+    "Esta cajita esconde un secreto que casi nadie conoce: hace el trabajo de un órgano, gota a gota. (exagera: hace PARTE del trabajo del páncreas; no sustituye al órgano entero)",
+    "Todos creen que una bomba de insulina piensa sola… y están muy equivocados. (solo es cierto a medias: los sistemas de asa cerrada sí ajustan la basal solos)",
+    "Voy a abrir una bomba de insulina y te juro que lo que hay dentro te va a volar la cabeza. (promesa demasiado genérica)"
+  ]
+}

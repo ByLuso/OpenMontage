@@ -1,0 +1,17 @@
+{
+  "n": 129,
+  "slug": "mandogaraje",
+  "comp_id": "MandoGaraje",
+  "tema": "Cómo funciona el mando del garaje (y por qué no te lo pueden copiar fácilmente)",
+  "formato": "medio",
+  "portada": "Cada pulsación, otra contraseña",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que hay mandos de garaje que, en cada pulsación, le avisan al motor de que su pila se está agotando? 🔋 ¿Cuánto hace que no le cambias la pila al tuyo?",
+  "tiktok_hashtags": ["#comofunciona", "#garaje", "#tecnologia", "#curiosidades", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que el mando del garaje manda siempre la misma señal… y están muy equivocados.",
+    "Voy a abrir el mando del garaje y te juro que lo que hay dentro te va a volar la cabeza.",
+    "Así se ve un mando de garaje por dentro, y te juro que no te lo esperas: lleva un contador."
+  ]
+}
