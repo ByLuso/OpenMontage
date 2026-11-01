@@ -1,0 +1,17 @@
+{
+  "n": 133,
+  "slug": "llavecoche",
+  "comp_id": "LlaveCoche",
+  "tema": "Cómo abre el coche la llave sin llave (keyless): sin pulsar nada",
+  "formato": "medio",
+  "portada": "La llave que contesta",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que algunas llaves de coche llevan un sensor de movimiento y dejan de responder si se quedan un rato quietas? 😴 ¿Dónde dejas tú la llave al llegar a casa?",
+  "tiktok_hashtags": ["#comofunciona", "#coches", "#tecnologia", "#curiosidades", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que la llave keyless abre el coche ella sola… y están muy equivocados.",
+    "Voy a abrir una llave sin llave y te juro que lo que hay dentro te va a volar la cabeza.",
+    "Así se ve una llave keyless por dentro, y te juro que no te lo esperas: lleva dos radios."
+  ]
+}

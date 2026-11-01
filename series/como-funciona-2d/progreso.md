@@ -5,3 +5,8 @@
 | 127 | deshumidificador | deshumidificador/deshumidificador.mp4 (76,1 s) |
 | 128 | cafetera de cápsulas | capsulas/capsulas.mp4 (76,3 s) |
 | 129 | mando del garaje | mandogaraje/mandogaraje.mp4 (76,2 s) |
+| 130 | visor de venas (hospital) | venas/venas.mp4 (76,8 s) |
+| 131 | cepillo eléctrico | cepillo/cepillo.mp4 (76,9 s) |
+| 132 | plancha de vapor | plancha/plancha.mp4 (74,5 s) |
+| 133 | llave sin llave (keyless) | llavecoche/llavecoche.mp4 (76,5 s) |
+| 134 | nevera portátil Peltier | neveraportatil/neveraportatil.mp4 |

@@ -1,0 +1,23 @@
+{
+  "n": 131,
+  "slug": "cepillo",
+  "comp_id": "Cepillo",
+  "tema": "Cómo funciona un cepillo de dientes eléctrico (y cómo se carga sin enchufe)",
+  "formato": "medio",
+  "portada": "Se carga sin contactos",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que la base de tu cepillo eléctrico cambia su campo magnético decenas de miles de veces por segundo? ⚡ ¿Tú lo dejas siempre en la base?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#cepillodedientes",
+    "#cepilloelectrico",
+    "#ciencia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Voy a abrir un cepillo de dientes eléctrico y te juro que no te lo esperas: se carga sin un solo contacto metálico. (23 palabras, pasa del máximo de 20; y «ni un contacto metálico» choca con el núcleo de hierro de la base, que sí es metal aunque va forrado de plástico)",
+    "Todos creen que el cepillo eléctrico se carga por unos contactos… y están muy equivocados. (premisa inventada: no consta que «todos» lo crean; además algunos de los primeros modelos recargables sí usaban pestañas metálicas para cargar)",
+    "Así se ve tu cepillo eléctrico por dentro, y te juro que no te lo esperas: no lleva enchufe. (inexacto: la base sí va enchufada; lo que no hay es contacto eléctrico entre base y mango)"
+  ]
+}

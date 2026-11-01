@@ -1,0 +1,17 @@
+{
+  "n": 130,
+  "slug": "venas",
+  "comp_id": "Venas",
+  "tema": "Cómo funciona el visor de venas (la luz que dibuja tus venas sobre la piel)",
+  "formato": "medio",
+  "portada": "Dibuja tus venas",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que la revista Time eligió un visor de venas como uno de los inventos más asombrosos de 2004? 💡 ¿Te han buscado alguna vez la vena con uno?",
+  "tiktok_hashtags": ["#comofunciona", "#visordevenas", "#hospital", "#ciencia", "#aprendeentiktok"],
+  "hospital": true,
+  "ganchos_descartados": [
+    "Esta lámpara esconde un truco que casi nadie conoce: hace que tus venas se vean a través de la piel. (impreciso: no vuelve la piel transparente; una cámara saca la imagen y un proyector dibuja el mapa encima)",
+    "Todos creen que las enfermeras encuentran la vena a ojo… y están muy equivocados. (falso como generalización: casi siempre se hace a la vista y al tacto; el visor es una ayuda para casos difíciles)",
+    "Voy a abrir un visor de venas y te juro que lo que hay dentro te va a volar la cabeza. (promesa demasiado genérica)"
+  ]
+}
