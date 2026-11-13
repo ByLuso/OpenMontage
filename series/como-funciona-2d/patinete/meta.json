@@ -1,0 +1,17 @@
+{
+  "n": 136,
+  "slug": "patinete",
+  "comp_id": "Patinete",
+  "tema": "Cómo funciona un patinete eléctrico: el motor va dentro de la rueda",
+  "formato": "medio",
+  "portada": "El motor, en la rueda",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que las pilas que lleva dentro un patinete se llaman 18650 porque miden 18 milímetros de ancho y 65 de largo? 🔋 ¿Cuántos kilómetros haces tú al día en patinete?",
+  "tiktok_hashtags": ["#comofunciona", "#patineteelectrico", "#tecnologia", "#curiosidades", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Voy a abrir un patinete eléctrico y te juro que no te lo esperas: el motor está escondido dentro de la rueda.",
+    "Todos creen que el motor del patinete va debajo de los pies… y están muy equivocados.",
+    "Así se ve un patinete eléctrico por dentro, y te juro que no te lo esperas: la rueda es el motor."
+  ]
+}

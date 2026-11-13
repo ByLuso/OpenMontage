@@ -1,0 +1,14 @@
+[
+  [1, "gota", "stamp", 0.35],
+  [2, "bombilla", "ding", 0.3],
+  [3, "caliente", "bubbles", 0.25],
+  [4, "calor", "hum", 0.25],
+  [5, "sube", "bubbles", 0.25],
+  [7, "convección", "ding", 0.3],
+  [8, "muelle", "metal", 0.3],
+  [9, "hora", "tick", 0.3],
+  [10, "1963", "stamp", 0.3],
+  [11, "secretos", "click", 0.3],
+  [12, "enturbia", "hiss", 0.25],
+  [13, "parar", "pop", 0.3]
+]

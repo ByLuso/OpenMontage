@@ -1,0 +1,17 @@
+{
+  "n": 135,
+  "slug": "oxigeno",
+  "comp_id": "Oxigeno",
+  "tema": "Cómo fabrica oxígeno un concentrador de oxígeno (sin bombona)",
+  "formato": "medio",
+  "portada": "Oxígeno sin bombona",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que hay concentradores de oxígeno portátiles que se pueden llevar y usar dentro del avión? ✈️ ¿Habías visto alguno de cerca?",
+  "tiktok_hashtags": ["#comofunciona", "#concentradordeoxigeno", "#hospital", "#ciencia", "#aprendeentiktok"],
+  "hospital": true,
+  "ganchos_descartados": [
+    "Esta máquina fabrica oxígeno de la nada… (falso: lo separa del aire de la habitación, no lo crea)",
+    "Voy a abrir un concentrador de oxígeno y te juro que lo que hay dentro te va a volar la cabeza. (promesa genérica; el contraste con la bombona es más concreto)",
+    "El concentrador de oxígeno esconde una historia que casi nadie conoce. (la historia del invento, años 70 y tamiz molecular de los 50, solo tiene una fuente abierta)"
+  ]
+}

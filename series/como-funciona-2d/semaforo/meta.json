@@ -1,0 +1,23 @@
+{
+  "n": 137,
+  "slug": "semaforo",
+  "comp_id": "Semaforo",
+  "tema": "Cómo sabe el semáforo que hay un coche esperando",
+  "formato": "medio",
+  "portada": "Te detecta un cable",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que la corriente del cable escondido bajo el semáforo va y viene entre diez mil y doscientas mil veces por segundo? ⚡ ¿Te habías fijado en los cortes del asfalto de tu calle?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#semaforo",
+    "#trafico",
+    "#curiosidades",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Este semáforo esconde un secreto que casi nadie conoce: bajo el asfalto hay un cable que nota tu coche.",
+    "Todos creen que el semáforo cambia cuando le da la gana… y están muy equivocados.",
+    "Así se ve un cruce por debajo, y te juro que no te lo esperas: hay un cable que te vigila."
+  ]
+}

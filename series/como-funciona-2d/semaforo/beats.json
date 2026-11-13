@@ -1,0 +1,14 @@
+[
+  "Muchos semáforos esconden un secreto que casi nadie conoce: bajo el asfalto hay un cable que nota tu coche.",
+  "Se llama espira magnética: un bucle de cable metido en esos cortes rectangulares del asfalto.",
+  "La idea clave: el metal de tu coche altera ese cable, y así el semáforo sabe que estás.",
+  "Primero: un detector mete en el cable corriente alterna, que va y viene y crea un campo magnético.",
+  "Segundo: al parar encima, el metal del coche le baja la inductancia al cable, y su frecuencia cambia.",
+  "Tercero: el detector avisa al controlador, el cerebro del cruce, que decide cuándo darte el verde.",
+  "Cuarto: no todos usan espira; hay semáforos con cámaras o radar, y muchos van solo con tiempos fijos.",
+  "Y en muchas avenidas los coordinan en onda verde: a la velocidad prevista, encadenas un verde tras otro.",
+  "Curiosidad: a una bici o una moto a veces no la detecta: lleva mucho menos metal que un coche.",
+  "Truco: si vas en bici, detente con las ruedas justo encima del corte, antes de la línea de parada.",
+  "Otra: en algunos cruces, el botón de peatones solo apunta tu petición; pulsarlo diez veces no lo adelanta.",
+  "Así que un cable bajo el asfalto nota tu metal y pide verde."
+]
