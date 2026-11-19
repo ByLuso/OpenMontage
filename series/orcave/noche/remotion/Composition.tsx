@@ -232,7 +232,7 @@ export const Noche: React.FC<Props> = ({ timing, dpr = 1, cover = false, logo = 
     <AbsoluteFill style={{ background: "#07090D" }}>
       {scene}
 
-      <Head text="¿Suelo radiante frío?" hl="frío" sub="al encender la calefacción" t={t} a={0.3} b={T.calm - 0.2} />
+      <Head text="¿Suelo radiante frío?" hl="frío" sub="al encender la calefacción" t={t} a={0.3} b={T.calm - 0.5} />
       <Head text="Tiene solución" t={t} a={T.calm} b={T.hp - 0.15} />
       <Fine text="Aerotermia + suelo radiante · arranque de la temporada de calefacción" t={t} a={0.6} b={T.hp - 0.2} />
 

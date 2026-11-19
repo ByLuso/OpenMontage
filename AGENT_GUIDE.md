@@ -4,6 +4,13 @@ Start here. This is the complete operating guide and agent contract for OpenMont
 
 For architecture, key files, and conventions see [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md).
 
+## House style: explicador 3D nocturno
+
+If the user asks for a 3D explainer video "like the Orcave one", "with the same quality", "estilo nocturno", or a
+vertical explainer for a company about home installations (heating, plumbing, HVAC…), read
+`.claude/skills/explicador-3d-noche/SKILL.md` first and follow it instead of the generic pipelines. The approved
+template lives in `series/orcave/noche/`.
+
 ## First Interaction — Onboarding
 
 When the user's first message is vague, exploratory, or asks what you can do ("make me a video", "what can you do?", "help me create something", "I want to make content"), read the onboarding skill **before** doing anything else:
