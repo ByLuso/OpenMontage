@@ -1,0 +1,23 @@
+{
+  "n": 144,
+  "slug": "auriculares",
+  "comp_id": "Auriculares",
+  "tema": "Cómo saben los auriculares inalámbricos que te los has quitado (y cómo se conectan sin cable)",
+  "formato": "medio",
+  "portada": "Saben si los llevas",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que el Bluetooth se llama así por un rey danés de hace más de mil años, Harald «Diente Azul»? 👑 ¿Tú los usas con los dos puestos o con uno solo?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#auriculares",
+    "#bluetooth",
+    "#tecnologia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Estos auriculares esconden un secreto que casi nadie conoce: saben si están dentro de tu oreja. (propuesta original: «estos» supone que enseñamos unos concretos; se cambia a «tus auriculares inalámbricos», que nombra el aparato en el primer segundo; la promesa se mantiene y se cumple en el beat 2)",
+    "Voy a abrir tus auriculares y te juro que lo que hay dentro te va a volar la cabeza. (promesa vaga: no dice qué hay dentro y el beat 2 no la cumple de forma concreta)",
+    "Todos creen que tus auriculares se pausan por arte de magia… y están muy equivocados. (premisa inventada: no consta que nadie crea eso)"
+  ]
+}

@@ -1,0 +1,14 @@
+[
+  [1, "equivocados", "stamp", 0.35],
+  [2, "bruscos", "metal", 0.3],
+  [3, "encogen", "pop", 0.25],
+  [4, "rojo", "hum", 0.25],
+  [5, "infrarroja", "whoosh", 0.25],
+  [7, "enciende", "click", 0.35],
+  [7, "apaga", "click", 0.3],
+  [8, "campo", "hum", 0.25],
+  [9, "imán", "metal", 0.3],
+  [10, "cuarenta", "ding", 0.3],
+  [11, "quemando", "hiss", 0.25],
+  [13, "rayan", "tick", 0.3]
+]

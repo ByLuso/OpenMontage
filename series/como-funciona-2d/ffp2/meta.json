@@ -1,0 +1,17 @@
+{
+  "n": 140,
+  "slug": "ffp2",
+  "comp_id": "Ffp2",
+  "tema": "Cómo filtra una mascarilla FFP2 partículas más pequeñas que sus agujeros",
+  "formato": "medio",
+  "portada": "No es un colador",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que para aprobar una FFP2 la ponen a prueba con una niebla de sal y otra de aceite de parafina? 🧂 ¿Te imaginabas que se probaran así?",
+  "tiktok_hashtags": ["#comofunciona", "#mascarillaffp2", "#hospital", "#ciencia", "#aprendeentiktok"],
+  "hospital": true,
+  "ganchos_descartados": [
+    "Voy a abrir una mascarilla FFP2 y te juro que lo que hay dentro te va a volar la cabeza. (promesa genérica; el contraste con el colador es más concreto y se cumple en el beat 2)",
+    "La FFP2 atrapa virus más pequeños que sus agujeros… (no se nombra ningún microorganismo para no rozar consejo médico; se habla de partículas)",
+    "La mascarilla FFP2 esconde una historia que casi nadie conoce. (no se abrieron ≥2 fuentes sobre la historia del invento)"
+  ]
+}

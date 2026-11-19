@@ -1,0 +1,17 @@
+{
+  "n": 142,
+  "slug": "puertaauto",
+  "comp_id": "PuertaAuto",
+  "tema": "Cómo sabe la puerta automática del súper que vas a entrar: un radar Doppler",
+  "formato": "medio",
+  "portada": "Te vigila un radar",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que el radar de la puerta del súper trabaja en torno a los 24 gigahercios, en la misma banda K que usan muchos radares de tráfico? 📡 ¿Alguna vez te has quedado delante de una puerta que no se abría?",
+  "tiktok_hashtags": ["#comofunciona", "#puertaautomatica", "#ciencia", "#curiosidades", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Esta puerta esconde un secreto que casi nadie conoce: te ve llegar con un radar, como los de la policía.",
+    "Todos creen que la puerta del súper se abre porque te ve… y en realidad escucha un eco.",
+    "Voy a abrir la caja de encima de la puerta del súper y te juro que no te esperas lo que hay: un radar."
+  ]
+}

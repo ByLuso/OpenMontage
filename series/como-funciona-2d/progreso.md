@@ -17,3 +17,10 @@
 | 137 | semáforo / espira | semaforo/semaforo.mp4 (75,1 s) |
 | 138 | ventilador sin aspas | sinaspas/sinaspas.mp4 (76,2 s) |
 | 139 | lámpara de lava | lampalava/lampalava.mp4 (74,7 s) |
+| 140 | mascarilla FFP2 (hospital) | ffp2/ffp2.mp4 (73,7 s) |
+| 141 | detector de metales | detectormetales/detectormetales.mp4 (75,8 s) |
+| 142 | puerta automática | puertaauto/puertaauto.mp4 (75,5 s) |
+| 143 | vitrocerámica | vitro/vitro.mp4 (75,9 s) |
+| 144 | auriculares inalámbricos | auriculares/auriculares.mp4 |
+
+> 19-11: TikTok conectado (app Sandbox, subida a la bandeja con serie/tools/tiktok.py). Rutina diaria: serie/RUTINA_DIARIA.md, cola.json.

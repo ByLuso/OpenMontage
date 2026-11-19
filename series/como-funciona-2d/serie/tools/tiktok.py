@@ -83,7 +83,14 @@ def main():
     elif cmd == "refresh":
         refresh()
     elif cmd == "upload":
-        p = Path(sys.argv[2]); n = p.stat().st_size
+        src = Path(sys.argv[2]); p = src.with_name(src.stem + "_tiktok.mp4")
+        # recodificar a lo más estándar: yuv420p rango limitado, BT.709, AAC 44,1 kHz, moov al principio
+        import subprocess
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+                        "-pix_fmt", "yuv420p", "-color_range", "tv", "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709",
+                        "-profile:v", "high", "-level", "4.1", "-r", "30", "-c:a", "aac", "-b:a", "192k", "-ar", "44100",
+                        "-movflags", "+faststart", str(p)], check=True)
+        n = p.stat().st_size
         if n > 64 * 1024 * 1024:
             sys.exit("Vídeo > 64 MB: hace falta subir en trozos (no implementado).")
         tok = access_token()

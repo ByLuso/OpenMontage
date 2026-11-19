@@ -1,0 +1,23 @@
+{
+  "n": 141,
+  "slug": "detectormetales",
+  "comp_id": "DetectorMetales",
+  "tema": "Cómo funciona el arco detector de metales del aeropuerto",
+  "formato": "medio",
+  "portada": "Este arco escucha ecos",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que el eco que devuelve tu metal se apaga en apenas unas decenas de millonésimas de segundo? ⚡ ¿A ti qué te hace pitar siempre en el control?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#aeropuerto",
+    "#detectordemetales",
+    "#fisica",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Este arco esconde un secreto que casi nadie conoce: no busca metal, escucha un eco magnético.",
+    "Todos creen que el arco del aeropuerto te hace una foto… y están muy equivocados.",
+    "Así se ve el arco del aeropuerto por dentro, y te juro que no te lo esperas: bobinas que lanzan pulsos."
+  ]
+}
