@@ -1,0 +1,13 @@
+[
+  [1, "carbón", "metal", 0.3],
+  [2, "poros", "pop", 0.25],
+  [2, "mil", "ding", 0.3],
+  [4, "cruza", "bubbles", 0.25],
+  [5, "pegados", "click", 0.3],
+  [6, "sueltan", "pop", 0.25],
+  [7, "esteriliza", "stamp", 0.35],
+  [8, "apta", "ding", 0.3],
+  [9, "bacterias", "hiss", 0.25],
+  [10, "nevera", "hum", 0.25],
+  [11, "cal", "tick", 0.25]
+]

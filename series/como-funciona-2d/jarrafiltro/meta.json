@@ -1,0 +1,17 @@
+{
+  "n": 149,
+  "slug": "jarrafiltro",
+  "comp_id": "JarraFiltro",
+  "tema": "Cómo funciona una jarra con filtro de agua",
+  "formato": "medio",
+  "portada": "Esconde una pista de tenis",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que muchos cartuchos de jarra llevan plata para frenar a las bacterias dentro del propio filtro? 🥈 ¿Tú bebes agua del grifo o filtrada?",
+  "tiktok_hashtags": "#comofunciona #jarrafiltrante #agua #ciencia #aprendeentiktok",
+  "hospital": false,
+  "ganchos_descartados": [
+    "Este filtro esconde un secreto que casi nadie conoce: un gramo de su carbón tiene la superficie de un campo de fútbol. (FALSO: un gramo da ~500-1.500 m²; un campo de fútbol tiene ~7.000 m²)",
+    "Todos creen que la jarra con filtro purifica el agua… y están muy equivocados: ni la esteriliza.",
+    "Voy a abrir el cartucho de una jarra y te juro que lo que hay dentro te va a volar la cabeza."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "n": 147,
+  "slug": "billetes",
+  "comp_id": "Billetes",
+  "tema": "Cómo detecta la máquina del súper un billete falso",
+  "formato": "medio",
+  "portada": "Este billete esconde secretos",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que, a contraluz, la marca de agua de los billetes nuevos esconde el retrato de Europa, un personaje de la mitología griega? 🔦 ¿Tú alguna vez has mirado un billete a contraluz?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#billetes",
+    "#euro",
+    "#ciencia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Este billete esconde secretos que casi nadie conoce: brilla con luz ultravioleta y una máquina lo lee con imanes.",
+    "Todos creen que la máquina del súper solo mira el billete… y están muy equivocados.",
+    "Así se ve un billete bajo luz ultravioleta, y te juro que no te lo esperas: fibras de colores."
+  ]
+}

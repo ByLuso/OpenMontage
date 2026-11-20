@@ -1,0 +1,23 @@
+{
+  "n": 150,
+  "slug": "gafasvr",
+  "comp_id": "GafasVR",
+  "tema": "Cómo funcionan las gafas de realidad virtual",
+  "formato": "medio",
+  "portada": "Cada ojo ve otra imagen",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que uno de los primeros cascos de realidad virtual, de finales de los años sesenta, pesaba tanto que colgaba del techo y lo apodaron «la espada de Damocles»? 🗡️ ¿Tú te has mareado alguna vez con unas?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#realidadvirtual",
+    "#tecnologia",
+    "#ciencia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Voy a abrir unas gafas de realidad virtual y te juro que no te lo esperas: cada ojo ve una película distinta. (propuesta original: 22 palabras, pasa del límite de 20; y «película distinta» exagera: son dos imágenes casi iguales, desplazadas. Se cambia a «Abro…» y «una imagen distinta»)",
+    "Todos creen que las gafas de realidad virtual tienen una pantalla normal… y están muy equivocados. (premisa inventada: no consta que nadie lo crea)",
+    "Las gafas de realidad virtual esconden un truco de 1838 que casi nadie conoce. (verdad, pero el beat 2 no lo cumple: Wheatstone sale en el beat 12)"
+  ]
+}

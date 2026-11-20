@@ -22,5 +22,12 @@
 | 142 | puerta automática | puertaauto/puertaauto.mp4 (75,5 s) |
 | 143 | vitrocerámica | vitro/vitro.mp4 (75,9 s) |
 | 144 | auriculares inalámbricos | auriculares/auriculares.mp4 |
+| 145 | escayola (hospital) | escayola/escayola.mp4 (73,3 s) |
+| 146 | bolígrafo borrable | boliborrable/boliborrable.mp4 (70,1 s) |
+| 147 | máquina detectora de billetes falsos | billetes/billetes.mp4 (74,7 s) |
+| 148 | horno pirolítico | pirolisis/pirolisis.mp4 (75,1 s) |
+| 149 | jarra con filtro de agua | jarrafiltro/jarrafiltro.mp4 (72,3 s) |
+| 150 | gafas de realidad virtual | gafasvr/gafasvr.mp4 (76,8 s) |
 
 > 19-11: TikTok conectado (app Sandbox, subida a la bandeja con serie/tools/tiktok.py). Rutina diaria: serie/RUTINA_DIARIA.md, cola.json.
+> 20-11: entregados auriculares, boliborrable, jarrafiltro. En cola: escayola, pirolisis, gafasvr (21-11) y billetes (22-11).

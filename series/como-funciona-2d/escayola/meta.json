@@ -1,0 +1,17 @@
+{
+  "n": 145,
+  "slug": "escayola",
+  "comp_id": "Escayola",
+  "tema": "Cómo funciona una escayola (yeso o fibra de vidrio) para curar un hueso roto",
+  "formato": "medio",
+  "portada": "La escayola no cura",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que las vendas de yeso para huesos rotos se usan desde 1851, gracias a un cirujano militar holandés? 🦴 ¿Te han escayolado alguna vez?",
+  "tiktok_hashtags": ["#comofunciona", "#escayola", "#hospital", "#ciencia", "#aprendeentiktok"],
+  "hospital": true,
+  "ganchos_descartados": [
+    "Todos creen que la escayola cura el hueso… y están muy equivocados: solo lo deja quieto. (propuesta original: 15 palabras, pero adelantaba la respuesta del beat 2; se deja la promesa en el beat 1 y la entrega en el 2)",
+    "Voy a abrir una escayola y te juro que lo que hay dentro te va a volar la cabeza. (promesa genérica; el contraste «no cura» es más concreto y se cumple en el beat 2)",
+    "La escayola esconde una historia que casi nadie conoce. (la historia de 1851 se usa en el gancho de TikTok; el episodio va del mecanismo)"
+  ]
+}

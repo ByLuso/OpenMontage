@@ -1,0 +1,14 @@
+[
+  [1, "quema", "hiss", 0.3],
+  [2, "quinientos", "sting", 0.25],
+  [2, "trapo", "whoosh", 0.25],
+  [3, "rompe", "pop", 0.3],
+  [4, "bloquea", "metal", 0.35],
+  [5, "tres", "tick", 0.3],
+  [7, "catalizador", "hum", 0.25],
+  [8, "comen", "bubbles", 0.25],
+  [9, "vapor", "hiss", 0.25],
+  [10, "mucha", "stamp", 0.35],
+  [11, "aptas", "click", 0.3],
+  [13, "ceniza", "ding", 0.3]
+]
