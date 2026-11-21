@@ -1,0 +1,23 @@
+{
+  "n": 152,
+  "slug": "mandotele",
+  "comp_id": "MandoTele",
+  "tema": "Cómo funciona el mando a distancia de la tele (infrarrojos)",
+  "formato": "medio",
+  "portada": "Habla con luz invisible",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que el primer mando de ultrasonidos, de 1956, no llevaba pilas: era puramente mecánico? 🔨 ¿Cuántos mandos tienes ahora mismo en el salón?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#mandoadistancia",
+    "#infrarrojos",
+    "#tecnologia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Voy a abrir el mando de la tele y te juro que no te lo esperas: habla con luz que no ves. (propuesta del coordinador: 22 palabras, pasa del límite de 20; se acorta a «Abro el mando de la tele…» y «luz que no ves» → «luz invisible», misma promesa, que se cumple en el beat 2)",
+    "Todos creen que el mando manda una señal de radio… y están muy equivocados. (premisa inventada: no consta que nadie lo crea; además muchos mandos modernos sí combinan radio)",
+    "El mando de tu tele esconde una historia que casi nadie conoce: el sol le apagaba la tele. (la historia es del modelo de 1955, no de tu mando; el beat 2 no la cumpliría)"
+  ]
+}

@@ -1,0 +1,15 @@
+[
+  "Así se ve un detector de humo por dentro, y te juro que no te lo esperas: un laberinto.",
+  "Una cámara oscura con paredes en zigzag: deja pasar el humo, pero no la luz.",
+  "La idea clave: una luz que apunta a otro lado y el humo la desvía al sensor.",
+  "Primero, la luz: un pequeño LED lanza un haz que cruza la cámara a oscuras.",
+  "El sensor, un fotodiodo, está colocado en ángulo: el haz pasa de largo y no lo ve.",
+  "Segundo, entra el humo: la luz choca con sus partículas y parte rebota hacia el fotodiodo.",
+  "Tercero, el umbral: un circuito mide esa luz y, si pasa de cierto nivel, da la alarma.",
+  "Cuarto, la sirena: una plaquita piezoeléctrica vibra y pita al menos a ochenta y cinco decibelios a tres metros.",
+  "Ese pitido corto que se repite cada poco no es humo: es la pila, que se acaba.",
+  "Curiosidad: existe otro tipo, el iónico, con una pizca radiactiva de americio, inofensiva mientras no lo rompas.",
+  "Truco: pulsa su botón de prueba cada mes, y a los diez años cambia el detector entero.",
+  "Otra: el vapor de la ducha o cocinar puede dispararlo; aléjalo unos metros de baño y cocina.",
+  "Laberinto oscuro, luz que rebota y sirena que pita: así te avisa."
+]

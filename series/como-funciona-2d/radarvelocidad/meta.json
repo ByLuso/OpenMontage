@@ -1,0 +1,17 @@
+{
+  "n": 154,
+  "slug": "radarvelocidad",
+  "comp_id": "RadarVelocidad",
+  "tema": "Cómo te pilla un radar de velocidad (fijo y de tramo)",
+  "formato": "medio",
+  "portada": "Te mide un eco",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que en España hay radares de tramo que vigilan más de veinte kilómetros seguidos de carretera? 🚗 ¿Cuál es el tramo más largo que has recorrido tú?",
+  "tiktok_hashtags": ["#comofunciona", "#radar", "#ciencia", "#curiosidades", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que el radar te hace una foto cuando pasas rápido… y están muy equivocados: primero te escucha.",
+    "El radar de la carretera esconde un secreto que casi nadie conoce: no te ve, te mide con un eco.",
+    "Voy a abrir un radar de carretera y te juro que lo que hay dentro no es una cámara: es un eco."
+  ]
+}

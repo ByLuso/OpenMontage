@@ -1,0 +1,12 @@
+[[1, "laberinto", "pop", 0.3],
+ [2, "zigzag", "click", 0.25],
+ [3, "desvía", "ding", 0.25],
+ [4, "haz", "whoosh", 0.2],
+ [6, "rebota", "ding", 0.3],
+ [7, "alarma", "sting", 0.3],
+ [8, "vibra", "hum", 0.25],
+ [9, "pitido", "tick", 0.3],
+ [10, "americio", "hum", 0.2],
+ [11, "pulsa", "click", 0.3],
+ [12, "vapor", "hiss", 0.25],
+ [13, "avisa", "ding", 0.3]]

@@ -1,4 +1,7 @@
 
+> Temas ya hechos antes del 125 (recuperados del historial; los 1-82 se perdieron, evitar los clásicos de casa: microondas, nevera, inducción, lavadora, moka, tostadora, GPS, wifi, aspirador…):
+> 83 máquina de coser · 84 bisturí eléctrico (h) · 85 inhalador (h) · 86 báscula de grasa · 87 incubadora (h) · 88 mechero piezoeléctrico · 89 hervidor · 90 placa solar · 91 cargador inalámbrico · 92 impresora de tinta · 93 lector de código de barras · 94 deportivo eléctrico · 95 móvil plegable · 96 gafas inteligentes con IA · 97 tinta electrónica · 98 baliza V16 · 100 vía intravenosa (h) · 101 tubos del análisis de sangre (h) · 102 programa ECO lavadora · 103 secadora bomba de calor · 104 báscula del baño · 105 hemograma (h) · 106 ticket térmico · 107 lata de refresco · 108 calientamanos · 109 gafas polarizadas · 110 donación de sangre (h) · 111 pegamento instantáneo · 112 pañal · 113 pulseras luminosas · 114 bolsa de patatas · 115 test rápido (h) · 116 imán de nevera · 117 palomitas · 118 cerilla · 119 sartén antiadherente · 120 CPAP (h) · 121 impresora láser · 122 cierre de abrojo · 123 bote de espray · 124 tapón del cava
+
 > 31-10: contenedor reiniciado, se perdió todo projects/ (no estaba en git). Pipeline 2D reconstruido desde la copia 3D de main (BRIEF v4, plantilla, kit, voz, render, postcheck). Copia en git: series/como-funciona-2d/ (serie/tools/backup.sh).
 | 125 | bomba de insulina (hospital) | insulina/insulina.mp4 (76,6 s) |
 | 126 | robot aspirador | robotaspirador/robotaspirador.mp4 (76,9 s) |
@@ -28,6 +31,13 @@
 | 148 | horno pirolítico | pirolisis/pirolisis.mp4 (75,1 s) |
 | 149 | jarra con filtro de agua | jarrafiltro/jarrafiltro.mp4 (72,3 s) |
 | 150 | gafas de realidad virtual | gafasvr/gafasvr.mp4 (76,8 s) |
+| 151 | pulsioxímetro (hospital) | pulsioximetro/pulsioximetro.mp4 (76,5 s) |
+| 152 | mando de la tele | mandotele/mandotele.mp4 (74,7 s) |
+| 153 | detector de humo | detectorhumo/detectorhumo.mp4 (77,2 s) |
+| 154 | radar de velocidad | radarvelocidad/radarvelocidad.mp4 (69,1 s) |
+| 155 | alcoholímetro | alcoholimetro/alcoholimetro.mp4 (75,8 s) |
+| 156 | reloj de cuarzo | relojcuarzo/relojcuarzo.mp4 (76,5 s) |
 
 > 19-11: TikTok conectado (app Sandbox, subida a la bandeja con serie/tools/tiktok.py). Rutina diaria: serie/RUTINA_DIARIA.md, cola.json.
 > 20-11: entregados auriculares, boliborrable, jarrafiltro. En cola: escayola, pirolisis, gafasvr (21-11) y billetes (22-11).
+> 21-11: entregados escayola, pirolisis, gafasvr. Tanda 151-156 hecha. Cola: billetes, relojcuarzo, pulsioximetro, radarvelocidad, detectorhumo, mandotele, alcoholimetro.

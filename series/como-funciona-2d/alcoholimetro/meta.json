@@ -1,0 +1,23 @@
+{
+  "n": 155,
+  "slug": "alcoholimetro",
+  "comp_id": "Alcoholimetro",
+  "tema": "Cómo sabe el alcoholímetro lo que has bebido soplando",
+  "formato": "medio",
+  "portada": "Tu alcohol da corriente",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que en 1954 un policía de Indiana, Robert Borkenstein, inventó un medidor de aliento mucho más fácil de llevar que el «Drunkometer»? 🚓 ¿Habías visto alguno por dentro?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#alcoholimetro",
+    "#ciencia",
+    "#seguridadvial",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que el alcoholímetro huele tu aliento… y están muy equivocados: lo quema. (propuesta del encargo: la premisa «todos creen que lo huele» no es verificable, y «lo quema» no es literal: la pila de combustible oxida el alcohol sin llama; se cambia a la plantilla «esconde un secreto» con la promesa verdadera, que se cumple en el beat 2)",
+    "Voy a abrir un alcoholímetro y te juro que lo que hay dentro te va a volar la cabeza. (promesa vaga: no dice qué hay dentro)",
+    "El alcoholímetro esconde un secreto: quema tu alcohol para fabricar electricidad. («quema» no es exacto; oxidación electroquímica)"
+  ]
+}

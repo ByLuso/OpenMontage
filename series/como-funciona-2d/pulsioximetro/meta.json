@@ -1,0 +1,17 @@
+{
+  "n": 151,
+  "slug": "pulsioximetro",
+  "comp_id": "Pulsioximetro",
+  "tema": "Cómo sabe la pinza del dedo cuánto oxígeno llevas en la sangre (pulsioxímetro)",
+  "formato": "medio",
+  "portada": "Te mira la sangre",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que la tabla que convierte esa luz en porcentaje se hace midiendo a voluntarios sanos? 💡 ¿Te la han puesto alguna vez?",
+  "tiktok_hashtags": ["#comofunciona", "#pulsioximetro", "#hospital", "#ciencia", "#aprendeentiktok"],
+  "hospital": true,
+  "ganchos_descartados": [
+    "Esa pinza que te ponen en el dedo esconde un truco que casi nadie conoce: te mira la sangre con dos luces. (propuesta original: 22 palabras, pasa del límite de 20 y adelanta la entrega del beat 2; se deja «sin pincharte» como promesa y las dos luces se revelan en el beat 2)",
+    "Voy a abrir la pinza del dedo y te juro que lo que hay dentro te va a volar la cabeza. (promesa genérica; «te mira la sangre sin pincharte» es más concreta y se cumple en el beat 2)",
+    "La pinza del dedo esconde una historia que casi nadie conoce. (la historia del invento, años setenta, solo da para una curiosidad y sus fechas varían entre fuentes: 1972-1975)"
+  ]
+}

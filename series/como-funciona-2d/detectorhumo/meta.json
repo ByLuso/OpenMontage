@@ -1,0 +1,23 @@
+{
+  "n": 153,
+  "slug": "detectorhumo",
+  "comp_id": "DetectorHumo",
+  "tema": "Cómo funciona un detector de humo",
+  "formato": "medio",
+  "portada": "Dentro hay un laberinto",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que muchos detectores tienen un botón de silencio para cuando saltan por el vapor o mientras cocinas? 🔕 ¿Cuántas veces te ha saltado a ti con la cena?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#detectordehumo",
+    "#ciencia",
+    "#seguridadencasa",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Voy a abrir un detector de humo y te juro que no te lo esperas: dentro hay una cámara oscura con un laberinto. (propuesta original: 23 palabras, pasa del máximo de 20; se reescribe con la plantilla «Así se ve [X] por dentro, y te juro que no te lo esperas: …» y la cámara oscura pasa al beat 2, que cumple la promesa)",
+    "Todos creen que el detector de humo huele el humo… y están muy equivocados. (premisa inventada: no consta que nadie crea eso)",
+    "Tu detector de humo esconde un secreto que casi nadie conoce: dentro lleva una luz que nunca ves. (válido, pero la luz encendida no es lo primero que se ve al abrirlo; el laberinto es más visual para el beat 1)"
+  ]
+}

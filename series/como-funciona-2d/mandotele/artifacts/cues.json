@@ -1,0 +1,11 @@
+[[1, "esperas", "pop", 0.3],
+ [2, "destellos", "tick", 0.25],
+ [4, "cierra", "click", 0.3],
+ [6, "ráfagas", "whoosh", 0.25],
+ [7, "ruido", "hiss", 0.25],
+ [8, "obedece", "ding", 0.3],
+ [9, "marca", "sting", 0.25],
+ [10, "pulsa", "click", 0.3],
+ [11, "apagarte", "stamp", 0.25],
+ [12, "clic", "metal", 0.3],
+ [13, "canal", "ding", 0.3]]
