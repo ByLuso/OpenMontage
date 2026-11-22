@@ -1,0 +1,23 @@
+{
+  "n": 162,
+  "slug": "expendedora",
+  "comp_id": "Expendedora",
+  "tema": "Cómo sabe la máquina expendedora qué moneda le has metido (y si es falsa)",
+  "formato": "medio",
+  "portada": "Tu moneda pasa entre imanes",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que el canto de la moneda de veinte céntimos tiene siete muescas, la llamada «flor española»? 🪙 ¿Lo habías notado alguna vez?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#monedas",
+    "#euro",
+    "#ciencia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "La máquina de refrescos esconde un secreto que casi nadie conoce: escucha el metal de tu moneda con imanes.",
+    "Todos creen que la máquina solo mira el tamaño de la moneda… y están muy equivocados.",
+    "Voy a abrir una máquina expendedora y te juro que lo que hay dentro te va a volar la cabeza."
+  ]
+}

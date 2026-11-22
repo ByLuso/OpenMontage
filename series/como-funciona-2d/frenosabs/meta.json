@@ -1,0 +1,17 @@
+{
+  "n": 159,
+  "slug": "frenosabs",
+  "comp_id": "FrenosABS",
+  "tema": "Cómo funcionan los frenos ABS del coche: no están para frenar en menos metros, sino para que puedas girar mientras frenas",
+  "formato": "medio",
+  "portada": "El ABS te deja girar",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que muchos coches detectan una rueda baja de aire con los mismos sensores del ABS, porque esa rueda gira un poco más rápido que las demás? 🛞 ¿Tu coche te ha avisado alguna vez de una rueda baja?",
+  "tiktok_hashtags": ["#comofunciona", "#abs", "#coches", "#curiosidades", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que el ABS sirve para frenar antes… y están muy equivocados: sirve para que puedas girar.",
+    "Voy a abrir la rueda de un coche y te juro que lo que hay dentro te va a volar la cabeza: un sensor que cuenta dientes.",
+    "El ABS esconde una historia que casi nadie conoce: antes de llegar a los coches, triunfó en los aviones."
+  ]
+}

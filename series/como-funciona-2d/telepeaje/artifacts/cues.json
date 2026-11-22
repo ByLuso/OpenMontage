@@ -1,0 +1,11 @@
+[[1, "secreto", "pop", 0.3],
+ [2, "microondas", "hum", 0.25],
+ [2, "devuelve", "whoosh", 0.25],
+ [5, "despierta", "ding", 0.25],
+ [6, "carga", "stamp", 0.3],
+ [7, "pita", "tick", 0.3],
+ [7, "levanta", "whoosh", 0.25],
+ [8, "cámaras", "click", 0.3],
+ [10, "tapa", "sting", 0.25],
+ [12, "arcos", "whoosh", 0.2],
+ [13, "pagas", "ding", 0.3]]

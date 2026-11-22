@@ -1,0 +1,23 @@
+{
+  "n": 161,
+  "slug": "matamosquitos",
+  "comp_id": "Matamosquitos",
+  "tema": "Cómo funciona la raqueta eléctrica matamosquitos",
+  "formato": "medio",
+  "portada": "Dos pilas, miles de voltios",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que la raqueta matamosquitos eléctrica se patentó en 1996? 🦟 ¿Tú eres más de raqueta o de zapatilla?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#matamosquitos",
+    "#ciencia",
+    "#electronica",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Voy a abrir una raqueta matamosquitos y te juro que no te lo esperas: con dos pilas saca miles de voltios. (propuesta original: 21 palabras, pasa del máximo de 20; se recorta a «dos pilas, miles de voltios», misma promesa)",
+    "Voy a abrir una raqueta matamosquitos y te juro que no te lo esperas: dos pilas y más de mil voltios. (21 palabras; «más de mil» es la cifra que sostienen todas las fuentes, pero pasa del máximo)",
+    "Todos creen que la raqueta matamosquitos es inofensiva… y están muy equivocados. (premisa inventada: no consta que nadie lo crea, y empujaría a minimizar o exagerar el calambrazo)"
+  ]
+}

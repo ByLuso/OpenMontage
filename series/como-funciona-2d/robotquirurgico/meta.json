@@ -1,0 +1,23 @@
+{
+  "n": 157,
+  "slug": "robotquirurgico",
+  "comp_id": "RobotQuirurgico",
+  "tema": "Cómo funciona un robot quirúrgico (cirugía robótica)",
+  "formato": "medio",
+  "portada": "El robot no opera solo",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que en la operación de 2001, entre que el cirujano movía la mano en Nueva York y lo veía en pantalla, pasaban solo 155 milésimas de segundo? ⚡ ¿Te lo esperabas?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#cirugiarobotica",
+    "#hospital",
+    "#tecnologia",
+    "#aprendeentiktok"
+  ],
+  "hospital": true,
+  "ganchos_descartados": [
+    "Voy a abrir un robot quirúrgico y te juro que lo que hay dentro te va a volar la cabeza. (promesa genérica; lo sorprendente no está dentro de la máquina sino en quién la mueve)",
+    "El robot quirúrgico esconde un secreto que casi nadie conoce: no decide nada. (menos fuerte que la plantilla «Todos creen…», y adelanta el dato de la agencia sanitaria que va de curiosidad en el beat 10)",
+    "Así se ve un robot quirúrgico por dentro, y te juro que no te lo esperas: un cirujano. (forzado: el cirujano no está dentro del robot)"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "n": 160,
+  "slug": "fibraoptica",
+  "comp_id": "FibraOptica",
+  "tema": "Cómo llega internet por la fibra óptica de tu casa",
+  "formato": "medio",
+  "portada": "Internet viaja en luz",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que los cables de internet que cruzan el océano son tan anchos como una manguera de jardín? 🌊 ¿Cuántos aparatos tienes ahora mismo conectados a tu fibra?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#fibraoptica",
+    "#internet",
+    "#ciencia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que internet llega a casa por un cable eléctrico… y están muy equivocados: llega en destellos de luz por un pelo de cristal. (propuesta del coordinador: 25 palabras, pasa de 20; premisa inventada, no consta que nadie lo crea, y durante años internet sí llegó a casa por el cable de cobre del teléfono; además «pelo de cristal» solo vale para el hilo entero de 125 micras, no para el núcleo)",
+    "Así se ve por dentro el cable de fibra de tu casa, y te juro que no te lo esperas: luz. (21 palabras; y destripa la promesa en el propio gancho)",
+    "La fibra de tu casa esconde una historia que casi nadie conoce: empezó con un chorro de agua en 1842. (la historia es de la guía de luz en general, no del invento de la fibra para internet; el beat 2 no la cumpliría)"
+  ]
+}

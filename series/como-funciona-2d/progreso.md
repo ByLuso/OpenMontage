@@ -1,4 +1,6 @@
 
+> Carpetas de episodios que existían el 24-10 (antes de perderse; temas YA HECHOS, no repetir): agujetas airbag aire alcoholimetro analiticas anestesia ascensor aspiradora audifono balizav16 bascula bateria boligrafo bombilla cafetera cajanegra caldera camara cancelacion candado cargador cerradura cinta cinturon cisterna codigobarras codigoqr contactless creatina cremallera desfibrilador detector dialisis diferencial dron ecg ecografia electrobisturi endoscopio escalera extintor fonendo freidora gafasia glucometro gotero gps grifo hervidor hibrido huella impresora incubadora induccion inhalador lavadora lavadoraeco lavadoravertical lavavajillas mando maquinacoser marcapasos mechero mercurio microondas microscopio muestras musculo nevera olla pararrayos persiana pesobano placasolar plegable poligrafo prismaticos proyector pulsioximetro radar radiador raton rayosx reloj resonancia respirador roadster secador secadora sifon tac tactil telescopio tensiometro termo termometro tintae tostadora tubos vacuna ventilador via wifi
+> 22-11: OJO, la tanda 151-156 repite temas de esa lista (pulsioxímetro y alcoholímetro seguro; mando, radar, reloj y detector probablemente).
 > Temas ya hechos antes del 125 (recuperados del historial; los 1-82 se perdieron, evitar los clásicos de casa: microondas, nevera, inducción, lavadora, moka, tostadora, GPS, wifi, aspirador…):
 > 83 máquina de coser · 84 bisturí eléctrico (h) · 85 inhalador (h) · 86 báscula de grasa · 87 incubadora (h) · 88 mechero piezoeléctrico · 89 hervidor · 90 placa solar · 91 cargador inalámbrico · 92 impresora de tinta · 93 lector de código de barras · 94 deportivo eléctrico · 95 móvil plegable · 96 gafas inteligentes con IA · 97 tinta electrónica · 98 baliza V16 · 100 vía intravenosa (h) · 101 tubos del análisis de sangre (h) · 102 programa ECO lavadora · 103 secadora bomba de calor · 104 báscula del baño · 105 hemograma (h) · 106 ticket térmico · 107 lata de refresco · 108 calientamanos · 109 gafas polarizadas · 110 donación de sangre (h) · 111 pegamento instantáneo · 112 pañal · 113 pulseras luminosas · 114 bolsa de patatas · 115 test rápido (h) · 116 imán de nevera · 117 palomitas · 118 cerilla · 119 sartén antiadherente · 120 CPAP (h) · 121 impresora láser · 122 cierre de abrojo · 123 bote de espray · 124 tapón del cava
 
@@ -37,7 +39,14 @@
 | 154 | radar de velocidad | radarvelocidad/radarvelocidad.mp4 (69,1 s) |
 | 155 | alcoholímetro | alcoholimetro/alcoholimetro.mp4 (75,8 s) |
 | 156 | reloj de cuarzo | relojcuarzo/relojcuarzo.mp4 (76,5 s) |
+| 157 | robot quirúrgico (hospital) | robotquirurgico/robotquirurgico.mp4 (74,9 s) |
+| 158 | telepeaje | telepeaje/telepeaje.mp4 (74,1 s) |
+| 159 | frenos ABS | frenosabs/frenosabs.mp4 (76,5 s) |
+| 160 | fibra óptica | fibraoptica/fibraoptica.mp4 (75,3 s) |
+| 161 | raqueta matamosquitos | matamosquitos/matamosquitos.mp4 (76,7 s) |
+| 162 | máquina expendedora (monedas) | expendedora/expendedora.mp4 (75,7 s) |
 
 > 19-11: TikTok conectado (app Sandbox, subida a la bandeja con serie/tools/tiktok.py). Rutina diaria: serie/RUTINA_DIARIA.md, cola.json.
 > 20-11: entregados auriculares, boliborrable, jarrafiltro. En cola: escayola, pirolisis, gafasvr (21-11) y billetes (22-11).
 > 21-11: entregados escayola, pirolisis, gafasvr. Tanda 151-156 hecha. Cola: billetes, relojcuarzo, pulsioximetro, radarvelocidad, detectorhumo, mandotele, alcoholimetro.
+> 22-11: entregados billetes, relojcuarzo, pulsioximetro. Tanda 157-162 hecha (tarde).

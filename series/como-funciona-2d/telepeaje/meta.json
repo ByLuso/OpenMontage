@@ -1,0 +1,23 @@
+{
+  "n": 158,
+  "slug": "telepeaje",
+  "comp_id": "Telepeaje",
+  "tema": "Cómo te cobra el peaje sin pararte (el aparatito del parabrisas)",
+  "formato": "medio",
+  "portada": "Responde como un espejo",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que un carril de telepeaje deja pasar unas cuatro veces más coches por hora que uno donde pagas en la cabina? 🚗 ¿Tú sigues pagando con tarjeta en la caseta?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#telepeaje",
+    "#autopista",
+    "#tecnologia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Ese aparatito del parabrisas esconde un secreto que casi nadie conoce: no lleva batería para hablar con el peaje… (propuesta del coordinador: FALSO tal cual; los aparatos europeos de 5,8 GHz sí llevan pila, con vida «de más de siete años» según el portal de normas ITS. Lo verdadero es que no fabrican su propia onda: devuelven modulada la del peaje (retrodispersión). Se reescribe con esa promesa)",
+    "Todos creen que el aparatito manda una señal al peaje… y están muy equivocados. (premisa inventada: no consta que nadie lo crea; y en rigor sí «manda» algo, solo que reflejando la onda del peaje)",
+    "El telepeaje esconde una historia que casi nadie conoce: nació en Noruega en 1986. (fecha discutida: Wikipedia da Bergen 1986, pero la Dirección de Carreteras de Noruega dice que Bergen 1986 tenía carriles sin parar para abonados y que el primer cobro electrónico a escala real fue en Ålesund, 1987; además no se cumple en el beat 2)"
+  ]
+}
