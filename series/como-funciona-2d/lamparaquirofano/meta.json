@@ -1,0 +1,23 @@
+{
+  "n": 163,
+  "slug": "lamparaquirofano",
+  "comp_id": "LamparaQuirofano",
+  "tema": "Cómo funciona la lámpara del quirófano (la luz que no hace sombras)",
+  "formato": "medio",
+  "portada": "La luz casi sin sombra",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que, según un estudio, en el quirófano se recoloca la lámpara de media una vez cada 7,5 minutos? 💡 ¿Cuántas veces crees que la toca el propio cirujano?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#quirofano",
+    "#hospital",
+    "#ciencia",
+    "#aprendeentiktok"
+  ],
+  "hospital": true,
+  "ganchos_descartados": [
+    "Todos creen que la lámpara del quirófano es una bombilla muy potente… y están muy equivocados. (cierto, pero la promesa fuerte —que casi no hace sombra— queda fuera del gancho)",
+    "Voy a abrir la lámpara del quirófano y te juro que lo que hay dentro te va a volar la cabeza. (genérica: lo sorprendente no es lo que hay dentro, sino que casi no hace sombra)",
+    "La lámpara del quirófano esconde un secreto que casi nadie conoce: no hace sombra. (falso tal cual: la sombra se reduce mucho, pero no desaparece del todo; por eso el elegido dice «casi»)"
+  ]
+}

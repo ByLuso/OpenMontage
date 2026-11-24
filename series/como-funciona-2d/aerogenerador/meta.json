@@ -1,0 +1,23 @@
+{
+  "n": 167,
+  "slug": "aerogenerador",
+  "comp_id": "Aerogenerador",
+  "tema": "Cómo funciona un aerogenerador (el molino de viento que da luz)",
+  "formato": "medio",
+  "portada": "El molino por dentro",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que un aerogenerador empieza a producir con vientos de menos de veinte kilómetros por hora? 🌬️ ¿Tienes algún parque eólico cerca de casa?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#aerogenerador",
+    "#energiaeolica",
+    "#ciencia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Así se ve un aerogenerador por dentro, y te juro que no te lo esperas: arriba hay una caseta del tamaño de un autobús. (propuesta del coordinador: 24 palabras, pasa de 20; además destripa la promesa en el propio gancho. Se parte: la primera mitad es el beat 1 y la caseta, el beat 2, con «tan larga como» porque la góndola solo se parece al autobús en largo: es más ancha y más alta)",
+    "Todos creen que al aerogenerador lo empuja el viento como a una vela… y están muy equivocados. (premisa inventada, no consta que nadie lo crea; y las velas también trabajan en buena parte por sustentación, así que la comparación no se sostiene)",
+    "Así se ve un aerogenerador por dentro: arriba hay una caseta más grande que una casa. (el Departamento de Energía de EE. UU. dice «algunas góndolas», no todas; con una sola fuente no vale como promesa general)"
+  ]
+}

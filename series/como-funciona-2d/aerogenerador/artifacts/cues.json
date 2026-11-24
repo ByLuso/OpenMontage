@@ -1,0 +1,12 @@
+[[1, "esperas", "pop", 0.3],
+ [2, "caseta", "click", 0.3],
+ [3, "ala", "whoosh", 0.25],
+ [4, "girar", "whoosh", 0.25],
+ [5, "multiplicadora", "metal", 0.3],
+ [6, "generador", "hum", 0.25],
+ [7, "electricidad", "ding", 0.3],
+ [8, "veleta", "tick", 0.25],
+ [9, "paran", "stamp", 0.3],
+ [10, "punta", "whoosh", 0.3],
+ [11, "viento", "pop", 0.25],
+ [12, "luz", "ding", 0.3]]

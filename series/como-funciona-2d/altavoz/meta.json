@@ -1,0 +1,17 @@
+{
+  "n": 168,
+  "slug": "altavoz",
+  "comp_id": "Altavoz",
+  "tema": "Cómo funciona un altavoz (cómo un imán hace música)",
+  "formato": "medio",
+  "portada": "Un imán empujando papel",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que en 1925 dos empresas distintas pidieron la patente del mismo tipo de altavoz con solo diecinueve días de diferencia? 🧲 ¿Tú pones la música a tope o bajita?",
+  "tiktok_hashtags": ["#comofunciona", "#altavoz", "#sonido", "#ciencia", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Voy a abrir un altavoz y te juro que no te lo esperas: la música la hace un imán empujando papel. (propuesta original: 21 palabras, pasa del máximo de 20; se reescribe con la plantilla «Así se ve [X] por dentro, y te juro que no te lo esperas: …» manteniendo la misma promesa, que se cumple en el beat 2)",
+    "Todos creen que el sonido sale de la electrónica… y están muy equivocados. (premisa inventada: no consta que nadie crea eso)",
+    "El altavoz esconde una historia que casi nadie conoce: lo inventaron dos veces el mismo año. (verdad, pero el beat 2 no la cumpliría: el vídeo explica el funcionamiento; se deja para el tiktok_gancho)"
+  ]
+}

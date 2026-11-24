@@ -1,0 +1,17 @@
+{
+  "n": 164,
+  "slug": "purificador",
+  "comp_id": "Purificador",
+  "tema": "Cómo funciona un purificador de aire (filtro HEPA)",
+  "formato": "medio",
+  "portada": "Más pequeño que sus huecos",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que estos filtros descienden de los de las máscaras antigás de la Segunda Guerra Mundial? 😷 ¿Te imaginabas ese origen?",
+  "tiktok_hashtags": ["#comofunciona", "#purificadordeaire", "#filtrohepa", "#ciencia", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que el filtro del purificador es un colador… y están muy equivocados: atrapa cosas más pequeñas que sus huecos. (propuesta original: 21 palabras, pasa del máximo de 20; la segunda mitad pasa al beat 2, que cumple la promesa)",
+    "El filtro HEPA esconde una historia que casi nadie conoce. (válido —se usó en el Proyecto Manhattan—, pero el filtro no «nació» allí: venía de las máscaras antigás; mejor como curiosidad matizada que como promesa del gancho)",
+    "Voy a abrir un purificador de aire y te juro que lo que hay dentro te va a volar la cabeza. (promesa genérica; el contraste con el colador es más concreto y se cumple en el beat 2)"
+  ]
+}

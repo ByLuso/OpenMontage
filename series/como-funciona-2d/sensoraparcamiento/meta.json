@@ -1,0 +1,17 @@
+{
+  "n": 166,
+  "slug": "sensoraparcamiento",
+  "comp_id": "SensorAparcamiento",
+  "tema": "Cómo funcionan los sensores de aparcamiento: cada circulito del parachoques lanza un grito de ultrasonido, cronometra el eco y lo convierte en pitidos que se aceleran",
+  "formato": "medio",
+  "portada": "Gritan como un murciélago",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que estos sensores pueden detectar obstáculos a unos cinco metros, pero no empiezan a pitar hasta que estás a metro o metro y medio? 🔊 ¿El tuyo pita demasiado pronto o demasiado tarde?",
+  "tiktok_hashtags": ["#comofunciona", "#coches", "#sensoresdeaparcamiento", "#curiosidades", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que el sensor de aparcamiento es una cámara… y están muy equivocados: es un oído.",
+    "Voy a abrir un sensor de aparcamiento y te juro que lo que hay dentro te va a volar la cabeza.",
+    "Así se ve un sensor de aparcamiento por dentro, y te juro que no te lo esperas: un disco que grita."
+  ]
+}

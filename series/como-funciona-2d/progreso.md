@@ -45,8 +45,15 @@
 | 160 | fibra óptica | fibraoptica/fibraoptica.mp4 (75,3 s) |
 | 161 | raqueta matamosquitos | matamosquitos/matamosquitos.mp4 (76,7 s) |
 | 162 | máquina expendedora (monedas) | expendedora/expendedora.mp4 (75,7 s) |
+| 163 | lámpara de quirófano (hospital) | lamparaquirofano/lamparaquirofano.mp4 (75,5 s) |
+| 164 | purificador de aire | purificador/purificador.mp4 (76,3 s) |
+| 165 | humidificador ultrasónico | humidificador/humidificador.mp4 (73,7 s) |
+| 166 | sensores de aparcamiento | sensoraparcamiento/sensoraparcamiento.mp4 (72,0 s) |
+| 167 | aerogenerador | aerogenerador/aerogenerador.mp4 (74,0 s) |
+| 168 | altavoz | altavoz/altavoz.mp4 (74,3 s) |
 
 > 19-11: TikTok conectado (app Sandbox, subida a la bandeja con serie/tools/tiktok.py). Rutina diaria: serie/RUTINA_DIARIA.md, cola.json.
 > 20-11: entregados auriculares, boliborrable, jarrafiltro. En cola: escayola, pirolisis, gafasvr (21-11) y billetes (22-11).
 > 21-11: entregados escayola, pirolisis, gafasvr. Tanda 151-156 hecha. Cola: billetes, relojcuarzo, pulsioximetro, radarvelocidad, detectorhumo, mandotele, alcoholimetro.
 > 22-11: entregados billetes, relojcuarzo, pulsioximetro. Tanda 157-162 hecha (tarde).
+> 24-11: entregados alcoholimetro, telepeaje, fibraoptica. Tanda 163-168 hecha (tarde).
