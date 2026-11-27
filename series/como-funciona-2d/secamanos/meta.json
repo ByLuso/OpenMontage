@@ -1,0 +1,23 @@
+{
+  "n": 172,
+  "slug": "secamanos",
+  "comp_id": "Secamanos",
+  "tema": "Cómo funciona el secamanos de aire (el de calor y el de cuchilla de aire)",
+  "formato": "medio",
+  "portada": "Te seca a soplidos",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que el primer secamanos de «cuchilla de aire» salió a la venta en Japón en 1993? 🇯🇵 ¿Tú cuál te encuentras más en los baños?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#secamanos",
+    "#ciencia",
+    "#tecnologia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que el secamanos te seca con calor… y están muy equivocados: los modernos te arrancan el agua a soplidos. (gancho propuesto: 21 palabras, pasa del máximo de 20; se quitan los dos «te» y se pasa a singular «el moderno»)",
+    "Así se ve un secamanos por dentro, y te juro que no te lo esperas: no lleva calor. (falso para el clásico, que sí lleva resistencia, y algunos de cuchilla también templan el aire)",
+    "El secamanos esconde una historia que casi nadie conoce: se patentó en 1922 y se encendía con un pedal. (la historia del invento no es lo que se explica en el beat 2; mejor como curiosidad)"
+  ]
+}

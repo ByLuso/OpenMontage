@@ -1,0 +1,22 @@
+{
+  "n": 170,
+  "slug": "cajero",
+  "comp_id": "Cajero",
+  "tema": "Cómo sabe el cajero automático cuántos billetes darte (y que no van pegados)",
+  "formato": "medio",
+  "portada": "El cajero mide cada billete",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que el primer cajero no usaba tarjetas, sino unos cheques marcados con carbono 14, ligeramente radiactivos? ☢️ ¿Te habrías atrevido a usarlo?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#cajero",
+    "#dinero",
+    "#ciencia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que el cajero solo cuenta billetes… y están muy equivocados.",
+    "Así se ve un cajero automático por dentro, y te juro que no te lo esperas: tiene una báscula de grosor."
+  ]
+}

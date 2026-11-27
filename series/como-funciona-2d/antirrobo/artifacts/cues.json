@@ -1,0 +1,12 @@
+[[1, "conoce", "pop", 0.3],
+ [1, "canta", "ding", 0.25],
+ [2, "vibra", "hum", 0.2],
+ [3, "contesta", "tick", 0.25],
+ [4, "pulsos", "hum", 0.25],
+ [5, "imán", "metal", 0.25],
+ [6, "pita", "sting", 0.3],
+ [7, "desmagnetiza", "hiss", 0.25],
+ [9, "daña", "pop", 0.3],
+ [10, "quitan", "click", 0.3],
+ [11, "pita", "sting", 0.25],
+ [13, "calla", "ding", 0.3]]

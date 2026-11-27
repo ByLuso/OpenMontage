@@ -1,0 +1,17 @@
+{
+  "n": 174,
+  "slug": "brujula",
+  "comp_id": "Brujula",
+  "tema": "Cómo funciona una brújula (y la del móvil, sin aguja)",
+  "formato": "medio",
+  "portada": "No señala el Polo",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que el polo del Ártico que atrae la punta norte de tu brújula es, en física, un polo sur magnético? 🧲 ¿Tú te orientas con el móvil o a ojo?",
+  "tiktok_hashtags": ["#comofunciona", "#brujula", "#magnetismo", "#ciencia", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Voy a abrir una brújula y te juro que lo que hay dentro te va a volar la cabeza. (falso: por dentro solo hay una aguja imantada, a veces en líquido; la sorpresa no está dentro, sino en a dónde apunta)",
+    "La brújula esconde una historia que casi nadie conoce: ya aparece en un libro chino de hacia 1088. (verdad, pero el beat 2 no la cumpliría: el vídeo explica el funcionamiento; queda como curiosidad del beat 11)",
+    "Todos creen que la brújula señala el Polo Norte… y están muy equivocados: señala al polo norte magnético. (descartado: «señala al polo» es demasiado literal; la aguja sigue las líneas del campo, que la llevan HACIA ese polo; se usa la versión «señala otro sitio que además se mueve», que el beat 2 cumple)"
+  ]
+}

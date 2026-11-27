@@ -1,0 +1,17 @@
+{
+  "n": 173,
+  "slug": "antirrobo",
+  "comp_id": "Antirrobo",
+  "tema": "Cómo pita el arco de la tienda si te llevas algo sin pagar (las etiquetas antirrobo)",
+  "formato": "medio",
+  "portada": "Una tira que canta",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que estos arcos ya vigilaban tiendas antes de que se pasara por caja el primer código de barras, en 1974? 🛒 ¿Te ha pitado alguna vez el arco al entrar?",
+  "tiktok_hashtags": ["#comofunciona", "#antirrobo", "#tiendas", "#ciencia", "#aprendeentiktok"],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Esa pegatina de la tienda esconde un secreto que casi nadie conoce: dentro hay una tira de metal que canta. (propuesta del coordinador: la tira vibrante es de la etiqueta acustomagnética, que es una cajita en relieve con la tira suelta dentro; la «pegatina» plana es la de radiofrecuencia, que no lleva tira. Se cambia «pegatina» por «etiqueta antirrobo»)",
+    "Todos creen que el arco ve lo que llevas en la bolsa… y están muy equivocados. (premisa inventada: no consta que nadie lo crea)",
+    "Estos arcos esconden una historia que casi nadie conoce: existen desde finales de los 60. (fecha discutida: las fuentes dan 1964-1966 para el invento y 1965-1967 para los primeros sistemas comerciales, es decir, mediados de los 60; además no se cumple en el beat 2)"
+  ]
+}
