@@ -51,9 +51,16 @@
 | 166 | sensores de aparcamiento | sensoraparcamiento/sensoraparcamiento.mp4 (72,0 s) |
 | 167 | aerogenerador | aerogenerador/aerogenerador.mp4 (74,0 s) |
 | 168 | altavoz | altavoz/altavoz.mp4 (74,3 s) |
+| 169 | láser de ojos (hospital) | laserojos/laserojos.mp4 (76,2 s) |
+| 170 | cajero automático | cajero/cajero.mp4 (76,8 s) |
+| 171 | lámpara de uñas | lamparaunas/lamparaunas.mp4 (74,1 s) |
+| 172 | secamanos | secamanos/secamanos.mp4 (76,7 s) |
+| 173 | antirrobo | antirrobo/antirrobo.mp4 (74,1 s) |
+| 174 | brújula | brujula/brujula.mp4 (75,2 s) |
 
 > 19-11: TikTok conectado (app Sandbox, subida a la bandeja con serie/tools/tiktok.py). Rutina diaria: serie/RUTINA_DIARIA.md, cola.json.
 > 20-11: entregados auriculares, boliborrable, jarrafiltro. En cola: escayola, pirolisis, gafasvr (21-11) y billetes (22-11).
 > 21-11: entregados escayola, pirolisis, gafasvr. Tanda 151-156 hecha. Cola: billetes, relojcuarzo, pulsioximetro, radarvelocidad, detectorhumo, mandotele, alcoholimetro.
 > 22-11: entregados billetes, relojcuarzo, pulsioximetro. Tanda 157-162 hecha (tarde).
 > 24-11: entregados alcoholimetro, telepeaje, fibraoptica. Tanda 163-168 hecha (tarde).
+> 27-11: tanda de la tarde (169, 172, 174) hecha por un solo agente.
