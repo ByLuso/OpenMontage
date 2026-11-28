@@ -57,6 +57,9 @@
 | 172 | secamanos | secamanos/secamanos.mp4 (76,7 s) |
 | 173 | antirrobo | antirrobo/antirrobo.mp4 (74,1 s) |
 | 174 | brújula | brujula/brujula.mp4 (75,2 s) |
+| 175 | detector de monóxido de carbono | detectorco/detectorco.mp4 (76,8 s) |
+| 176 | punto de recarga | puntorecarga/puntorecarga.mp4 (73,4 s) |
+| 177 | linterna de manivela | linternadinamo/linternadinamo.mp4 (70,3 s) |
 
 > 19-11: TikTok conectado (app Sandbox, subida a la bandeja con serie/tools/tiktok.py). Rutina diaria: serie/RUTINA_DIARIA.md, cola.json.
 > 20-11: entregados auriculares, boliborrable, jarrafiltro. En cola: escayola, pirolisis, gafasvr (21-11) y billetes (22-11).
@@ -64,3 +67,4 @@
 > 22-11: entregados billetes, relojcuarzo, pulsioximetro. Tanda 157-162 hecha (tarde).
 > 24-11: entregados alcoholimetro, telepeaje, fibraoptica. Tanda 163-168 hecha (tarde).
 > 27-11: tanda de la tarde (169, 172, 174) hecha por un solo agente.
+> 28-11: tanda de la tarde 175-177.

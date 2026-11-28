@@ -1,0 +1,22 @@
+{
+  "n": 175,
+  "slug": "detectorco",
+  "comp_id": "DetectorCO",
+  "tema": "Cómo funciona el detector de monóxido de carbono",
+  "formato": "medio",
+  "portada": "Una pila que huele",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que el monóxido de carbono sale de quemar combustible sin aire suficiente, desde una estufa hasta una barbacoa de carbón? 🔥 ¿Dónde pondrías tú el detector?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#detectordemonoxido",
+    "#ciencia",
+    "#seguridadencasa",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Todos creen que el detector de monóxido huele el gas… y están muy equivocados. (premisa inventada: no consta que nadie lo crea)",
+    "El detector de monóxido esconde un secreto que casi nadie conoce: dentro lleva una pila que se alimenta del gas. (falso: la celda no se alimenta del gas, lo detecta; se cambia por «minipila química», que es una analogía honesta)"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "n": 176,
+  "slug": "puntorecarga",
+  "comp_id": "PuntoRecarga",
+  "tema": "Cómo carga un coche eléctrico en el punto de recarga",
+  "formato": "medio",
+  "portada": "Hablan antes de cargar",
+  "cta": "Sígueme y el próximo aparato lo eliges tú.",
+  "tiktok_gancho": "¿Sabías que algunos postes rápidos pueden dar más de doscientos kilovatios, mucho más de lo que cabe en el cargador de un coche? ⚡ ¿Cuánto tarda en cargar el tuyo?",
+  "tiktok_hashtags": [
+    "#comofunciona",
+    "#cocheelectrico",
+    "#puntoderecarga",
+    "#ciencia",
+    "#aprendeentiktok"
+  ],
+  "hospital": false,
+  "ganchos_descartados": [
+    "Voy a abrir un punto de recarga y te juro que lo que hay dentro te va a volar la cabeza. (no se abre ningún poste en el vídeo y la promesa sería vaga)",
+    "Todos creen que el coche eléctrico carga con lo que sale del enchufe… y están muy equivocados. (premisa inventada)"
+  ]
+}

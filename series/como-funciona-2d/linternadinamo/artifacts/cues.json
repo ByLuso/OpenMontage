@@ -1,0 +1,11 @@
+[[1, "generador", "pop", 0.3],
+ [2, "gira", "hum", 0.25],
+ [3, "Faraday", "ding", 0.3],
+ [4, "engranajes", "metal", 0.25],
+ [5, "electrones", "click", 0.25],
+ [6, "rectificador", "tick", 0.3],
+ [7, "batería", "ding", 0.25],
+ [8, "minuto", "tick", 0.3],
+ [9, "bici", "whoosh", 0.2],
+ [10, "gasta", "hiss", 0.25],
+ [11, "luz", "sting", 0.3]]

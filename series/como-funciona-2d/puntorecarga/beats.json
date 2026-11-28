@@ -1,0 +1,13 @@
+[
+ "El punto de recarga esconde un secreto que casi nadie conoce: antes de darte corriente, habla con tu coche.",
+ "Una señal piloto: el poste envía pulsos, el coche responde que está listo y solo entonces pasa la corriente.",
+ "La idea clave: la batería solo traga corriente continua, y la red te da alterna; alguien tiene que convertirla.",
+ "Primero, el lento de pared: te pasa la alterna tal cual y el cargador del coche la convierte en continua.",
+ "Segundo, el rápido: el poste convierte la corriente él mismo y la entrega continua, directa a la batería.",
+ "Tercero, la potencia: el convertidor del coche es pequeño y limita; el del poste, enorme, puede dar mucha más.",
+ "Cuarto, el último veinte por ciento: cerca de llenarse, el coche pide menos corriente para no pasarse de voltaje.",
+ "Curiosidad: por eso los postes rápidos se anuncian para llegar al ochenta por ciento; el resto va mucho más despacio.",
+ "Otra: la corriente máxima la marca el poste: el ancho del pulso le dice al coche cuánto puede tomar.",
+ "Otra: en el rápido hablan más: por el cable de control viajan datos para ajustar la carga a la batería.",
+ "Así: lento, convierte el coche; rápido, el poste; y antes, siempre hablan."
+]
